@@ -39,7 +39,7 @@ const Navbar = () => {
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="bg-green-200 p-6  flex items-center justify-between relative">
+    <nav className="bg-green-500 p-6  flex items-center justify-between relative">
       <NavLeft setIsOpen={setIsOpen} />
       <NavRight />
       <NavMenu isOpen={isOpen} />
