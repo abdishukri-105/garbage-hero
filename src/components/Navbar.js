@@ -4,6 +4,8 @@ import { useState } from "react";
 import { FiMenu, FiArrowRight } from "react-icons/fi";
 import Link from "next/link";
 
+import Image from "next/image";
+
 const LINKS = [
 	{
 		title: "Home",
@@ -39,7 +41,7 @@ const Navbar = () => {
 const Nav = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
-		<nav className="bg-green-500 p-6  flex items-center justify-between relative">
+		<nav className="py-2 px-8 bg-fucsia-600 flex items-center justify-between relative">
 			<NavLeft setIsOpen={setIsOpen} />
 			<NavRight />
 			<NavMenu isOpen={isOpen} />
@@ -80,7 +82,8 @@ const NavLeft = ({ setIsOpen }) => {
 			>
 				<FiMenu />
 			</motion.button>
-			<Logo />
+			<Image src="/images/logo.png" alt="Logo" width={100} height={100} />
+			{/* <Logo /> */}
 			{LINKS.map((link) => (
 				<NavLink key={link.href} text={link.title} href={link.href} />
 			))}
@@ -92,13 +95,13 @@ const NavLink = ({ text, href }) => {
 	return (
 		<Link
 			href={href}
-			className="hidden lg:block h-[40px] overflow-hidden font-medium"
+			className="hidden bg-aber-300 lg:block h-[40px] overflow-hidden font-medium"
 		>
 			<motion.div whileHover={{ y: -30 }}>
-				<span className="flex items-center text-xl h-[40px] text-gray-900">
+				<span className="flex items-center bg-blu-400 text-xl h-[40px] text-gray-900">
 					{text}
 				</span>
-				<span className="flex items-center text-xl h-[40px] text-green-700">
+				<span className="flex items-center bg-prple-600 text-xl h-[40px] text-green-700">
 					{text}
 				</span>
 			</motion.div>

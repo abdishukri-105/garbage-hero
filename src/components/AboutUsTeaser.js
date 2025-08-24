@@ -19,7 +19,9 @@ const AboutUsTeaser = () => {
         ease: [0.4, 0, 0.6, 1],
         delay,
         onUpdate(value) {
-          statRef.current.textContent = value.toFixed(decimals);
+          if (statRef.current) {
+            statRef.current.textContent = value.toFixed(decimals);
+          }
         },
       });
     }, [num, decimals, isInView, delay]);
