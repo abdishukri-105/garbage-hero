@@ -61,7 +61,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative w-full h-[80vh] sm:h-[80vh] flex items-center justify-start overflow-hidden">
+    <section className="relative w-full h-[80vh] sm:h-[80vh] flex items-center justify-start overflow-hidden pb-16 sm:pb-20 z-0">
       {SLIDES.map((slide, index) => (
         <motion.div
           key={index}
@@ -81,13 +81,13 @@ const HeroSection = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent flex items-center justify-start">
             <motion.div
-              className="text-white px-3 sm:px-8 md:px-12 lg:px-24 max-w-[90%] sm:max-w-md md:max-w-lg lg:max-w-3xl"
+              className="text-white px-3 sm:px-6 md:px-8 lg:px-16 max-w-[90%] sm:max-w-md md:max-w-lg lg:max-w-2xl"
               initial={{ x: -30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 1, ease: [0.4, 0, 0.6, 1] }}
             >
               <motion.h1
-                className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4"
+                className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 md:mb-4"
                 initial={{ y: 15, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.1, duration: 0.8, ease: [0.4, 0, 0.6, 1] }}
@@ -95,7 +95,7 @@ const HeroSection = () => {
                 {slide.title}
               </motion.h1>
               <motion.p
-                className="text-sm sm:text-lg md:text-xl lg:text-2xl mb-4 sm:mb-6"
+                className="text-xs sm:text-base md:text-lg lg:text-xl mb-3 sm:mb-4 md:mb-6"
                 initial={{ y: 15, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.8, ease: [0.4, 0, 0.6, 1] }}
@@ -108,7 +108,7 @@ const HeroSection = () => {
                   whileTap={{ scale: 0.95 }}
                   animate={{ scale: [1, 1.02, 1] }}
                   transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-                  className="px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md shadow-lg text-sm sm:text-lg"
+                  className="px-3 py-1 sm:px-4 sm:py-2 md:px-6 md:py-3 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md shadow-lg text-xs sm:text-sm md:text-lg"
                 >
                   Get a Quote
                 </motion.button>
@@ -120,7 +120,7 @@ const HeroSection = () => {
       <motion.button
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.95 }}
-        className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-white text-2xl sm:text-3xl bg-black bg-opacity-50 p-2 rounded-full z-10"
+        className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-white text-xl sm:text-2xl md:text-3xl bg-black bg-opacity-50 p-2 rounded-full z-20"
         onClick={goToPrevious}
         aria-label="Previous slide"
       >
@@ -129,17 +129,17 @@ const HeroSection = () => {
       <motion.button
         whileHover={{ scale: 1.1, rotate: -5 }}
         whileTap={{ scale: 0.95 }}
-        className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white text-2xl sm:text-3xl bg-black bg-opacity-50 p-2 rounded-full z-10"
+        className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white text-xl sm:text-2xl md:text-3xl bg-black bg-opacity-50 p-2 rounded-full z-20"
         onClick={goToNext}
         aria-label="Next slide"
       >
         <FiChevronRight />
       </motion.button>
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-10">
+      <div className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-20">
         {SLIDES.map((_, index) => (
           <motion.button
             key={index}
-            className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${
+            className={`w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded-full ${
               index === currentSlide ? "bg-indigo-600" : "bg-gray-400"
             }`}
             whileHover={{ scale: 1.3 }}

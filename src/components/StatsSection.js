@@ -1,8 +1,93 @@
-// StatsSection component placeholder
-export default function StatsSection() {
+"use client";
+import { motion, useInView, animate } from "framer-motion";
+import { useEffect, useRef } from "react";
+
+const StatsSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+ 
   return (
-    <section className="py-12 bg-white text-black text-center">
-      <div className="text-2xl font-montserrat">Stats Section</div>
-    </section>
+    <motion.section
+      ref={ref}
+      className="absolute bottom-0 left-0 right-0 bg-white/95 shadow-lg px-4 py-1 sm:py-2 md:py-4 mx-auto max-w-[90%] sm:max-w-5xl transform translate-y-1/2 z-10"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+      transition={{ duration: 1, ease: [0.4, 0, 0.6, 1] }}
+    >
+      <h2 className="mb-1 sm:mb-2 text-center text-sm sm:text-base md:text-lg text-indigo-900 font-semibold">
+        OUR NUMBER SPEAK FOR THEMSELVES
+        {/* <span className="text-indigo-500"> RELIABLE CLEANING SERVICES</span> */}
+      </h2>
+      <div className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8">
+        <Stat
+          num={95}
+          suffix="%"
+          subheading="Customer satisfaction"
+          delay={0}
+        />
+        <div className="h-[1px] w-12 bg-indigo-200 sm:h-4 sm:w-[1px]" />
+        <Stat
+          num={12.5}
+          decimals={1}
+          suffix="K+"
+          subheading="businesses cleaned"
+          delay={0.2}
+        />
+        <div className="h-[1px] w-12 bg-indigo-200 sm:h-4 sm:w-[1px]" />
+        <Stat
+          num={20}
+          suffix="+"
+          subheading="Years "
+          delay={0.4}
+        />
+         <Stat
+          num={95}
+          suffix="%"
+          subheading="Customer satisfaction"
+          delay={0}
+        />
+         <Stat
+          num={95}
+          suffix="%"
+          subheading="Customer satisfaction"
+          delay={0}
+        />
+      </div>
+    </motion.section>
   );
-}
+};
+
+const Stat = ({ num, suffix, decimals = 0, subheading, delay = 0 }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!isInView || !ref.current) return;
+
+    animate(0, num, {
+      duration: 3,
+      ease: [0.4, 0, 0.6, 1],
+      delay,
+      onUpdate(value) {
+        ref.current.textContent = value.toFixed(decimals);
+      },
+    });
+  }, [num, decimals, isInView, delay]);
+
+  return (
+    <div className="flex flex-col items-center py-2 sm:py-2">
+      <p
+        className="mb-2 text-center text-xl sm:text-2xl md:text-4xl font-semibold text-green-900"
+        aria-label={`${num}${suffix} ${subheading}`}
+      >
+        <span ref={ref}></span>
+        {suffix}
+      </p>
+      <p className="max-w-[85%] sm:max-w-[200px] text-center text-xs sm:text-sm md:text-base text-neutral-700">
+        {subheading}
+      </p>
+    </div>
+  );
+};
+
+export default StatsSection;
