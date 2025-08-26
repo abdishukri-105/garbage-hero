@@ -1,9 +1,12 @@
 import Head from "next/head";
 import Navbar from "../../components/Navbar";
-import HeroSection from "../../components/HeroSection";
+import PageBanner from "../../components/PageBanner";
 import ProjectGrid from "../../components/ProjectGrid";
 import CTABanner from "../../components/CTABanner";
 import Footer from "../../components/Footer";
+import MiniContactForm from "../../components/MiniContactForm";
+import Process from "@/components/Process";
+
 
 // Portfolio (Case Studies) Page for Garbage Hero Limited
 export default function PortfolioPage() {
@@ -15,9 +18,14 @@ export default function PortfolioPage() {
       </Head>
       <main className="bg-white text-black font-roboto">
         <Navbar />
-        <HeroSection variant="portfolio" />
+         <PageBanner
+        title="Our Green Projects"
+        subtitle="See our work in sustainable cleaning and landscaping"
+      />
         <ProjectGrid />
+        <Process />
         <CTABanner />
+        <MiniContactForm />
         <Footer />
       </main>
     </>

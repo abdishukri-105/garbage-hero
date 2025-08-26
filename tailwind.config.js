@@ -23,8 +23,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        roboto: ['Roboto', 'sans-serif'],
-        'open-sans': ['Open Sans', 'sans-serif'],
+        sans: ["var(--font-roboto)", "sans-serif"],   // Roboto
+        open: ["var(--font-open-sans)", "sans-serif"], // Open Sans
       },
     },
   },

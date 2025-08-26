@@ -11,8 +11,10 @@ import ServicesPreview from "@/components/ServicesPreview";
 import CTABanner from "@/components/CTABanner";
 import RecentWorkTeaser from "@/components/RecentWorkTeaser";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
-import MiniContactForm from "@/components/MiniContactForm";
+import ContactForm from "@/components/MiniContactForm";
 import Footer from "@/components/Footer";
+import WhyUs from "@/components/WhyUs";
+import TabsFaq from "@/components/TabsFaq";
 
 export default function HomePage() {
   return (
@@ -26,10 +28,12 @@ export default function HomePage() {
         <AboutUsTeaser />
       </div>
       <ServicesPreview />
+      <WhyUs />
       <CTABanner />
       <RecentWorkTeaser />
       <TestimonialsCarousel />
-      <MiniContactForm />
+      <TabsFaq />
+      <ContactForm />
       <Footer />
     </main>
   );

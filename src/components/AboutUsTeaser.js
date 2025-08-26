@@ -11,10 +11,10 @@ const AboutUsTeaser = () => {
   const isInView = useInView(ref, { margin: "-50px 0px" });
 
   const stats = [
-    { num: 20, suffix: "+", subheading: "Years of Experience", icon: "🕰️", delay: 0.6 },
-    { num: 12.5, decimals: 1, suffix: "K+", subheading: "Spaces Cleaned", icon: "🧹", delay: 0.8 },
-    { num: 95, suffix: "%", subheading: "Customer Satisfaction", icon: "😊", delay: 1.0 },
-    { num: 100, suffix: "+", subheading: "Team Members", icon: "👷", delay: 1.2 },
+    { num: 20, suffix: "+", subheading: "Years of Experience", delay: 0.6 },
+    { num: 12.5, decimals: 1, suffix: "K+", subheading: "Spaces Cleaned", delay: 0.8 },
+    { num: 95, suffix: "%", subheading: "Customer Satisfaction", delay: 1.0 },
+    { num: 100, suffix: "+", subheading: "Team Members", delay: 1.2 },
   ];
 
   return (

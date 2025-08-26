@@ -61,7 +61,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative w-full h-[80vh] sm:h-[80vh] flex items-center justify-start overflow-hidden pb-16 sm:pb-20 z-0">
+    <section className="relative w-full font-sans h-[80vh] sm:h-[80vh] flex items-center justify-start overflow-hidden pb-16 sm:pb-20 z-0">
       {SLIDES.map((slide, index) => (
         <motion.div
           key={index}

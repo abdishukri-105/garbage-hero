@@ -1,12 +1,13 @@
 import Head from "next/head";
 import Navbar from "../../components/Navbar";
-import HeroSection from "../../components/HeroSection";
+
 import FullStory from "../../components/FullStory";
 import MissionVisionValues from "../../components/MissionVisionValues";
 import CompanyVideo from "../../components/CompanyVideo";
 import TeamProfiles from "../../components/TeamProfiles";
 import CTABanner from "../../components/CTABanner";
 import Footer from "../../components/Footer";
+import PageBanner from "@/components/PageBanner";
 
 // About Us Page for Garbage Hero Limited
 export default function AboutUsPage() {
@@ -18,9 +19,10 @@ export default function AboutUsPage() {
       </Head>
       <main className="bg-white text-black font-roboto">
         <Navbar />
-        <HeroSection variant="about" />
-        <FullStory />
+       <PageBanner/>
         <MissionVisionValues />
+        <FullStory />
+        
         <CompanyVideo />
         <TeamProfiles />
         <CTABanner />

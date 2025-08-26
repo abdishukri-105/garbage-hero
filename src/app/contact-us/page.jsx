@@ -1,11 +1,13 @@
 import Head from "next/head";
 import Navbar from "../../components/Navbar";
 import HeroSection from "../../components/HeroSection";
-import ContactForm from "../../components/ContactForm";
+
+import MiniContactForm from "../../components/MiniContactForm";
 import ContactDetails from "../../components/ContactDetails";
 import MapEmbed from "../../components/MapEmbed";
 import SocialLinks from "../../components/SocialLinks";
 import Footer from "../../components/Footer";
+import PageBanner from "@/components/PageBanner";
 
 // Contact Us Page for Garbage Hero Limited
 export default function ContactUsPage() {
@@ -17,11 +19,14 @@ export default function ContactUsPage() {
       </Head>
       <main className="bg-white text-black font-roboto">
         <Navbar />
-        <HeroSection variant="contact" />
-        <ContactForm />
-        <ContactDetails />
+        <PageBanner  
+         title="Get in Touch With Us"
+        subtitle="we're here to help and answer any questions you might have"
+        />
+        <MiniContactForm />
+        {/* <ContactDetails /> */}
         <MapEmbed />
-        <SocialLinks />
+        {/* <SocialLinks /> */}
         <Footer />
       </main>
     </>

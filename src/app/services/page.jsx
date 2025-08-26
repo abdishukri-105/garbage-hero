@@ -1,10 +1,12 @@
 import Head from "next/head";
 import Navbar from "../../components/Navbar";
 import HeroSection from "../../components/HeroSection";
-import ServicesList from "../../components/ServicesList";
+import { ServicesList } from "../../components/ServicesList";
 import RecentWorkTeaser from "../../components/RecentWorkTeaser";
 import CTABanner from "../../components/CTABanner";
+import MiniContactForm from "../../components/MiniContactForm";
 import Footer from "../../components/Footer";
+import PageBanner from "@/components/PageBanner";
 
 // Services Page for Garbage Hero Limited
 export default function ServicesPage() {
@@ -16,10 +18,14 @@ export default function ServicesPage() {
       </Head>
       <main className="bg-white text-black font-roboto">
         <Navbar />
-        <HeroSection variant="services" />
-        <ServicesList />
-        <RecentWorkTeaser />
+       <PageBanner
+        title="Our Eco-Friendly Services"
+        subtitle="Cleaning and landscaping for universities and governments"
+      />
+     <ServicesList />
+        {/* <RecentWorkTeaser /> */}
         <CTABanner />
+        <MiniContactForm />
         <Footer />
       </main>
     </>
