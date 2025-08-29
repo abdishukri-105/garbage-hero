@@ -1,55 +1,32 @@
 "use client";
 import { motion } from "framer-motion";
-import { useRef } from "react";
-import { useInView } from "framer-motion";
-import { FiArrowRight } from "react-icons/fi";
+import Link from "next/link";
 
-const Button = ({
-  variant = "primary",
-  size = "md",
-  disabled = false,
-  icon,
-  iconPosition = "right",
-  children,
-  className,
-  ...props
-}) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-50px 0px" });
-
-  const variantStyles = {
-    primary:
-      "bg-gradient-to-r from-primary-start to-primary-end text-black hover:bg-gradient-to-r hover:from-primary-end hover:to-primary-start",
-    secondary:
-      "border border-secondary text-secondary hover:bg-secondary hover:text-white",
-  };
-
-  const sizeStyles = {
-    sm: "text-sm px-3 py-1",
-    md: "text-base px-4 py-2",
-    lg: "text-lg px-5 py-3",
-  };
-
-  return (
+const NeuButton = ({ text = "Button", href, onClick, className = "" }) => {
+  return href ? (
+    <Link href={href}>
+      <motion.button
+        whileHover={{ scale: 1.05, backgroundColor: "#228B22" }}
+        whileTap={{ scale: 0.95 }}
+        animate={{ scale: [1, 1.02, 1] }}
+        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        className={`px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-3 bg-[#3aa335] text-[#FFFFFF] font-roboto font-medium rounded-md shadow-md text-xs sm:text-sm md:text-base ${className}`}
+        onClick={onClick}
+      >
+        {text}
+      </motion.button>
+    </Link>
+  ) : (
     <motion.button
-      ref={ref}
-      className={`font-roboto font-medium rounded-md shadow-sm flex items-center justify-center transition ease-in-out duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
-      whileHover={{ scale: 1.05 }}
-      transition={{ delay: 0.6, duration: 0.8, ease: [0.4, 0, 0.6, 1] }}
-      disabled={disabled}
-      {...props}
+      whileHover={{ scale: 1.05, backgroundColor: "#228B22" }}
+      whileTap={{ scale: 0.95 }}
+      animate={{ scale: [1, 1.02, 1] }}
+      transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+      className={`  transition-all shadow-[6px_6px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]px-3 py-1.5 hover:cursor-pointer sm:px-4 sm:py-2 md:px-6 md:py-3 bg-[#3aa335] text-[#FFFFFF] font-roboto font-medium rounded-md shado-md text-xs sm:text-sm md:text-base ${className}`}
+      onClick={onClick}
     >
-      {icon && iconPosition === "left" && (
-        <FiArrowRight className="mr-2" />
-      )}
-      {children}
-      {icon && iconPosition === "right" && (
-        <FiArrowRight className="ml-2" />
-      )}
+      {text}
     </motion.button>
   );
 };
-
-export default Button;
+export default NeuButton;

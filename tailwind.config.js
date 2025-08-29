@@ -6,27 +6,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          start: '#7C3AED', // violet-600
-          end: '#4F46E5', // indigo-600
-        },
-        secondary: '#065F46', // green-900
-        text: {
-          primary: '#111827', // gray-900
-          body: '#374151', // gray-700
-          subtle: '#6B7280', // gray-500
-        },
-        background: {
-          white: '#FFFFFF', // white
-          light: '#F3F4F6', // gray-100
-          dark: '#111827', // gray-900
-        },
+        primary: '#3aa335', // Safaricom green for CTAs, buttons, hover states
+        secondary: '#228B22', // Darker forest green for headings, hovers, dividers
+        accentLight: '#E5F3E8', // Soft green for section backgrounds, cards
+        textPrimary: '#000000', // Black for main headings, emphasized text
+        textSecondary: '#333333', // Dark gray for body paragraphs, subtext
+        neutralBg: '#FFFFFF', // White for main page/body backgrounds
+        error: '#FF6347', // Soft red for form errors, alerts
       },
       fontFamily: {
-        sans: ["var(--font-roboto)", "sans-serif"],   // Roboto
-        open: ["var(--font-open-sans)", "sans-serif"], // Open Sans
+        sans: ["var(--font-roboto)", "sans-serif"], // Roboto for headings
+        open: ["var(--font-open-sans)", "sans-serif"], // Open Sans for body
       },
     },
   },
   plugins: [],
-}
+};

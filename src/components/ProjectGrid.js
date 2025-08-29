@@ -7,7 +7,7 @@ const ProjectGrid = () => {
 
   return (
     <section className="py-12 bg-gray-100 font-montserrat text-black">
-      <div className="mx-auto max-w-5xl px-4 md:px-8">
+      <div className="mx-auto max-w-8xl px-4 md:px-8">
         <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Projects</h2>
         <p className="text-lg text-gray-600 mb-8">
           Explore our diverse portfolio of innovative projects, each designed to deliver impactful solutions and drive progress across Kenya and beyond.
@@ -58,12 +58,12 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
     <div className="group relative w-full">
       <button
         onClick={() => setSelected(tabNum)}
-        className="relative z-0 flex w-full border-l-[6px] border-slate-200 p-4 transition-colors group-hover:border-slate-300 md:border-l-8 md:p-6"
+        className="relative z-0 flex w-full border-l-[6px] border-slate-200 p-4 transition-colors group-hover:border-slate-300 md:border-l-8 md:p-2"
       >
         <span
           className={`w-full text-start text-xl font-bold transition-colors md:text-2xl ${
             selected
-              ? "text-violet-500"
+              ? "text-green-500"
               : "text-slate-400 group-hover:text-slate-500"
           }`}
         >
@@ -73,7 +73,7 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
       {selected && (
         <motion.span
           layoutId="project-grid-slider"
-          className="absolute bottom-0 left-0 top-0 z-10 w-[6px] bg-violet-500 md:w-2"
+          className="absolute bottom-0 left-0 top-0 z-10 w-[6px] bg-green-600 md:w-2"
         />
       )}
     </div>
@@ -82,10 +82,10 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
 
 const PROJECTS = [
   {
-    title: "Project 1",
+    title: "Umma University",
     Feature: () => (
       <div className="w-full space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800">Project 1</h2>
+        <h2 className="text-3xl font-bold text-gray-800">Umma University</h2>
         <div className="columns-2 gap-4 md:columns-3">
           <div className="mb-4 h-64 bg-gray-200 rounded-xl break-inside-avoid"></div>
           <div className="mb-4 h-96 bg-gray-200 rounded-xl break-inside-avoid"></div>

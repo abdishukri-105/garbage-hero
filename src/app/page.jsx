@@ -24,7 +24,7 @@ export default function HomePage() {
         <HeroSection />
         {/* <StatsSection /> */}
       </div>
-      <div className="-mt-2 sm:-mt-4">
+      {/* <div className="-mt-2 sm:-mt-4">
         <AboutUsTeaser />
       </div>
       <ServicesPreview />
@@ -34,7 +34,7 @@ export default function HomePage() {
       <TestimonialsCarousel />
       <TabsFaq />
       <ContactForm />
-      <Footer />
+      <Footer /> */}
     </main>
   );
 }

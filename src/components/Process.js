@@ -10,7 +10,7 @@ const Process = () => {
           <h2 className="text-3xl font-bold text-center sm:text-5xl text-gray-900">
             Our Service Process
           </h2>
-          long
+          
           <p className="max-w-3xl mx-auto mt-4 text-xl text-center text-gray-600">
             Discover how Garbage Hero Ltd delivers exceptional cleaning, sanitary, gardening, and fumigation services with a seamless, professional, and eco-friendly approach.
           </p>

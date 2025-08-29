@@ -1,203 +1,134 @@
 "use client";
-import { motion } from "framer-motion";
 import { useState } from "react";
-import { FiMenu, FiArrowRight } from "react-icons/fi";
+import { motion } from "framer-motion";
+import { FiMenu } from "react-icons/fi";
+import { Download } from "lucide-react";
+import useMeasure from "react-use-measure";
 import Link from "next/link";
-
 import Image from "next/image";
 
 const LINKS = [
-	{
-		title: "Home",
-		href: "/",
-	},
-	{
-		title: "About Us",
-		href: "/about-us",
-	},
-	{
-		title: "Services",
-		href: "/services",
-	},
-	{
-		title: "Portfolio",
-		href: "/portfolio",
-	},
-	{
-		title: "Contact Us",
-		href: "/contact-us",
-	},
+  { title: "Home", href: "/" },
+  { title: "About Us", href: "/about-us" },
+  { title: "Services", href: "/services" },
+  { title: "Portfolio", href: "/portfolio" },
+  { title: "Contact Us", href: "/contact-us" },
 ];
 
 const Navbar = () => {
-	return (
-		<div className="bg-gray-50">
-			<Nav />
-			{/* <div className="h-72" /> */}
-		</div>
-	);
+  return (
+    <section className="relative w-full bg-[#FFFFFF]">
+      <GlassNavigation />
+    </section>
+  );
 };
 
-const Nav = () => {
-	const [isOpen, setIsOpen] = useState(false);
-	return (
-		<nav className="py-2 px-8 bg-fucsia-600 flex items-center justify-between relative">
-			<NavLeft setIsOpen={setIsOpen} />
-			<NavRight />
-			<NavMenu isOpen={isOpen} />
-		</nav>
-	);
+const GlassNavigation = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <nav className="fixed left-0 right-0 top-0 z-50 mx-auto max-w-6xl overflow-hidden border-[1px] border-[#E5F3E8] bg-gradient-to-br from-[#3aa335]/20 to-[#3aa335]/5 backdrop-blur-md md:left-6 md:right-6 md:top-6 md:rounded-2xl">
+      <div className="flex items-center justify-between px-4 sm:px-5 py-4 sm:py-3">
+        <Logo />
+        <Links />
+        <Buttons setMenuOpen={setMenuOpen} />
+      </div>
+      <MobileMenu menuOpen={menuOpen} />
+    </nav>
+  );
 };
 
-const Logo = () => {
-	return (
-		<svg
-			width="50"
-			height="39"
-			viewBox="0 0 50 39"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-			className="fill-gray-800"
-		>
-			<path
-				d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"
-				fill="#000000"
-			></path>
-			<path
-				d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"
-				fill="#000000"
-			></path>
-		</svg>
-	);
-};
+const Logo = () => (
+  <Image
+    src="/images/logo1.png"
+    alt="Garbage Hero Ltd Logo"
+    width={80}
+    height={80}
+    className="relative w-12 sm:w-16 mr-4"
+  />
+);
 
-const NavLeft = ({ setIsOpen }) => {
-	return (
-		<div className="flex items-center gap-6">
-			<motion.button
-				whileHover={{ scale: 1.05 }}
-				whileTap={{ scale: 0.95 }}
-				className="block lg:hidden text-gray-950 text-2xl"
-				onClick={() => setIsOpen((pv) => !pv)}
-			>
-				<FiMenu />
-			</motion.button>
-			<Image src="/images/logo.png" alt="Logo" width={100} height={100} />
-			{/* <Logo /> */}
-			{LINKS.map((link) => (
-				<NavLink key={link.href} text={link.title} href={link.href} />
-			))}
-		</div>
-	);
-};
-
-const NavLink = ({ text, href }) => {
-	return (
-		<Link
-			href={href}
-			className="hidden bg-aber-300 lg:block h-[40px] overflow-hidden font-medium"
-		>
-			<motion.div whileHover={{ y: -30 }}>
-				<span className="flex items-center bg-blu-400 text-xl h-[40px] text-gray-900">
-					{text}
-				</span>
-				<span className="flex items-center bg-prple-600 text-xl h-[40px] text-green-700">
-					{text}
-				</span>
-			</motion.div>
-		</Link>
-	);
-};
-
-const NavRight = () => {
-	return (
-		<div className="flex items-center gap-4">
-			{/* <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent font-medium rounded-md whitespace-nowrap"
+const Links = () => (
+  <div className="hidden md:flex items-center gap-2">
+    {LINKS.map((link) => (
+      <Link
+        key={link.href}
+        href={link.href}
+        className="px-3 sm:px-4 py-2 font-roboto font-medium text-base sm:text-xl text-[#000000] hover:text-[#3aa335] transition-colors duration-200"
       >
-        Sign in
-      </motion.button> */}
-			<motion.button
-				whileHover={{ scale: 1.05 }}
-				whileTap={{ scale: 0.95 }}
-				className="px-4 py-2 bg-gradient-to-r from-green-600 to-green-800 text-white font-medium rounded-md whitespace-nowrap"
-			>
-				get A Quote
-			</motion.button>
-		</div>
-	);
+        {link.title}
+      </Link>
+    ))}
+  </div>
+);
+
+const TextLink = ({ text, href }) => {
+  return (
+    <Link
+      href={href}
+      className="px-3 py-2 font-open-sans font-medium text-base text-[#333333] hover:text-[#3aa335] transition-colors duration-200"
+    >
+      {text}
+    </Link>
+  );
 };
 
-const NavMenu = ({ isOpen }) => {
-	return (
-		<motion.div
-			variants={menuVariants}
-			initial="closed"
-			animate={isOpen ? "open" : "closed"}
-			className="absolute p-4 bg-white shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4"
-		>
-			{LINKS.map((link) => (
-				<MenuLink key={link.href} text={link.title} href={link.href} />
-			))}
-		</motion.div>
-	);
-};
+const Buttons = ({ setMenuOpen }) => (
+  <div className="flex items-center gap-2 sm:gap-4">
+    <motion.a
+      href="/images/companyprofile.pdf"
+      download="Garbage-Hero-Ltd-Company-Profile.pdf"
+      whileHover={{ scale: 1.05, backgroundColor: '#228B22' }}
+      whileTap={{ scale: 0.95 }}
+      className="hidden md:inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-[#3aa335] text-[#FFFFFF] font-roboto font-medium text-sm sm:text-base rounded-md whitespace-nowrap"
+    >
+      <Download size={16} className="sm:w-5 sm:h-5" />
+      <span className="hidden sm:inline">Company Profile</span>
+      <span className="sm:hidden">Profile</span>
+    </motion.a>
+    <motion.button
+      whileHover={{ scale: 1.05, backgroundColor: '#228B22' }}
+      whileTap={{ scale: 0.95 }}
+      className="px-2 sm:px-4 py-1.5 sm:py-2 bg-[#3aa335] text-[#FFFFFF] font-roboto font-medium text-sm sm:text-base rounded-md whitespace-nowrap"
+    >
+      Get a Quote
+    </motion.button>
+    <button
+      onClick={() => setMenuOpen((pv) => !pv)}
+      className="ml-2 block md:hidden text-2xl sm:text-3xl text-[#000000] transition-transform hover:scale-105 active:scale-95 font-roboto"
+    >
+      <FiMenu />
+    </button>
+  </div>
+);
 
-const MenuLink = ({ text, href }) => {
-	return (
-		<Link href={href} className="h-[40px] overflow-hidden font-medium text-lg flex items-start gap-4">
-			<motion.span variants={menuLinkArrowVariants}>
-				<FiArrowRight className="h-[40px] text-gray-950" />
-			</motion.span>
-			<motion.div whileHover={{ y: -30 }}>
-				<span className="flex items-center h-[40px] text-gray-500">
-					{text}
-				</span>
-				<span className="flex items-center h-[40px] text-indigo-600">
-					{text}
-				</span>
-			</motion.div>
-		</Link>
-	);
-};
-
-const menuVariants = {
-	open: {
-		scaleY: 1,
-		transition: {
-			when: "beforeChildren",
-			staggerChildren: 0.1,
-		},
-	},
-	closed: {
-		scaleY: 0,
-		transition: {
-			when: "afterChildren",
-			staggerChildren: 0.1,
-		},
-	},
-};
-
-const menuLinkVariants = {
-	open: {
-		y: 0,
-		opacity: 1,
-	},
-	closed: {
-		y: -10,
-		opacity: 0,
-	},
-};
-
-const menuLinkArrowVariants = {
-	open: {
-		x: 0,
-	},
-	closed: {
-		x: -4,
-	},
+const MobileMenu = ({ menuOpen }) => {
+  const [ref, { height }] = useMeasure();
+  return (
+    <motion.div
+      initial={false}
+      animate={{
+        height: menuOpen ? height : "0px",
+        opacity: menuOpen ? 1 : 0,
+      }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="block md:hidden overflow-hidden"
+    >
+      <div ref={ref} className="flex flex-col gap-4 px-4 pb-4">
+        {LINKS.map((link) => (
+          <TextLink key={link.href} text={link.title} href={link.href} />
+        ))}
+        <motion.a
+          href="/images/companyprofile.pdf"
+          download="Garbage-Hero-Ltd-Company-Profile.pdf"
+          className="inline-flex items-center gap-2 px-2 py-1.5 bg-[#3aa335] text-[#FFFFFF] font-roboto font-medium text-sm rounded-md"
+        >
+          <Download size={16} />
+          Profile
+        </motion.a>
+      </div>
+    </motion.div>
+  );
 };
 
 export default Navbar;
