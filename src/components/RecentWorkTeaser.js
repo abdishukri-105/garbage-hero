@@ -4,11 +4,12 @@ import { useState, useRef } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import useMeasure from "react-use-measure";
 import Image from "next/image";
+import Link from "next/link";
 import Heading from "./ui/Heading";
 import Paragraph from "./ui/Paragraph";
 import Button from "./ui/Button";
 
-const CARD_WIDTH = 350;
+const CARD_WIDTH = 390;
 const CARD_HEIGHT = 350;
 const MARGIN = 20;
 const CARD_SIZE = CARD_WIDTH + MARGIN;
@@ -21,9 +22,9 @@ const BREAKPOINTS = {
 const items = [
   {
     id: 1,
-    url: "/images/slide1.jpg",
+    url: "/images/parliament.jpg",
     category: "Cleaning & Janitorial",
-    title: "Nairobi Corporate Office",
+    title: "Parliament of Kenya",
     description: "Transformed a 10,000 sq.ft office with eco-friendly cleaning for a leading Kenyan firm.",
   },
   {
@@ -72,32 +73,34 @@ const items = [
 
 const Card = ({ url, category, title, description }) => {
   return (
-    <div
-      className="relative shrink-0 cursor-pointer rounded-2xl bg-background-white shadow-md transition-all hover:scale-[1.015] hover:shadow-xl"
-      style={{
-        width: CARD_WIDTH,
-        height: CARD_HEIGHT,
-        marginRight: MARGIN,
-      }}
-    >
-      <Image
-        src={url}
-        alt={title}
-        fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 350px"
-        style={{ objectFit: "cover" }}
-        className="rounded-2xl"
-      />
-      <div className="absolute inset-0 z-20 rounded-2xl bg-gradient-to-b from-black/90 via-black/60 to-black/0 p-6 text-white transition-[backdrop-filter] hover:backdrop-blur-sm">
-        <span className="text-xs font-semibold uppercase text-secondary font-roboto">
-          {category}
-        </span>
-        <p className="my-2 text-3xl font-bold font-roboto">{title}</p>
-        <Paragraph size="sm" color="white">
-          {description}
-        </Paragraph>
+    <Link href="/portfolio">
+      <div
+        className="relative shrink-0 cursor-pointer rounded-2xl bg-background-white shadow-md transition-all hover:scale-[1.015] hover:shadow-xl"
+        style={{
+          width: CARD_WIDTH,
+          height: CARD_HEIGHT,
+          marginRight: MARGIN,
+        }}
+      >
+        <Image
+          src={url}
+          alt={title}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 350px"
+          style={{ objectFit: "cover" }}
+          className="rounded-2xl"
+        />
+        <div className="absolute inset-0 z-20 rounded-2xl bg-gradient-to-b from-black/90 via-black/60 to-black/0 p-6 text-white transition-[backdrop-filter] hover:backdrop-blur-sm">
+          <h5 className="text-lg text-[#3aa335] font-semibold uppercase text-secondary ">
+            {category}
+          </h5>
+          <h3 className="my-2 text-3xl font-bold ">{title}</h3>
+          <p className="text-base text-white">
+            {description}
+          </p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -128,17 +131,17 @@ const RecentWorkTeaser = () => {
   return (
     <motion.section
       ref={sectionRef}
-      className="bg-background-light"
+      className="border-t border-b rounded-tr-[2rem] rounded-br-[2rem] md:py-12"
       initial={{ opacity: 0 }}
       animate={{ opacity: isInView ? 1 : 0 }}
       transition={{ duration: 1, ease: [0.4, 0, 0.6, 1] }}
     >
       <div className="relative overflow-hidden p-4" ref={ref}>
         <div className="mx-auto max-w-6xl">
-          <Heading level={2} className="mb-4">
+          <h1  className="mb-12 text-2xl sm:text-5xl font-bold">
             Our Recent Work.{" "}
             <span className="text-secondary">Transforming Spaces Across Kenya.</span>
-          </Heading>
+          </h1>
           <motion.div
             animate={{ x: offset }}
             transition={{ duration: 0.8, ease: [0.4, 0, 0.6, 1] }}
@@ -149,28 +152,28 @@ const RecentWorkTeaser = () => {
             ))}
           </motion.div>
         </div>
-        <Button
-          variant="secondary"
-          size="lg"
-          className="absolute left-0 top-[60%] z-30 rounded-r-xl bg-background-light/30 p-3 pl-2 text-4xl backdrop-blur-sm transition-[padding] hover:pl-3"
-          onClick={shiftLeft}
-          icon
-          iconPosition="left"
-          disabled={!CAN_SHIFT_LEFT}
-        >
-          <FiChevronLeft />
-        </Button>
-        <Button
-          variant="secondary"
-          size="lg"
-          className="absolute right-0 top-[60%] z-30 rounded-l-xl bg-background-light/30 p-3 pr-2 text-4xl backdrop-blur-sm transition-[padding] hover:pr-3"
-          onClick={shiftRight}
-          icon
-          iconPosition="right"
-          disabled={!CAN_SHIFT_RIGHT}
-        >
-          <FiChevronRight />
-        </Button>
+ <>
+          <motion.button
+            initial={false}
+            animate={{
+              x: CAN_SHIFT_LEFT ? "0%" : "-100%",
+            }}
+            className="absolute left-0 top-[60%] z-30 rounded-r-xl bg-slate-100/30 p-3 pl-2 text-4xl text-[#3aa335] backdrop-blur-sm transition-[padding] hover:pl-3"
+            onClick={shiftLeft}
+          >
+            <FiChevronLeft />
+          </motion.button>
+          <motion.button
+            initial={false}
+            animate={{
+              x: CAN_SHIFT_RIGHT ? "0%" : "100%",
+            }}
+            className="absolute right-0 top-[60%] z-30 rounded-l-xl bg-slate-100/30 p-3 pr-2 text-4xl text-[#3aa335] backdrop-blur-sm transition-[padding] hover:pr-3"
+            onClick={shiftRight}
+          >
+            <FiChevronRight />
+          </motion.button>
+        </>
       </div>
     </motion.section>
   );

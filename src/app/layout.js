@@ -1,19 +1,18 @@
 
-import { Roboto, Open_Sans } from "next/font/google";
+import { Open_Sans, Playfair } from "next/font/google";
 import "./globals.css";
 
-const roboto = Roboto({
+
+const Open_Sans_init = Open_Sans({
+  weight: ["400"],
   subsets: ["latin"],
-  weight: ["400", "500", "700", "900"], // Covers light, medium, bold, black for headings, nav, buttons
-  variable: "--font-roboto",
-  display: "swap", // Ensures fonts load without FOUT (flash of unstyled text)
+  variable: "--font-open_sans",
 });
 
-const openSans = Open_Sans({
+const Playfair_init = Playfair({
+  weight: ["900", "800", "700", "600", "500", "400", "300"],
   subsets: ["latin"],
-  weight: ["300", "400", "600"], // Light, regular, semibold for body, mobile, captions
-  variable: "--font-open-sans",
-  display: "swap",
+  variable: "--font-playfair",
 });
 
 export const metadata = {
@@ -24,7 +23,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} ${openSans.variable} antialiased font-open-sans`}> {/* Default to Open Sans for body text, Roboto for headings */}
+    <body className={`${Open_Sans_init.variable} ${Playfair_init.variable} `}>
         {children}
       </body>
     </html>

@@ -59,12 +59,12 @@ export default function HeroSection() {
   }, []);
 
   // Progress bar update
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((pv) => (pv >= 100 ? 0 : pv + 100 / (AUTO_DELAY / 1000)));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setProgress((pv) => (pv >= 100 ? 0 : pv + 100 / (AUTO_DELAY / 1000)));
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const onDragEnd = (info) => {
     const offset = info.offset.x;
@@ -80,7 +80,7 @@ export default function HeroSection() {
   };
 
   return (
-    <div className="relative overflow-hidden w-full h-[60vh] sm:h-[70vh] md:h-[90vh] rounded-b-[2rem]">
+    <div className="relative overflow-hidden w-full h-[60vh] sm:h-[70vh] md:h-[100vh] rounded-br-[2rem]">
       <motion.div
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
@@ -114,14 +114,14 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-[#E5F3E8]/20">
+      {/* <div className="absolute bottom-0 left-0 w-full h-1 bg-[#E5F3E8]/20">
         <motion.div
           initial={{ width: "0%" }}
           animate={{ width: `${progress}%` }}
           transition={{ ease: "linear" }}
           className="h-full bg-[#3aa335]"
         />
-      </div>
+      </div> */}
 
       <Dots imgIndex={imgIndex} setImgIndex={setImgIndex} />
 
@@ -143,7 +143,7 @@ const Images = ({ imgIndex }) => {
           }}
           animate={{ scale: imgIndex === idx ? 1 : 0.95 }}
           transition={SPRING_OPTIONS}
-          className="w-screen h-[60vh] sm:h-[70vh] md:h-[90vh] shrink-0"
+          className="w-screen h-[60vh] sm:h-[70vh] md:h-[100vh] shrink-0"
         />
       ))}
     </>

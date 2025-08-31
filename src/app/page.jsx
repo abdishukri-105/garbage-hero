@@ -20,21 +20,21 @@ export default function HomePage() {
   return (
     <main className="bg-white text-black font-roboto">
       <Navbar />
-      <div className="relative">
+    
         <HeroSection />
-        {/* <StatsSection /> */}
-      </div>
-      {/* <div className="-mt-2 sm:-mt-4">
+      
+  
+      
         <AboutUsTeaser />
-      </div>
+    
       <ServicesPreview />
       <WhyUs />
       <CTABanner />
       <RecentWorkTeaser />
       <TestimonialsCarousel />
-      <TabsFaq />
+      {/* <TabsFaq /> */}
       <ContactForm />
-      <Footer /> */}
+      <Footer /> 
     </main>
   );
 }

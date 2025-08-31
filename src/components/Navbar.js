@@ -27,7 +27,7 @@ const GlassNavigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 mx-auto max-w-6xl overflow-hidden border-[1px] border-[#E5F3E8] bg-gradient-to-br from-[#3aa335]/20 to-[#3aa335]/5 backdrop-blur-md md:left-6 md:right-6 md:top-6 md:rounded-2xl">
+    <nav className="fixed left-0 right-0 top-0 z-50 mx-auto max-w-6xl overflow-hidden border-[1px] border-[#E5F3E8] bg-gradient-to-br from-[#000000]/20 to-[#000000]/5 backdrop-blur-lg md:left-6 md:right-6 md:top-6 md:rounded-2xl">
       <div className="flex items-center justify-between px-4 sm:px-5 py-4 sm:py-3">
         <Logo />
         <Links />
@@ -54,7 +54,7 @@ const Links = () => (
       <Link
         key={link.href}
         href={link.href}
-        className="px-3 sm:px-4 py-2 font-roboto font-medium text-base sm:text-xl text-[#000000] hover:text-[#3aa335] transition-colors duration-200"
+        className="px-3 sm:px-4 py-2 font-bold text-base sm:text-xl text-[#3aa335] hover:text-[#ffffff] transition-colors duration-200"
       >
         {link.title}
       </Link>
@@ -66,7 +66,7 @@ const TextLink = ({ text, href }) => {
   return (
     <Link
       href={href}
-      className="px-3 py-2 font-open-sans font-medium text-base text-[#333333] hover:text-[#3aa335] transition-colors duration-200"
+      className="px-3 py-2 text-[#3aa335] font-open-sans font-medium text-base hover:text-[#333333]  transition-colors duration-200"
     >
       {text}
     </Link>
@@ -114,7 +114,7 @@ const MobileMenu = ({ menuOpen }) => {
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="block md:hidden overflow-hidden"
     >
-      <div ref={ref} className="flex flex-col gap-4 px-4 pb-4">
+      <div ref={ref} className="flex  flex-col gap-4 px-4 pb-4">
         {LINKS.map((link) => (
           <TextLink key={link.href} text={link.title} href={link.href} />
         ))}
