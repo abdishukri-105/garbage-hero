@@ -8,6 +8,7 @@ import Link from "next/link";
 import Heading from "./ui/Heading";
 import Paragraph from "./ui/Paragraph";
 import Button from "./ui/Button";
+import { urlFor } from '@/lib/sanity';
 
 const CARD_WIDTH = 390;
 const CARD_HEIGHT = 350;
@@ -19,7 +20,7 @@ const BREAKPOINTS = {
   lg: 1024,
 };
 
-const items = [
+const staticItems = [
   {
     id: 1,
     url: "/images/parliament.jpg",
@@ -104,7 +105,18 @@ const Card = ({ url, category, title, description }) => {
   );
 };
 
-const RecentWorkTeaser = () => {
+const RecentWorkTeaser = ({ teasers = [] }) => {
+  // Map Sanity teasers (if provided) to card shape; fallback to staticItems
+  const mapped = Array.isArray(teasers) && teasers.length > 0
+    ? teasers.map(t => ({
+        id: t._id,
+        url: t.image ? urlFor(t.image).width(800).height(600).url() : '/images/slide3.jpg',
+        category: t.category || 'Project',
+        title: t.companyName || 'Untitled',
+        description: t.shortDescription || '',
+      }))
+    : staticItems;
+
   const [ref, { width }] = useMeasure();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { margin: "-50px 0px" });
@@ -116,7 +128,7 @@ const RecentWorkTeaser = () => {
   const CAN_SHIFT_LEFT = offset < 0;
 
   const CAN_SHIFT_RIGHT =
-    Math.abs(offset) < CARD_SIZE * (items.length - CARD_BUFFER);
+    Math.abs(offset) < CARD_SIZE * (mapped.length - CARD_BUFFER);
 
   const shiftLeft = () => {
     if (!CAN_SHIFT_LEFT) return;
@@ -147,12 +159,12 @@ const RecentWorkTeaser = () => {
             transition={{ duration: 0.8, ease: [0.4, 0, 0.6, 1] }}
             className="flex"
           >
-            {items.map((item) => (
+            {mapped.map((item) => (
               <Card key={item.id} {...item} />
             ))}
           </motion.div>
         </div>
- <>
+        <>
           <motion.button
             initial={false}
             animate={{

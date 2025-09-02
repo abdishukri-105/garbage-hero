@@ -27,7 +27,7 @@ const ContactForm = () => {
               <div className="group w-full h-full">
                 <div className="relative h-96 lg:h-full min-h-[400px]">
                   <Image
-                    src="/images/slide3.jpg"
+                    src="/projects/staff-1.jpg"
                     alt="Contact us background"
                     fill
                     className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply bg-primary-start object-cover"

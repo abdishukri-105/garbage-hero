@@ -4,7 +4,7 @@ import React from "react";
 
 const PageBanner = ({ title = "Get to Know Us Better", subtitle = "Discover our story and values" }) => {
   return (
-    <section className="relative bg-white font-montserrat text-black h-[250px] flex items-center overflow-hidden">
+    <section className="relative bg-white  text-black h-[300px] md:h-[350px] flex items-center overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.2 }}
@@ -25,7 +25,7 @@ const PageBanner = ({ title = "Get to Know Us Better", subtitle = "Discover our 
           <defs>
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" style={{ stopColor: "#10B981" }} /> {/* green-500 */}
-              <stop offset="100%" style={{ stopColor: "#000000" }} /> {/* violet-600 */}
+              <stop offset="100%" style={{ stopColor: "#3aa335" }} /> {/* violet-600 */}
             </linearGradient>
           </defs>
         </svg>
@@ -37,8 +37,8 @@ const PageBanner = ({ title = "Get to Know Us Better", subtitle = "Discover our 
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center"
         >
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-800 mb-2">{title}</h1>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600">{subtitle}</p>
+          <h1 className="text-2xl sm:text-3xl md:text-6xl font-bold text-gray-800 mb-2">{title}</h1>
+          <p className="text-sm sm:text-base md:text-xl text-gray-600">{subtitle}</p>
         </motion.div>
       </div>
     </section>

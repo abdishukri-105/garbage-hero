@@ -1,17 +1,29 @@
-"use client"
+"use client";
 import { motion, useInView } from "framer-motion";
 import React, { useRef } from "react";
 
 const FullStory = () => {
   return (
-    <section className="py-12 bg-gray-100 font-montserrat text-black">
+    <section className="py-12 bg-[#E5F3E8] font-inter text-black overflow-x-hidden">
       <div className="mx-auto max-w-5xl px-4 md:px-8">
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Full Story</h2>
-        <p className="text-lg text-gray-600 mb-8">
-          Journey through a decade of innovation, from our founding in 2015 to becoming a global leader in transformative technology solutions.
-        </p>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl md:text-4xl font-bold text-[#50AB62] mb-4 text-center"
+        >
+          Our Journey
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-lg text-gray-700 mb-8 text-center max-w-3xl mx-auto"
+        >
+          Since 2014, Garbage Hero Limited has been delivering eco-friendly cleaning, sanitation, and landscaping solutions across Kenya, transforming spaces with professionalism and trust.
+        </motion.p>
         <div className="relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-violet-500 transform -translate-x-1/2 hidden md:block"></div>
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-[#50AB62] transform -translate-x-1/2 hidden md:block"></div>
           {MILESTONES.map((milestone, index) => (
             <TimelineItem key={milestone.id} milestone={milestone} index={index} />
           ))}
@@ -32,18 +44,22 @@ const TimelineItem = ({ milestone, index }) => {
       initial={{ opacity: 0, x: isOdd ? -50 : 50 }}
       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isOdd ? -50 : 50 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`mb-8 flex flex-col md:flex ${
+      className={`mb-4 flex flex-col md:flex ${
         isOdd ? "md:flex-row" : "md:flex-row-reverse"
-      } justify-between items-center w-full relative`}
+      } justify-between items-center w-full max-w-full relative`}
     >
-      <div className="order-1 w-full md:w-5/12">
-        <div className={`bg-white rounded-lg shadow-xl px-6 py-4 ${isOdd ? "md:mr-8" : "md:ml-8"}`}>
-          <h3 className="mb-3 font-bold text-gray-800 text-xl">{milestone.title}</h3>
-          <p className="text-gray-600 text-base leading-tight">{milestone.description}</p>
+      <div className="order-1 w-full md:w-5/12 max-w-[calc(100%-3rem)] md:max-w-[calc(50%-2rem)]">
+        <div className="flex flex-col items-center md:items-start">
+          <div
+            className={`w-12 h-12 rounded-full bg-[#50AB62] flex items-center justify-center -mb-4 md:mb-0 md:absolute md:left-1/2 md:transform md:-translate-x-1/2 z-20`}
+          >
+            <h1 className="font-semibold text-lg text-white">{milestone.year}</h1>
+          </div>
+          <div className={`bg-white rounded-lg shadow-xl px-6 py-4 w-full ${isOdd ? "md:mr-8" : "md:ml-8"}`}>
+            <h3 className="mb-3 font-bold text-gray-800 text-xl">{milestone.title}</h3>
+            <p className="text-gray-600 text-base leading-tight">{milestone.description}</p>
+          </div>
         </div>
-      </div>
-      <div className="order-1 z-20 flex items-center justify-center w-12 h-12 rounded-full bg-violet-500 absolute left-1/2 transform -translate-x-1/2">
-        <h1 className="font-semibold text-lg text-white">{milestone.year}</h1>
       </div>
     </motion.div>
   );
@@ -52,52 +68,45 @@ const TimelineItem = ({ milestone, index }) => {
 const MILESTONES = [
   {
     id: 1,
-    year: "2015",
-    title: "Founded",
+    year: "2014",
+    title: "Founded in Nairobi",
     description:
-      "Our company was established with a vision to revolutionize technology solutions in Kenya, starting with a small team of innovators.",
+      "Garbage Hero Limited was established in Nairobi, Kenya, with a mission to provide affordable, reliable, and eco-friendly cleaning and waste management solutions.",
   },
   {
     id: 2,
-    year: "2017",
-    title: "First Major Project",
+    year: "2016",
+    title: "Expanded Service Offerings",
     description:
-      "Launched our first flagship project, delivering a transformative digital platform for local communities.",
+      "Introduced gardening, landscaping, and fumigation services, catering to residential and commercial clients across Kenya.",
   },
   {
     id: 3,
-    year: "2019",
-    title: "Regional Expansion",
+    year: "2018",
+    title: "Trusted by Institutions",
     description:
-      "Expanded operations across East Africa, partnering with regional organizations to drive technological advancements.",
+      "Began serving higher learning institutions, hospitals, and government agencies, earning a reputation for quality and professionalism.",
   },
   {
     id: 4,
     year: "2020",
-    title: "Award Recognition",
+    title: "Eco-Friendly Innovation",
     description:
-      "Received industry recognition for innovation and impact, solidifying our position as a trusted leader.",
+      "Adopted advanced eco-friendly products and practices, reinforcing our commitment to sustainable and healthy environments.",
   },
   {
     id: 5,
-    year: "2022",
-    title: "Global Reach",
+    year: "2023",
+    title: "Community Impact",
     description:
-      "Began international collaborations, bringing our solutions to a global audience and scaling our impact.",
+      "Partnered with NGOs and local communities to promote sanitation and waste management initiatives, enhancing our social impact.",
   },
   {
     id: 6,
-    year: "2024",
-    title: "Technology Breakthrough",
-    description:
-      "Introduced a groundbreaking technology that redefined user experiences and set new industry standards.",
-  },
-  {
-    id: 7,
     year: "2025",
-    title: "Continued Excellence",
+    title: "Market Leader",
     description:
-      "Celebrating a decade of innovation, we continue to push boundaries and deliver exceptional solutions worldwide.",
+      "Celebrating over a decade of excellence, Garbage Hero continues to lead the cleaning industry with innovative, trustworthy services.",
   },
 ];
 
