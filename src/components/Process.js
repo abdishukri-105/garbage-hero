@@ -4,7 +4,7 @@ import { PhoneCall, ClipboardCheck, SprayCan, ShieldCheck } from "lucide-react";
 
 const Process = () => {
   return (
-    <section className="bg-gray-50">
+    <section className="">
       <div className="container max-w-xl mx-auto p-6 space-y-12 lg:px-8 lg:max-w-7xl">
         <div>
           <h2 className="text-3xl font-bold text-center sm:text-5xl text-gray-900">
@@ -15,8 +15,8 @@ const Process = () => {
             Discover how Garbage Hero Ltd delivers exceptional cleaning, sanitary, gardening, and fumigation services with a seamless, professional, and eco-friendly approach.
           </p>
         </div>
-        <div className="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
-          <div>
+        <div className="grid  lg:gap-8 lg:grid-cols-2 lg:items-center">
+          <div className="bg-[#E5F3E8] p-3 rounded-[2rem]">
             <div className="mt-4 space-y-12">
               <div className="flex">
                 <div className="flex-shrink-0">
@@ -81,15 +81,41 @@ shrink-0">
               </div>
             </div>
           </div>
-          <div aria-hidden="true" className="mt-10 lg:mt-0">
-            <Image
-              src="/images/slide2.jpg"
-              alt="Garbage Hero Ltd team cleaning a professional space"
-              width={600}
-              height={800}
-              className="mx-auto rounded-lg shadow-lg"
-            />
-          </div>
+          <div className="mt-10 lg:mt-0 grid grid-cols-1 lg:grid-cols-2 gap-4">
+  {/* First Image - spans full width */}
+  <div className="lg:col-span-2">
+    <Image
+      src="/projects/cleaning-1.jpg"
+      alt="Garbage Hero Ltd team cleaning a professional space"
+      width={600}
+      height={800}
+      className="mx-auto rounded-lg shadow-lg w-full h-auto"
+    />
+  </div>
+
+  {/* Second Image */}
+  <div>
+    <Image
+      src="/projects/cleaning-3.jpg"
+      alt="Garbage Hero Ltd team cleaning a professional space"
+      width={600}
+      height={800}
+      className="mx-auto rounded-lg shadow-lg w-full h-auto"
+    />
+  </div>
+
+  {/* Third Image */}
+  <div>
+    <Image
+      src="/projects/cleaning-4.jpg"
+      alt="Garbage Hero Ltd team cleaning a professional space"
+      width={600}
+      height={800}
+      className="mx-auto rounded-lg shadow-lg w-full h-auto"
+    />
+  </div>
+</div>
+
         </div>
       </div>
     </section>

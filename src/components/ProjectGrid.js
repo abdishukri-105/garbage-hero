@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Image from 'next/image';
@@ -16,21 +16,25 @@ const ProjectGrid = ({ projects = [] }) => {
   const [selected, setSelected] = useState(0);
   const active = tabs[selected];
   return (
-    <section className="py-12 bg-gray-100 font-montserrat text-black">
-      <div className="mx-auto max-w-8xl px-4 md:px-8">
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Projects</h2>
-        <p className="text-lg text-gray-600 mb-8">
-          Explore our diverse portfolio of innovative projects, each designed to deliver impactful solutions and drive progress across Kenya and beyond.
-        </p>
-        <div className="flex flex-col md:flex-row gap-8 md:gap-6 py-8">
+    <section className="py-8 sm:py-12 md:py-16 lg:py-20 font-open-sans  text-[#333333]">
+      <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-8 lg:px-16">
+        <div className="mb-8 sm:mb-10 md:mb-12 space-y-3 text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-[#000000] text-center">
+            Our Projects
+          </h2>
+          <p className="text-sm sm:text-base md:text-lg text-[#333333] max-w-3xl mx-auto">
+            Explore our diverse portfolio of innovative projects, each designed to deliver impactful solutions and drive progress across Kenya and beyond.
+          </p>
+        </div>
+        <div className="flex flex-col  md:flex-row gap-6 sm:gap-8 md:gap-10">
           <Tabs selected={selected} setSelected={setSelected} tabs={tabs} />
           <AnimatePresence mode="wait">
             <motion.div
               key={selected + (active?.title || '')}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              className="flex-1"
+              exit={{ opacity: 0, y: 8 }}
+              className="flex-1 min-w-0"
             >
               <ProjectFeature tab={active} />
             </motion.div>
@@ -43,7 +47,11 @@ const ProjectGrid = ({ projects = [] }) => {
 
 const Tabs = ({ selected, setSelected, tabs }) => {
   return (
-    <div className="w-full md:w-48 shrink-0 flex flex-row md:flex-col overflow-x-auto md:overflow-visible gap-2 md:gap-0">
+    <div
+      role="tablist"
+      aria-orientation="vertical"
+      className="w-full  rounded-[2rem] p-3 shadow shadow-green-100 md:w-60 shrink-0 flex flex-row md:flex-col md:sticky md:top-24 overflow-x-auto md:overflow-visible gap-2 md:gap-1 pb-2 md:pb-0 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0"
+    >
       {tabs.map((t, index) => (
         <Tab
           key={index}
@@ -59,16 +67,20 @@ const Tabs = ({ selected, setSelected, tabs }) => {
 
 const Tab = ({ selected, title, setSelected, tabNum }) => {
   return (
-    <div className="group relative w-full">
+    <div className="group  relative w-full md:w-auto">
       <button
+        role="tab"
+        aria-selected={selected}
+        aria-controls={`project-panel-${tabNum}`}
+        id={`project-tab-${tabNum}`}
         onClick={() => setSelected(tabNum)}
-        className="relative z-0 flex w-full border-l-[6px] border-slate-200 p-4 transition-colors group-hover:border-slate-300 md:border-l-8 md:p-2"
+        className={`relative  border z-0 flex w-full items-center gap-2 border-l-[6px] md:border-l-8 p-3 md:p-2 transition-colors text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3aa335]/60 focus-visible:ring-offset-2 rounded-r md:rounded-none ${selected ? 'border-[#3aa335] bg-[#FFFFFF] shadow-sm' : 'border-transparent hover:border-[#3aa335]/50'}`}
       >
         <span
-          className={`w-full text-start text-xl font-bold transition-colors md:text-2xl ${
+          className={`w-full hover:cursor-pointer text-start text-base sm:text-lg font-playfair font-bold transition-colors ${
             selected
-              ? "text-green-500"
-              : "text-slate-400 group-hover:text-slate-500"
+              ? 'text-[#3aa335]'
+              : 'text-[#333333]/60 group-hover:text-[#3aa335]'
           }`}
         >
           {title}
@@ -77,7 +89,7 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
       {selected && (
         <motion.span
           layoutId="project-grid-slider"
-          className="absolute bottom-0 left-0 top-0 z-10 w-[6px] bg-green-600 md:w-2"
+          className="absolute bottom-0 left-0 top-0 z-10 w-[6px] md:w-2 bg-[#3aa335] rounded-r"
         />
       )}
     </div>
@@ -88,184 +100,61 @@ const ProjectFeature = ({ tab }) => {
   if (!tab) return null;
   const { title, images = [], description, category, timePeriod } = tab;
   return (
-    <div className="w-full space-y-4">
-      <h2 className="text-3xl font-bold text-gray-800">{title}</h2>
-      <div className="text-sm text-gray-600 flex flex-wrap gap-3">
-        {category && <span className="px-2 py-1 bg-green-100 text-green-700 rounded-md text-xs uppercase font-semibold tracking-wide">{category}</span>}
-        {timePeriod && <span className="text-gray-500 italic">{timePeriod}</span>}
+    <div id={`project-panel-${title}`} role="tabpanel" aria-labelledby={`project-tab-${title}`} className="w-full bg-[#E5F3E8] p-4 rounded-[2rem] space-y-5">
+      <div className="space-y-2">
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-playfair font-bold text-[#000000] leading-snug">{title}</h3>
+        <div className="text-xs sm:text-sm text-[#333333] flex flex-wrap gap-3 items-center">
+          {category && <span className="px-2 py-1 bg-[#3aa335]/10 text-[#3aa335] rounded-md font-open-sans font-semibold uppercase tracking-wide">{category}</span>}
+          {timePeriod && <span className="text-[#333333]/70 italic font-open-sans">{timePeriod}</span>}
+        </div>
       </div>
-      {description && <p className="text-base text-gray-700 max-w-3xl">{description}</p>}
-      <div className="columns-2 gap-4 md:columns-3">
+      {description && <p className="text-sm sm:text-base text-[#333333]/90 max-w-3xl font-open-sans leading-relaxed">{description}</p>}
+      <div className="[column-fill:_balance] columns-2 sm:columns-2 lg:columns-3 gap-4 sm:gap-6">
         {images.length === 0 && (
-          <div className="mb-4 h-40 bg-gray-200 rounded-xl flex items-center justify-center text-gray-500 text-sm">No images</div>
-        )}
-        {images.map((asset, i) => (
-          <div key={asset._id || i} className="relative mb-4 rounded-xl overflow-hidden bg-gray-200 break-inside-avoid h-48 md:h-64">
-            <Image
-              src={urlFor(asset).width(800).height(800).url()}
-              alt={title}
-              fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-cover"
-            />
+          <div className="col-span-full h-48 flex items-center justify-center rounded-xl bg-[#E5F3E8] text-[#3aa335] text-sm font-open-sans font-medium">
+            No images
           </div>
-        ))}
+        )}
+        {images.map((asset, i) => {
+          const imgUrl = (() => {
+            try {
+              return urlFor(asset).width(900).fit('max').auto('format').url();
+            } catch (e) { return '/placeholder.png'; }
+          })();
+          const w = asset?.metadata?.dimensions?.width || 900;
+          const h = asset?.metadata?.dimensions?.height || 900;
+          return (
+            <div key={asset?._id || i} className="break-inside-avoid mb-4 relative rounded-xl overflow-hidden bg-[#E5F3E8] transition-colors group">
+              <Image
+                src={imgUrl}
+                alt={`${title} image ${i+1}`}
+                width={w}
+                height={h}
+                loading="lazy"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="w-full h-auto object-cover object-center rounded-xl group-hover:brightness-105 transition duration-300"
+              />
+              <div className="absolute inset-0 bg-[#3aa335]/0 group-hover:bg-[#3aa335]/10 transition-colors" />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 };
 
+// Placeholder projects (structure only) for when no CMS data is provided
 const PROJECTS = [
-  {
-    title: "Umma University",
-    Feature: () => (
-      <div className="w-full space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800">Umma University</h2>
-        <div className="columns-2 gap-4 md:columns-3">
-          <div className="mb-4 h-64 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-96 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-48 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-80 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-56 bg-gray-200 rounded-xl break-inside-avoid"></div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "Project 2",
-    Feature: () => (
-      <div className="w-full space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800">Project 2</h2>
-        <div className="columns-2 gap-4 md:columns-3">
-          <div className="mb-4 h-56 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-80 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-64 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-48 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-96 bg-gray-200 rounded-xl break-inside-avoid"></div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "Project 3",
-    Feature: () => (
-      <div className="w-full space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800">Project 3</h2>
-        <div className="columns-2 gap-4 md:columns-3">
-          <div className="mb-4 h-80 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-48 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-96 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-64 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-56 bg-gray-200 rounded-xl break-inside-avoid"></div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "Project 4",
-    Feature: () => (
-      <div className="w-full space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800">Project 4</h2>
-        <div className="columns-2 gap-4 md:columns-3">
-          <div className="mb-4 h-64 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-96 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-48 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-80 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-56 bg-gray-200 rounded-xl break-inside-avoid"></div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "Project 5",
-    Feature: () => (
-      <div className="w-full space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800">Project 5</h2>
-        <div className="columns-2 gap-4 md:columns-3">
-          <div className="mb-4 h-56 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-80 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-64 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-48 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-96 bg-gray-200 rounded-xl break-inside-avoid"></div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "Project 6",
-    Feature: () => (
-      <div className="w-full space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800">Project 6</h2>
-        <div className="columns-2 gap-4 md:columns-3">
-          <div className="mb-4 h-80 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-48 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-96 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-64 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-56 bg-gray-200 rounded-xl break-inside-avoid"></div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "Project 7",
-    Feature: () => (
-      <div className="w-full space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800">Project 7</h2>
-        <div className="columns-2 gap-4 md:columns-3">
-          <div className="mb-4 h-64 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-96 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-48 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-80 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-56 bg-gray-200 rounded-xl break-inside-avoid"></div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "Project 8",
-    Feature: () => (
-      <div className="w-full space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800">Project 8</h2>
-        <div className="columns-2 gap-4 md:columns-3">
-          <div className="mb-4 h-56 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-80 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-64 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-48 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-96 bg-gray-200 rounded-xl break-inside-avoid"></div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "Project 9",
-    Feature: () => (
-      <div className="w-full space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800">Project 9</h2>
-        <div className="columns-2 gap-4 md:columns-3">
-          <div className="mb-4 h-80 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-48 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-96 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-64 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-56 bg-gray-200 rounded-xl break-inside-avoid"></div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "Project 10",
-    Feature: () => (
-      <div className="w-full space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800">Project 10</h2>
-        <div className="columns-2 gap-4 md:columns-3">
-          <div className="mb-4 h-64 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-96 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-48 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-80 bg-gray-200 rounded-xl break-inside-avoid"></div>
-          <div className="mb-4 h-56 bg-gray-200 rounded-xl break-inside-avoid"></div>
-        </div>
-      </div>
-    ),
-  },
+  { title: "Umma University", images: [], description: "Flagship campus modernization and sustainability initiative.", category: 'Education', timePeriod: '2023 - Present' },
+  { title: "Project 2", images: [], description: "Community engagement & environmental stewardship program.", category: 'Community', timePeriod: '2024' },
+  { title: "Project 3", images: [], description: "Infrastructure upgrade focusing on accessibility.", category: 'Infrastructure', timePeriod: '2024' },
+  { title: "Project 4", images: [], description: "Digital transformation and process optimization.", category: 'Digital', timePeriod: '2024' },
+  { title: "Project 5", images: [], description: "Health & safety training roll-out across regions.", category: 'Health', timePeriod: '2023 - 2024' },
+  { title: "Project 6", images: [], description: "Renewable energy adoption pilot sites.", category: 'Sustainability', timePeriod: '2024' },
+  { title: "Project 7", images: [], description: "Waste reduction and recycling initiative.", category: 'Environment', timePeriod: '2024' },
+  { title: "Project 8", images: [], description: "Capacity building workshops for local partners.", category: 'Training', timePeriod: '2024' },
+  { title: "Project 9", images: [], description: "Research & development exploration phase.", category: 'R&D', timePeriod: '2024' },
+  { title: "Project 10", images: [], description: "Strategic partnership expansion and alignment.", category: 'Partnerships', timePeriod: '2025' },
 ];
 
 export default ProjectGrid;
