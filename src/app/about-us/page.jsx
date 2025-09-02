@@ -7,6 +7,10 @@ import CTABanner from "../../components/CTABanner";
 import Footer from "../../components/Footer";
 import PageBanner from "@/components/PageBanner";
 import { fetchTeam } from '@/lib/sanity';
+import MinicontactForm from "@/components/MiniContactForm"
+import FAQAccordion from "@/components/FAQAccordion"
+
+
 
 export const dynamic = 'force-dynamic';
 export const metadata = {
@@ -23,9 +27,12 @@ export default async function AboutUsPage() {
       <PageBanner />
       <MissionVisionValues />
       <FullStory />
+      
       <CompanyVideo />
       <TeamProfiles team={team} />
       <CTABanner />
+      <FAQAccordion />
+      <MinicontactForm />
       <Footer />
     </main>
   );

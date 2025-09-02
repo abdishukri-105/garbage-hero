@@ -7,6 +7,8 @@ import CTABanner from "../../components/CTABanner";
 import MiniContactForm from "../../components/MiniContactForm";
 import Footer from "../../components/Footer";
 import PageBanner from "@/components/PageBanner";
+import FAQAccordion from "@/components/FAQAccordion"
+
 
 // Services Page for Garbage Hero Limited
 export default function ServicesPage() {
@@ -25,6 +27,8 @@ export default function ServicesPage() {
      <ServicesList />
         {/* <RecentWorkTeaser /> */}
         <CTABanner />
+        <FAQAccordion />
+        
         <MiniContactForm />
         <Footer />
       </main>

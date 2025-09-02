@@ -23,6 +23,7 @@ export default function ContactUsPage() {
          title="Get in Touch With Us"
         subtitle="we're here to help and answer any questions you might have"
         />
+        
         <MiniContactForm />
         {/* <ContactDetails /> */}
         <MapEmbed />
