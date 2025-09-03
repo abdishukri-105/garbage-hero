@@ -61,7 +61,7 @@ const AboutUsTeaser = () => {
   return (
     <motion.section
       ref={ref}
-      className="px-4  py-8 border rounded-tr-[2rem] rounded-br-[2rem] sm:px-6 sm:py-12 md:px-8 md:py-16 lg:px-10 lg:py-20 bg-[#FFFFFF]"
+      className="px-4  py-8  sm:px-6 sm:py-12 md:px-8 md:py-16 lg:px-10 lg:py-20 bg-[#FFFFFF]"
       initial={{ opacity: 0 }}
       animate={{ opacity: isInView ? 1 : 0 }}
       transition={{ duration: 1, ease: "easeOut" }}
@@ -117,7 +117,7 @@ const AboutUsTeaser = () => {
             </div>
           </div>
 
-          <div className="order-1 lg:order-2 flex flex-col gap-6 sm:gap-8 text-center lg:text-left">
+          <div className="order-1 bg-[#E5F3E8] p-3 rounded-[2rem] lg:order-2 flex flex-col gap-6 sm:gap-8 text-center lg:text-left">
             <div className="space-y-4">
               <h2 className="font-playfair font-bold text-[#000000] text-2xl sm:text-3xl md:text-4xl text-center lg:text-left">
                 Cleaning Kenya, Sustaining Tomorrow
