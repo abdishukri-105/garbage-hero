@@ -4,6 +4,9 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
+import Heading from "./ui/Heading";
+
+// Palette hex: #3AA335 (brand), #1E611B (dark), #E8F6E9 (light), #333333 (body)
 
 const services = [
 	{
@@ -45,43 +48,57 @@ const ServicesPreview = () => {
 	return (
 		<motion.section
 			ref={ref}
-			className="px-4 sm:px-6 md:px-8 border rounded-tr-[2rem] rounded-br-[2rem] lg:px-10 py-8 md:py-12  z-0"
+			className="section-standard z-0"
 			initial={{ opacity: 0 }}
 			animate={{ opacity: isInView ? 1 : 0 }}
 			transition={{ duration: 1, ease: [0.4, 0, 0.6, 1] }}
 		>
-			<div className="text-center mb-8 sm:mb-10 md:mb-12">
-				<h1 className="font-playfair font-bold text-[#000000] text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4">
-					Our Services
-				</h1>
-			
-			</div>
-			<div className="w-full max-w-[90%] sm:max-w-4xl md:max-w-6xl lg:max-w-7xl mx-auto">
-				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 mb-4 md:mb-8">
-					{services.slice(0, 2).map((service, index) => (
-						<Card
-							key={index}
-							heading={service.title}
-							description={service.description}
-							imgSrc={service.imgSrc}
-							href={service.href}
-							index={index}
-							isInView={isInView}
-						/>
-					))}
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+				<div className="text-center md:text-left mb-8 sm:mb-10 md:mb-12">
+					<div
+						className="mx-auto md:mx-0 w-fit pb-1 px-3 rounded-md border-b-4"
+						style={{ borderColor: "#3AA335" }}
+					>
+						<Heading
+							level={2}
+							className="mb-0 text-center md:text-left"
+							variant="primary"
+						>
+							Our Services
+						</Heading>
+					</div>
+					<p className="text-lead font-lato text-[#333333] max-w-[60ch] mx-auto md:mx-0">
+						Comprehensive cleaning, facility care, and environmental management
+						solutions delivered with reliability, safety, and sustainability.
+					</p>
 				</div>
-				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8">
-					{services.slice(2).map((service, index) => (
-						<Card
-							key={index + 2}
-							heading={service.title}
-							description={service.description}
-							imgSrc={service.imgSrc}
-							href={service.href}
-							index={index + 2}
-							isInView={isInView}
-						/>
-					))}
+				<div className="w-full mx-auto">
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 mb-4 md:mb-8">
+						{services.slice(0, 2).map((service, index) => (
+							<Card
+								key={index}
+								heading={service.title}
+								description={service.description}
+								imgSrc={service.imgSrc}
+								href={service.href}
+								index={index}
+								isInView={isInView}
+							/>
+						))}
+					</div>
+					<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8">
+						{services.slice(2).map((service, index) => (
+							<Card
+								key={index + 2}
+								heading={service.title}
+								description={service.description}
+								imgSrc={service.imgSrc}
+								href={service.href}
+								index={index + 2}
+								isInView={isInView}
+							/>
+						))}
+					</div>
 				</div>
 			</div>
 		</motion.section>
@@ -93,7 +110,7 @@ const Card = ({ heading, description, imgSrc, href, index, isInView }) => {
 		<Link href={href} className="block">
 			<motion.div
 				whileHover="hover"
-				className="w-full h-[220px] sm:h-[250px] md:h-[320px] lg:h-[400px] overflow-hidden cursor-pointer group relative rounded-2xl shadow-md bg-white border border-[#E5F3E8]"
+				className="w-full h-[220px] sm:h-[250px] md:h-[320px] lg:h-[400px] overflow-hidden cursor-pointer group relative rounded-2xl shadow-md bg-white border border-[#E8F6E9]"
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
 				transition={{
@@ -115,15 +132,15 @@ const Card = ({ heading, description, imgSrc, href, index, isInView }) => {
 				</div>
 				<div className="p-4 relative z-10 h-full flex flex-col justify-between">
 					<div className="flex items-center justify-end">
-						<FiArrowRight className="text-3xl text-[#3aa335] group-hover:-rotate-45 transition-transform duration-500" />
+						<FiArrowRight className="text-3xl text-[#3AA335] group-hover:-rotate-45 transition-transform duration-500" />
 					</div>
-					<div className="bg-[#E5F3E8] bg-opacity-80 backdrop-blur-lg p-4 rounded-xl mt-auto">
-						<h4 className="font-playfair font-bold text-[#000000] text-lg sm:text-xl md:text-2xl mb-2">
+					<div className="bg-[#E8F6E9] bg-opacity-80 backdrop-blur-lg p-4 rounded-xl mt-auto">
+						<h4 className="font-playfair font-bold text-black text-lg sm:text-xl md:text-2xl mb-2">
 							{heading.split("").map((l, i) => (
 								<ShiftLetter letter={l} key={i} />
 							))}
 						</h4>
-						<p className="font-open-sans text-[#333333] text-xs sm:text-sm md:text-base">
+						<p className="font-lato text-[#333333] text-xs sm:text-sm md:text-base">
 							{description}
 						</p>
 					</div>

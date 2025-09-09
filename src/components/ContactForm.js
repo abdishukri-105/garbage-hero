@@ -6,3 +6,5 @@ export default function ContactForm() {
     </section>
   );
 }
+
+// TODO: Refactor ContactForm color classes to semantic tokens (pending once form structure reviewed)

@@ -4,15 +4,14 @@ import { motion, useMotionValue } from "framer-motion";
 import Image from "next/image";
 import Heading from "./ui/Heading";
 import Paragraph from "./ui/Paragraph";
-import NeuButton from "./ui/Button";
+import WetPaintButton from "./ui/WetPaintButton";
 
 const slides = [
 	{
-		src: "/Photos/hero1.jpg",
-		title: "Sparkling Clean Spaces, Every Time",
+		src: "/projects/traning-1.jpg",
+		title: "Immaculate Cleaning for Institutional Excellence",
 		description:
-			"We provide professional cleaning solutions tailored to your home or office. Reliable, eco-friendly, and affordable — because you deserve a spotless space.",
-		cta: "Get a Free Quote",
+			"Our trained teams use advanced, eco-friendly equipment to handle routine and deep cleans, ensuring minimal disruption and maximum efficiency for your operations. Secure long-term contracts that prioritize safety, sustainability, and regulatory standards",
 	},
 	{
 		src: "/Photos/hero2.jpg",
@@ -138,7 +137,7 @@ export default function HeroSection() {
 					onLoadingComplete={() => setIsFirstLoaded(true)}
 				/>
 				{!isFirstLoaded && (
-					<div className="absolute inset-0 bg-[#000000]/40 animate-pulse" />
+					<div className="absolute inset-0 bg-black/40 animate-pulse" />
 				)}
 			</div>
 
@@ -155,20 +154,21 @@ export default function HeroSection() {
 			<div
 				className={`absolute inset-0 transition-opacity duration-500 ${
 					isFirstLoaded ? "opacity-100" : "opacity-0"
-				} bg-gradient-to-b from-black/60 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/60 md:via-black/30 md:to-black/10 flex items-start md:items-center justify-start pt-28 md:pt-0`}
+				} bg-gradient-to-b from-black/80 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/80 md:via-black/30 md:to-black/10 flex items-start md:items-center justify-start pt-28 md:pt-0`}
 			>
 				<div className="px-6 md:px-16 max-w-[80%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-6">
-					<Heading level={1} variant="white" key={slides[imgIndex].title}>
+					<Heading level={1} variant="white" key={slides[imgIndex].title} className="text-[clamp(2rem,6vw,3rem)] leading-[1.05] hero-heading-font">{/* hero-specific larger size + new font */}
 						{slides[imgIndex].title}
 					</Heading>
 					<Paragraph
-						size="md"
+						size="lg"
 						color="white"
 						key={slides[imgIndex].description}
+						className="hero-body-font hero-paragraph-mobile-clamp"
 					>
 						{slides[imgIndex].description}
 					</Paragraph>
-					<NeuButton text={slides[imgIndex].cta} key={slides[imgIndex].cta} />
+					<WetPaintButton text={slides[imgIndex].cta || 'Get a Quote'} key={slides[imgIndex].cta} href="/contact-us" size="md" />
 				</div>
 			</div>
 
@@ -184,13 +184,13 @@ const Dots = ({ imgIndex, setImgIndex }) => (
 			<button
 				key={idx}
 				onClick={() => setImgIndex(idx)}
-				className={`h-3 w-3 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3aa335]/70 ${
+				className={`h-3 w-10 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3AA335]/70 ${
 					idx === imgIndex
-						? "bg-[#3aa335]"
-						: "bg-[#3aa335]/50 hover:bg-[#3aa335]/70"
+						? "bg-black"
+						: "bg-black/50 hover:bg-black/70 hover:cursor-pointer"
 				}`}
 				aria-label={`Go to slide ${idx + 1}`}
-				aria-current={idx === imgIndex}
+				aria-current={idx === imgIndex ? "true" : "false"}
 			/>
 		))}
 	</div>
@@ -198,7 +198,7 @@ const Dots = ({ imgIndex, setImgIndex }) => (
 
 const GradientEdges = () => (
 	<>
-		<div className="pointer-events-none absolute bottom-0 left-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-r from-[#000000]/40 to-transparent hidden md:block" />
-		<div className="pointer-events-none absolute bottom-0 right-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-l from-[#000000]/40 to-transparent hidden md:block" />
+		<div className="pointer-events-none absolute bottom-0 left-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-r from-black/40 to-transparent hidden md:block" />
+		<div className="pointer-events-none absolute bottom-0 right-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-l from-black/40 to-transparent hidden md:block" />
 	</>
 );

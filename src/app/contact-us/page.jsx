@@ -17,7 +17,7 @@ export default function ContactUsPage() {
         <title>Contact Us | Garbage Hero Limited</title>
         <meta name="description" content="Contact Garbage Hero Limited for cleaning and waste management services in Kenya. Get in touch today!" />
       </Head>
-      <main className="bg-white text-black font-roboto">
+      <main className="bg-white text-black font-lato">
         <Navbar />
         <PageBanner  
          title="Get in Touch With Us"

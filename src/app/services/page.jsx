@@ -18,7 +18,7 @@ export default function ServicesPage() {
         <title>Our Services | Garbage Hero Limited</title>
         <meta name="description" content="Explore our cleaning, landscaping, pest control, garbage collection, and sanitary disposal services in Kenya." />
       </Head>
-      <main className="bg-white text-black font-roboto">
+      <main className="bg-white text-black font-lato">
         <Navbar />
        <PageBanner
         title="Our Eco-Friendly Services"

@@ -8,19 +8,24 @@ const Heading = ({ level = 1, variant = "primary", children, className = "" }) =
 
   const Tag = `h${level}`;
   const variantStyles = {
-    primary: "text-[#000000]",
-    secondary: "text-[#3aa335]",
-    white: "text-[#FFFFFF]",
+    // simplified palette hardcoded
+    primary: "text-black",
+    secondary: "text-[#3AA335]",
+    white: "text-white",
   };
 
+  // Map levels to responsive scale (uses custom utilities + legacy helpers)
   const sizeStyles = {
-    1: "text-3xl sm:text-4xl md:text-5xl",
-    2: "text-2xl sm:text-3xl md:text-4xl",
-    3: "text-xl sm:text-2xl md:text-3xl",
-    4: "text-lg sm:text-xl md:text-2xl",
-    5: "text-base sm:text-lg md:text-xl",
-    6: "text-sm sm:text-base md:text-lg",
+    1: "text-hero", // fluid hero size (tailwind custom fontSize)
+    2: "heading-2",
+    3: "heading-3",
+    4: "heading-4",
+    5: "text-xl font-semibold",
+    6: "text-lg font-semibold",
   };
+
+  // Default font stack; can be overridden externally (e.g., hero-heading-font)
+  const defaultFont = "font-roboto-serif"; // switched from montserrat
 
   return (
     <motion.div
@@ -30,7 +35,7 @@ const Heading = ({ level = 1, variant = "primary", children, className = "" }) =
       transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
     >
       <Tag
-        className={`font-roboto font-bold tracking-tight ${sizeStyles[level]} ${variantStyles[variant]} ${className}`}
+        className={`${defaultFont} font-bold tracking-tight ${sizeStyles[level]} ${variantStyles[variant]} ${className}`}
       >
         {children}
       </Tag>

@@ -8,7 +8,7 @@ const TabsFaq = () => {
   const [selected, setSelected] = useState(TABS[0]);
 
   return (
-    <section className="overflow-hidden bg-slate-900 px-4 py-12 text-slate-50">
+    <section className="overflow-hidden bg-black px-4 py-12 text-white">
       <Heading />
       <Tabs selected={selected} setSelected={setSelected} />
       <Questions selected={selected} />
@@ -20,13 +20,11 @@ const Heading = () => {
   return (
     <>
       <div className="relative z-10 flex flex-col items-center justify-center">
-        <span className="mb-8 bg-gradient-to-r from-violet-500 to-indigo-500 bg-clip-text font-medium text-transparent">
-          Got Questions? We've Got Answers
-        </span>
-        <span className="mb-8 text-5xl font-bold">FAQs</span>
+        <span className="mb-8 bg-[#E8F6E9] text-[#1E611B] font-semibold px-3 py-1 rounded-full text-xs tracking-wide uppercase">Got Questions? We&apos;ve Got Answers</span>
+        <span className="mb-8 text-5xl font-bold text-white">FAQs</span>
       </div>
 
-      <span className="absolute -top-[350px] left-[50%] z-0 h-[500px] w-[600px] -translate-x-[50%] rounded-full bg-gradient-to-r from-violet-600/20 to-indigo-600/20 blur-3xl" />
+      <span className="absolute -top-[350px] left-[50%] z-0 h-[500px] w-[600px] -translate-x-[50%] rounded-full bg-[#3AA335]/10 blur-3xl" />
     </>
   );
 };
@@ -37,10 +35,10 @@ const Tabs = ({ selected, setSelected }) => {
       {TABS.map((tab) => (
         <button
           onClick={() => setSelected(tab)}
-          className={`relative overflow-hidden whitespace-nowrap rounded-md border-[1px] px-3 py-1.5 text-sm font-medium transition-colors duration-500 ${
+          className={`relative overflow-hidden whitespace-nowrap rounded-md border px-3 py-1.5 text-sm font-medium transition-colors duration-300 ${
             selected === tab
-              ? "border-violet-500 text-slate-50"
-              : "border-slate-600 bg-transparent text-slate-400"
+              ? "border-[#3AA335] bg-[#3AA335] text-white"
+              : "border-white/20 bg-transparent text-white/70 hover:border-white/40"
           }`}
           key={tab}
         >
@@ -52,10 +50,10 @@ const Tabs = ({ selected, setSelected }) => {
                 animate={{ y: "0%" }}
                 exit={{ y: "100%" }}
                 transition={{
-                  duration: 0.5,
+                  duration: 0.4,
                   ease: "backIn",
                 }}
-                className="absolute inset-0 z-0 bg-gradient-to-r from-violet-600 to-indigo-600"
+                className="absolute inset-0 z-0 bg-[#1E611B]"
               />
             )}
           </AnimatePresence>
@@ -100,8 +98,8 @@ const Question = ({ question, answer }) => {
   return (
     <motion.div
       animate={open ? "open" : "closed"}
-      className={`rounded-xl border-[1px] border-slate-700 px-4 transition-colors ${
-        open ? "bg-slate-800" : "bg-slate-900"
+      className={`rounded-xl border px-4 transition-colors ${
+        open ? "bg-[#1E611B]/30 border-[#1E611B]" : "bg-white/5 border-white/15"
       }`}
     >
       <button
@@ -110,7 +108,7 @@ const Question = ({ question, answer }) => {
       >
         <span
           className={`text-left text-lg font-medium transition-colors ${
-            open ? "text-slate-50" : "text-slate-400"
+            open ? "text-white" : "text-white/70"
           }`}
         >
           {question}
@@ -127,7 +125,7 @@ const Question = ({ question, answer }) => {
         >
           <FiPlus
             className={`text-2xl transition-colors ${
-              open ? "text-slate-50" : "text-slate-400"
+              open ? "text-white" : "text-white/70"
             }`}
           />
         </motion.span>
@@ -138,7 +136,7 @@ const Question = ({ question, answer }) => {
           height: open ? height : "0px",
           marginBottom: open ? "24px" : "0px",
         }}
-        className="overflow-hidden text-slate-400"
+        className="overflow-hidden text-white/70"
       >
         <p ref={ref}>{answer}</p>
       </motion.div>
@@ -234,7 +232,7 @@ const QUESTIONS = {
     {
       question: "Can you prevent future pest infestations?",
       answer:
-        "Yes, we offer preventative pest control services, including regular inspections and treatments to keep your property pest-free. Our team can create a customized plan to suit your needs."
+        "Yes, we offer preventative pest control services, including regular inspections and treatments to keep your property pest-free. Our team can create a customized plan to suit your needs.",
     }
   ]
 };

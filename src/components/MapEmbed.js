@@ -9,7 +9,7 @@ const MapEmbed = () => {
       transition={{ duration: 0.8, ease: 'easeOut' }}
       className="relative w-full max-w-7xl mx-auto my-8 rounded-xl overflow-hidden "
     >
-      <div className="absolute inset-0 bg-green-200/20 z-10" />
+      <div className="absolute inset-0 bg-[#E8F6E9]/60 z-10" />
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d997.201992744155!2d36.796688169523094!3d-1.2894544999186306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xcbb9deddfa4c301%3A0x7f7dedb87e97b20e!2sTransnep%20Insurance%20Brokers%20Limited!5e0!3m2!1sen!2ske!4v1756228875629!5m2!1sen!2ske"
         width="100%"
@@ -23,7 +23,7 @@ const MapEmbed = () => {
       <div className="absolute bottom-4 left-2 z-20">
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="bg-green/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md text-gray-800"
+          className="bg-[#3AA335]/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md text-[#333333]"
         >
           <p className="text-lg font-medium">Hurlingham, Transnep House, Lenana Road, Gate 8</p>
         </motion.div>

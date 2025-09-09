@@ -6,9 +6,9 @@ const CompanyVideo = () => {
   const videoUrl = 'https://www.youtube.com/embed/W-_mShO-_yw?si=EoWQAFf7CQeP_JEi'; // Provided 3-minute video
 
   return (
-    <section className="py-16 bg-gray-100">
+    <section className="py-16 bg-[#E8F6E9]">
       <motion.div
-        className="max-w-5xl mx-auto rounded-xl shadow-lg overflow-hidden bg-gray-300 border-2 border-transparent hover:border-indigo-500/50 transition-all duration-300"
+        className="max-w-5xl mx-auto rounded-xl shadow-lg overflow-hidden bg-white border-2 border-transparent hover:border-[#1E611B]/50 transition-all duration-300"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

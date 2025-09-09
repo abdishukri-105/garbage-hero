@@ -6,27 +6,23 @@ import { urlFor } from '@/lib/sanity';
 
 /*
   ClientLogosMarquee
-  Props: logos = [ { _id, companyName, url, logoImage } ] (Sanity clientLogo docs)
-  - If no Sanity data yet, shows a subtle placeholder icon set.
-  - Auto scrolling double-row marquee (one forward, one reverse) for visual interest.
-  Brand accents: green (#3aa335 / #50AB62) + soft neutral backgrounds (#E5F3E8 / white)
+  Updated: Removed Tailwind custom color tokens; hardcoded palette.
+  Palette: #3AA335 (brand), #1E611B (brand-dark), #E8F6E9 (brand-light), #333333 (body), #000, #fff
 */
 
 const ROW_DURATION = 40; // seconds for one full traverse
 
 export default function ClientLogosMarquee({ logos = [] }) {
   const hasData = Array.isArray(logos) && logos.length > 0;
-
-  // Build two rows (roughly split / or duplicate if small) to keep animation continuous
   const prepared = hasData ? spreadRows(logos) : placeholderRows();
   const [rowA, rowB] = prepared;
 
   return (
-    <section className="relative py-10 sm:py-12 bg-white border-t border-b border-[#50AB62]/10 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(80,171,98,0.06),transparent_70%)]" />
+    <section className="relative py-10 sm:py-12 bg-white border-t border-b overflow-hidden" style={{ borderColor: '#E8F6E9' }}>
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <h2 className="sr-only">Trusted By</h2>
-        <p className="text-center text-xs sm:text-sm tracking-wide uppercase font-semibold text-[#50AB62] mb-6">Trusted By Forward-Thinking Organisations</p>
+        <p className="text-center text-xs sm:text-sm tracking-wide uppercase font-semibold mb-6" style={{ color: '#3AA335' }}>Trusted By Forward-Thinking Organisations</p>
         <MarqueeRow items={rowA} reverse={false} duration={ROW_DURATION} />
         <MarqueeRow items={rowB} reverse duration={ROW_DURATION + 8} className="mt-6" />
       </div>
@@ -36,7 +32,6 @@ export default function ClientLogosMarquee({ logos = [] }) {
 }
 
 function MarqueeRow({ items, reverse, duration, className = '' }) {
-  // Duplicate sequence 3x for seamless loop
   const seq = [...items, ...items, ...items];
   return (
     <div className={`flex overflow-hidden select-none ${className}`} aria-hidden>
@@ -58,7 +53,7 @@ function LogoItem({ logo }) {
   if (logo.type === 'placeholder') {
     const Icon = logo.icon;
     return (
-      <div className="h-14 w-28 sm:h-16 sm:w-32 flex items-center justify-center rounded-xl bg-[#E5F3E8]/60 border border-[#50AB62]/10 text-[#3aa335]">
+      <div className="h-14 w-28 sm:h-16 sm:w-32 flex items-center justify-center rounded-xl border" style={{ backgroundColor: '#E8F6E9', borderColor: '#3AA3351A', color: '#3AA335' }}>
         <Icon className="text-3xl sm:text-4xl" />
       </div>
     );
@@ -66,7 +61,7 @@ function LogoItem({ logo }) {
   const href = cleanUrl(logo.url);
   const img = logo.logoImage;
   return (
-    <div className="group h-14 w-28 sm:h-16 sm:w-32 flex items-center justify-center rounded-xl bg-[#E5F3E8]/40 border border-[#50AB62]/10 hover:bg-[#E5F3E8]/70 transition-colors">
+    <div className="group h-14 w-28 sm:h-16 sm:w-32 flex items-center justify-center rounded-xl border transition-colors" style={{ backgroundColor: 'rgba(232,246,233,0.4)', borderColor: '#3AA3351A' }}>
       {href ? (
         <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-full w-full p-2">
           {img?.asset ? (
@@ -78,7 +73,7 @@ function LogoItem({ logo }) {
               className="object-contain max-h-full max-w-full opacity-80 group-hover:opacity-100 transition-opacity"
             />
           ) : (
-            <span className="text-xs text-[#333] font-medium truncate px-1">{logo.companyName || 'Client'}</span>
+            <span className="text-xs font-medium truncate px-1" style={{ color: '#333333' }}>{logo.companyName || 'Client'}</span>
           )}
         </a>
       ) : img?.asset ? (
@@ -90,7 +85,7 @@ function LogoItem({ logo }) {
           className="object-contain max-h-full max-w-full opacity-80 group-hover:opacity-100 transition-opacity p-2"
         />
       ) : (
-        <span className="text-xs text-[#333] font-medium truncate px-1">{logo.companyName || 'Client'}</span>
+        <span className="text-xs font-medium truncate px-1" style={{ color: '#333333' }}>{logo.companyName || 'Client'}</span>
       )}
     </div>
   );
@@ -99,8 +94,8 @@ function LogoItem({ logo }) {
 function EdgeFade() {
   return (
     <>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-16" style={{ background: 'linear-gradient(to right, #FFFFFF, transparent)' }} />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-16" style={{ background: 'linear-gradient(to left, #FFFFFF, transparent)' }} />
     </>
   );
 }

@@ -17,9 +17,14 @@ export const metadata = {
 
 // Portfolio (Case Studies) Page for Garbage Hero Limited
 export default async function PortfolioPage() {
-  const projects = await fetchPortfolio();
+  let projects = [];
+  try {
+    projects = await fetchPortfolio();
+  } catch (e) {
+    console.warn('[portfolio] fetchPortfolio failed', e);
+  }
   return (
-    <main className="bg-white text-black font-roboto">
+    <main className="bg-white text-black font-lato">
       <Navbar />
       <PageBanner
         title="Our Green Projects"

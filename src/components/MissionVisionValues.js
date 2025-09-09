@@ -1,17 +1,20 @@
 "use client";
 import React from "react";
 import { FiAward, FiEye, FiHeart } from "react-icons/fi";
+import Heading from './ui/Heading';
 
 const MissionVisionValues = () => {
   return (
-    <section className="py-8 sm:py-12 md:py-16 lg:py-20 font-open-sans text-[#333333]">
-      <div className="mx-auto max-w-[90%] sm:max-w-4xl md:max-w-5xl lg:max-w-6xl px-4 sm:px-6 md:px-8">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-[#000000] mb-4 sm:mb-6 text-center">
-          Our Mission, Vision, and Values
-        </h2>
-        <p className="text-sm sm:text-base md:text-xl text-[#333333] mb-8 sm:mb-10 md:mb-12 text-center max-w-3xl mx-auto">
-          Discover the core principles that drive Garbage Hero Limited’s commitment to creating cleaner, healthier, and sustainable environments across Kenya.
-        </p>
+    <section className="section-standard font-lato text-[#333333]">{/* standardized spacing */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">{/* standardized container */}
+        <div className="text-center mb-6 sm:mb-8 md:mb-10">
+          <div className="mx-auto w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
+            <Heading level={2} variant="primary" className="mb-0 text-center">Our Mission, Vision, and Values</Heading>
+          </div>
+          <p className="text-sm sm:text-base md:text-xl text-[#333333] mt-4 max-w-3xl mx-auto">
+            Discover the core principles that drive Garbage Hero Limited’s commitment to creating cleaner, healthier, and sustainable environments across Kenya.
+          </p>
+        </div>
         <div className="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {CARDS.map((card) => (
             <Card
@@ -30,15 +33,16 @@ const MissionVisionValues = () => {
 const Card = ({ title, subtitle, Icon }) => {
   return (
     <div
-      className="w-full p-4 sm:p-8 rounded-lg border-[1px] border-[#000000]/10 bg-[#FFFFFF] relative overflow-hidden group "
+      className="w-full p-4 sm:p-8 rounded-lg border border-black/10 bg-white relative overflow-hidden group"
     >
-      <div className="absolute inset-0 bg-[#3aa335] translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" />
-      <Icon className="absolute z-10 -top-12 -right-12 text-8xl sm:text-9xl text-[#E5F3E8] group-hover:text-[#228B22] group-hover:rotate-12 transition-transform duration-300" />
-      <Icon className="mb-2 text-xl  sm:text-4xl text-[#3aa335] group-hover:text-[#FFFFFF] transition-colors duration-300 relative z-10" />
-      <h3 className="font-playfair font-bold text-base sm:text-2xl text-[#000000] group-hover:text-[#FFFFFF] transition-colors duration-300 relative z-10">
+      {/* brand background slide */}
+      <div className="absolute inset-0 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" style={{ backgroundColor: '#3AA335' }} />
+      <Icon className="absolute z-10 -top-12 -right-12 text-8xl sm:text-9xl text-[#E8F6E9] group-hover:rotate-12 transition-transform duration-300" />
+      <Icon className="mb-2 text-xl sm:text-4xl relative z-10 transition-colors duration-300" style={{ color: '#3AA335' }} />
+      <h3 className="font-playfair font-bold text-base sm:text-2xl text-black group-hover:text-white transition-colors duration-300 relative z-10">
         {title}
       </h3>
-      <p className="text-[#333333] group-hover:text-[#FFFFFF]/90 text-xs sm:text-sm md:text-lg font-open-sans leading-relaxed transition-colors duration-300 relative z-10">
+      <p className="text-[#333333] group-hover:text-white/90 text-xs sm:text-sm md:text-lg font-lato leading-relaxed transition-colors duration-300 relative z-10">
         {subtitle}
       </p>
     </div>

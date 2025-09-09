@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity";
+import Heading from './ui/Heading';
 
 const AUTOPLAY_INTERVAL = 5000; // ms matches progress animation duration
 
@@ -21,14 +22,16 @@ const TestimonialsCarousel = ({ testimonials = [], autoplay = true }) => {
   if (!testimonials || testimonials.length === 0) return null; // nothing to show
 
   return (
-    <section className="bg-[#FFFFFF] py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 grid items-center grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-4 overflow-hidden">
+    <section className="section-standard bg-white px-4 sm:px-6 md:px-8 grid items-center grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-4 overflow-hidden">{/* standardized spacing */}
       <div className="p-4 sm:p-6">
-        <h3 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-[#000000]">
-          What Our Customers Think
-        </h3>
-        <p className="text-[#333333] my-4 sm:my-6 text-sm sm:text-base md:text-lg font-open-sans">
-          Hear from our satisfied clients about how Garbage Hero Limited’s eco-friendly cleaning and waste management services have transformed their spaces across Kenya.
-        </p>
+        <div className="text-center lg:text-left">
+          <div className="mx-auto lg:mx-0 w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
+            <Heading level={2} variant="primary" className="mb-0 text-center lg:text-left">What Our Customers Think</Heading>
+          </div>
+          <p className="text-[#333333] my-4 sm:my-6 text-sm sm:text-base md:text-lg font-lato max-w-prose mx-auto lg:mx-0">
+            Hear from our satisfied clients about how Garbage Hero Limited’s eco-friendly cleaning and waste management services have transformed their spaces across Kenya.
+          </p>
+        </div>
         <SelectBtns
           numTracks={testimonials.length}
           setSelected={setSelected}
@@ -54,12 +57,12 @@ const SelectBtns = ({ numTracks, setSelected, selected, autoplay }) => {
           <button
             key={n}
             onClick={() => setSelected(n)}
-            className="h-1.5 w-full bg-[#E5F3E8] relative overflow-hidden"
+            className="h-1.5 w-full bg-[#E8F6E9] relative overflow-hidden"
             aria-label={`Go to testimonial ${n + 1}`}
           >
             {isActive && autoplay ? (
               <motion.span
-                className="absolute top-0 left-0 bottom-0 bg-[#3aa335]"
+                className="absolute top-0 left-0 bottom-0 bg-[#3AA335]"
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: AUTOPLAY_INTERVAL / 1000, ease: "linear" }}
@@ -69,7 +72,7 @@ const SelectBtns = ({ numTracks, setSelected, selected, autoplay }) => {
               />
             ) : (
               <span
-                className="absolute top-0 left-0 bottom-0 bg-[#3aa335]"
+                className="absolute top-0 left-0 bottom-0 bg-[#3AA335]"
                 style={{ width: selected > n ? "100%" : "0%" }}
               />
             )}
@@ -116,7 +119,7 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
       whileHover={{ translateX: position === selected ? 0 : -3 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
       onClick={() => setSelected(position)}
-      className="absolute top-0 left-0 w-full min-h-full p-6 sm:p-8 lg:p-12 cursor-pointer flex flex-col justify-between rounded-lg border border-[#E5F3E8]"
+      className="absolute top-0 left-0 w-full min-h-full p-6 sm:p-8 lg:p-12 cursor-pointer flex flex-col justify-between rounded-lg border border-[#E8F6E9]"
     >
       <div className="flex flex-col items-center text-center">
         {companyLogo?.asset && (
@@ -130,15 +133,15 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
             />
           </div>
         )}
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl font-open-sans font-light italic my-4 sm:my-6 max-w-prose">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl font-lato font-light italic my-4 sm:my-6 max-w-prose">
           “{statement}”
         </p>
       </div>
       <div className="text-center">
-        <span className="block font-playfair font-bold text-base sm:text-lg text-[#000000]">
+        <span className="block font-montserrat font-bold text-base sm:text-lg text-black">
           {clientName}
         </span>
-        <span className="block font-open-sans text-xs sm:text-sm text-[#333333]">
+        <span className="block font-lato text-xs sm:text-sm text-[#333333]">
           {clientTitle}{clientTitle && company ? ' • ' : ''}{company}
         </span>
       </div>

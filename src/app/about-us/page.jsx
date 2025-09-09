@@ -20,9 +20,14 @@ export const metadata = {
 
 // About Us Page for Garbage Hero Limited
 export default async function AboutUsPage() {
-  const team = await fetchTeam();
+  let team = [];
+  try {
+    team = await fetchTeam();
+  } catch (e) {
+    console.warn('[about-us] fetchTeam failed', e);
+  }
   return (
-    <main className="bg-white text-black font-roboto">
+    <main className="bg-white text-black font-lato">
       <Navbar />
       <PageBanner />
       <MissionVisionValues />

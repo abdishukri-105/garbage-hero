@@ -19,13 +19,21 @@ import FAQAccordion from "@/components/FAQAccordion"
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  const [testimonials, teasers, clientLogos] = await Promise.all([
+  const results = await Promise.allSettled([
     fetchTestimonials(),
     fetchPortfolioTeasers(),
     fetchClientLogos(),
   ]);
+  const [testimonialsRes, teasersRes, clientLogosRes] = results;
+  const testimonials = testimonialsRes.status === 'fulfilled' ? testimonialsRes.value : [];
+  const teasers = teasersRes.status === 'fulfilled' ? teasersRes.value : [];
+  const clientLogos = clientLogosRes.status === 'fulfilled' ? clientLogosRes.value : [];
+  // Optionally log server side only
+  if (results.some(r => r.status === 'rejected')) {
+    console.warn('[home] Some data fetches failed:', results.filter(r => r.status === 'rejected').map(r => r.reason));
+  }
   return (
-    <main className="bg-white text-black font-roboto">
+    <main className="bg-white text-black font-lato">
       <Navbar />
       <HeroSection />
       <AboutUsTeaser />

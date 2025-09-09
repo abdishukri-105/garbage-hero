@@ -1,19 +1,96 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-body {
-  font-family: var(--font-open_sans), serif;
+/* Google Fonts import for Roboto & Roboto Serif (hero usage) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Serif:opsz,wght@8..144,500;8..144,600;8..144,700&display=swap');
+
+:root {
+  --font-roboto: 'Roboto', system-ui, sans-serif;
+  --font-roboto-serif: 'Roboto Serif', ui-serif, serif;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-playfair), serif;
+@layer base {
+body {
+  font-family: var(--font-roboto), system-ui, sans-serif; /* switched from Lato */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background-color: var(--color-bg, #FFFFFF);
+  color: #333333; /* body */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-roboto-serif), ui-serif, serif; /* switched from Montserrat */
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+}
+
+/* Typographic scale utility classes */
+.heading-1 { font-size: clamp(2.4rem, 4.2vw + 1rem, 3.6rem); line-height: 1.08; font-weight: 700; }
+.heading-2 { font-size: clamp(2rem, 3vw + 0.9rem, 2.8rem); line-height: 1.1; font-weight: 700; }
+.heading-3 { font-size: clamp(1.6rem, 2.2vw + 0.7rem, 2.1rem); line-height: 1.15; font-weight: 600; }
+.heading-4 { font-size: clamp(1.3rem, 1.4vw + 0.6rem, 1.6rem); line-height: 1.2; font-weight: 600; }
+.text-lead { font-size: clamp(1.05rem, 0.6vw + 0.9rem, 1.25rem); line-height: 1.55; }
+.text-body { font-size: 1rem; line-height: 1.6; }
+.text-body-sm { font-size: 0.875rem; line-height: 1.45; }
+.eyebrow { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #3AA335; }
+
+/* Layout helpers */
+.container-site { margin-left: auto; margin-right: auto; width: 100%; max-width: 1320px; padding-left: 1.5rem; padding-right: 1.5rem; }
+.section-spacing { padding-top: 4rem; padding-bottom: 4rem; }
+@media (min-width: 768px) {
+  .container-site { padding-left: 2.5rem; padding-right: 2.5rem; }
+  .section-spacing { padding-top: 5rem; padding-bottom: 5rem; }
+}
+
+/* Standardized vertical spacing utilities */
+.section-standard { padding-top: 3rem; padding-bottom: 3rem; }
+@media (min-width:640px){ .section-standard { padding-top:4rem; padding-bottom:4rem; } }
+@media (min-width:768px){ .section-standard { padding-top:5rem; padding-bottom:5rem; } }
+@media (min-width:1024px){ .section-standard { padding-top:6rem; padding-bottom:6rem; } }
+
+.section-hero { padding-top:5rem; padding-bottom:5rem; }
+@media (min-width:640px){ .section-hero { padding-top:6rem; padding-bottom:6rem; } }
+@media (min-width:768px){ .section-hero { padding-top:7rem; padding-bottom:7rem; } }
+@media (min-width:1024px){ .section-hero { padding-top:8rem; padding-bottom:8rem; } }
+
+.section-compact { padding-top:2rem; padding-bottom:2rem; }
+@media (min-width:640px){ .section-compact { padding-top:2.5rem; padding-bottom:2.5rem; } }
+@media (min-width:768px){ .section-compact { padding-top:3rem; padding-bottom:3rem; } }
+@media (min-width:1024px){ .section-compact { padding-top:3.5rem; padding-bottom:3.5rem; } }
+
+/* Constrain long-form text */
+.prose-max { max-width: 65ch; }
+
+/* Focus ring helper */
+.focus-ring { outline: none; }
+.focus-ring:focus-visible { box-shadow: 0 0 0 3px rgba(47,142,43,0.45); border-radius: 4px; }
+
+/* Font utility aliases to replace old font-open-sans / font-roboto usages */
+.font-lato { font-family: var(--font-lato), system-ui, sans-serif; }
+.font-montserrat { font-family: var(--font-montserrat), system-ui, sans-serif; }
+.font-roboto { font-family: var(--font-roboto), system-ui, sans-serif; }
+.font-roboto-serif { font-family: var(--font-roboto-serif), ui-serif, serif; }
+
+/* Hero specific font overrides (still usable) */
+.hero-heading-font { font-family: var(--font-roboto-serif), ui-serif, serif; }
+.hero-body-font { font-family: var(--font-roboto), system-ui, sans-serif; }
+
+/* Mobile-only 3 line clamp for hero paragraph */
+.hero-paragraph-mobile-clamp { 
+  display: -webkit-box; 
+  -webkit-line-clamp: 3; 
+  line-clamp: 3; /* standard */
+  -webkit-box-orient: vertical; 
+  overflow: hidden; 
+}
+@media (min-width:640px){
+  .hero-paragraph-mobile-clamp { 
+    display: block; 
+    -webkit-line-clamp: unset; 
+    line-clamp: unset; /* standard */
+    -webkit-box-orient: unset; 
+    overflow: visible; 
+  }
 }
 
 

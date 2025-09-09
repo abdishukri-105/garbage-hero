@@ -2,10 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import { FiArrowUpRight } from "react-icons/fi";
-
-// Brand constants
-const BRAND_GREEN = "#3aa335";
-const LIGHT_BG = "#E5F3E8";
+import Heading from "./ui/Heading";
+import WetPaintButton from "./ui/WetPaintButton";
 
 // Structured service data (hardcoded)
 const SERVICES = [
@@ -109,13 +107,13 @@ const SERVICES = [
 
 export const ServicesList = () => {
 	return (
-		<section className="w-full mx-auto py-14 bg-white" id="services">
-			<div className="max-w-7xl mx-auto px-4">
-				<header className="mb-12">
-					<div className="w-fit pb-1 px-3 rounded-md text-2xl font-playfair font-bold border-b-4 border-[#50AB62] text-[#0F2012]">
-						Our Services
+		<section className="section-standard bg-white" id="services">{/* standardized spacing */}
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">{/* standardized container */}
+				<header className="mb-12 text-center md:text-left">
+					<div className="mx-auto md:mx-0 w-fit pb-1 px-3 rounded-md border-b-4 border-[#3AA335]">
+						<Heading level={2} variant="primary" className="mb-0 text-center md:text-left">Our Services</Heading>
 					</div>
-					<p className="mt-4 max-w-3xl text-sm md:text-base text-[#36513B]">
+					<p className="mt-4 max-w-3xl text-lead font-lato text-[#333333] mx-auto md:mx-0">
 						Integrated cleaning, waste, hygiene and outdoor solutions engineered for reliability, compliance and environmental stewardship.
 					</p>
 				</header>
@@ -135,7 +133,7 @@ const ServiceBlock = ({ service, index }) => {
 		<div
 			className={`flex flex-col md:flex-row ${reverse ? "md:flex-row-reverse" : ""} md:items-stretch items-start gap-6 md:gap-10`}
 		>
-			<div className="md:w-1/2 w-full overflow-hidden rounded-xl shadow-sm ring-1 ring-[#50AB62]/15 bg-[#0F2012] relative aspect-[4/3]">
+			<div className="md:w-1/2 w-full overflow-hidden rounded-xl shadow-sm relative aspect-[4/3]" style={{ backgroundColor: '#1E611B', boxShadow: '0 0 0 1px rgba(58,163,53,0.3) inset' }}>
 				<Image
 					src={service.img}
 					alt={service.subheading}
@@ -146,39 +144,33 @@ const ServiceBlock = ({ service, index }) => {
 					quality={60}
 					sizes="(max-width:768px) 100vw, 45vw"
 				/>
-				<div className="absolute inset-0 bg-[linear-gradient(rgba(15,32,18,0.25),rgba(15,32,18,0.45))]" />
+				<div className="absolute inset-0" style={{ background: 'linear-gradient(rgba(15,32,18,0.25),rgba(15,32,18,0.45))' }} />
 			</div>
-			<div className="md:w-1/2 w-full bg-[#F6FBF7] rounded-xl md:rounded-md p-6 md:p-8 border border-[#50AB62]/20 flex flex-col">
-				<h2 className="text-2xl md:text-3xl font-bold font-playfair text-[#0F2012] leading-tight">
-					{service.heading}
-				</h2>
-				<p className="mt-2 text-sm uppercase tracking-wide font-semibold text-[#3aa335]">
+			<div className="md:w-1/2 w-full bg-white rounded-xl md:rounded-md p-6 md:p-8 border flex flex-col" style={{ borderColor: 'rgba(58,163,53,0.2)' }}>
+				<Heading level={3} variant="primary" className="mb-0 font-playfair leading-tight text-2xl md:text-3xl">{service.heading}</Heading>
+				<p className="mt-2 text-sm uppercase tracking-wide font-semibold" style={{ color: '#3AA335' }}>
 					{service.subheading}
 				</p>
-				<p className="mt-4 text-[#36513B] text-sm md:text-base leading-relaxed">
+				<p className="mt-4 text-sm md:text-base" style={{ color: '#333333' }}>
 					{service.intro}
 				</p>
 				<ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2">
 					{service.bullets.map((b, i) => (
 						<li
 							key={i}
-							className="flex items-start gap-2 text-[#12331B] text-xs md:text-sm bg-white/70 backdrop-blur rounded-md px-3 py-2 border border-[#50AB62]/10"
+							className="flex items-start gap-2 text-xs md:text-sm bg-white/70 backdrop-blur rounded-md px-3 py-2 border"
+							style={{ color: '#333333', borderColor: 'rgba(58,163,53,0.1)' }}
 						>
-							<span className="mt-0.5 h-2 w-2 rounded-full bg-[#50AB62] flex-shrink-0" />
+							<span className="mt-0.5 h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: '#3AA335' }} />
 							<span>{b}</span>
 						</li>
 					))}
 				</ul>
-				<div className="mt-5 text-xs md:text-sm italic text-[#12331B] bg-[#E5F3E8]/70 border border-[#50AB62]/10 rounded-md p-3">
+				<div className="mt-5 text-xs md:text-sm italic rounded-md p-3" style={{ color: '#333333', backgroundColor: '#E8F6E9', border: '1px solid rgba(58,163,53,0.1)' }}>
 					{service.value}
 				</div>
 				<div className="mt-6">
-					<a
-						href="/contact-us"
-						className="inline-flex items-center gap-2 rounded-md bg-[#3aa335] hover:bg-[#228B22] text-white font-medium px-5 py-3 text-sm shadow transition-colors"
-					>
-						Request Quote <FiArrowUpRight className="text-base" />
-					</a>
+					<WetPaintButton text="Request Quote" href="/contact-us" size="md" />
 				</div>
 			</div>
 		</div>

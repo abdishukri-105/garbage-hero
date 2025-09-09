@@ -1,29 +1,23 @@
 "use client";
 import { motion, useInView } from "framer-motion";
 import React, { useRef } from "react";
+import Heading from "./ui/Heading";
 
 const FullStory = () => {
   return (
-    <section className="py-12 bg-[#E5F3E8] font-inter text-black overflow-x-hidden">
+    <section className="py-12 font-inter text-black overflow-x-hidden" style={{ backgroundColor: '#E8F6E9' }}>
       <div className="mx-auto max-w-5xl px-4 md:px-8">
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-3xl md:text-4xl font-bold text-[#50AB62] mb-4 text-center"
+          className="text-center"
         >
-          Our Journey
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg text-gray-700 mb-8 text-center max-w-3xl mx-auto"
-        >
-          Since 2014, Garbage Hero Limited has been delivering eco-friendly cleaning, sanitation, and landscaping solutions across Kenya, transforming spaces with professionalism and trust.
-        </motion.p>
-        <div className="relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-[#50AB62] transform -translate-x-1/2 hidden md:block"></div>
+          <Heading level={2} variant="secondary" className="mb-4">Our Journey</Heading>
+          <p className="text-lead text-[#333333] max-w-3xl mx-auto">Since 2014, Garbage Hero Limited has been delivering eco-friendly cleaning, sanitation, and landscaping solutions across Kenya, transforming spaces with professionalism and trust.</p>
+        </motion.div>
+        <div className="relative mt-8">
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 transform -translate-x-1/2 hidden md:block" style={{ backgroundColor: '#3AA335' }}></div>
           {MILESTONES.map((milestone, index) => (
             <TimelineItem key={milestone.id} milestone={milestone} index={index} />
           ))}
@@ -51,13 +45,14 @@ const TimelineItem = ({ milestone, index }) => {
       <div className="order-1 w-full md:w-5/12 max-w-[calc(100%-3rem)] md:max-w-[calc(50%-2rem)]">
         <div className="flex flex-col items-center md:items-start">
           <div
-            className={`w-12 h-12 rounded-full bg-[#50AB62] flex items-center justify-center -mb-4 md:mb-0 md:absolute md:left-1/2 md:transform md:-translate-x-1/2 z-20`}
+            className={`w-12 h-12 rounded-full flex items-center justify-center -mb-4 md:mb-0 md:absolute md:left-1/2 md:transform md:-translate-x-1/2 z-20`}
+            style={{ backgroundColor: '#3AA335' }}
           >
             <h1 className="font-semibold text-lg text-white">{milestone.year}</h1>
           </div>
-          <div className={`bg-white rounded-lg shadow-xl px-6 py-4 w-full ${isOdd ? "md:mr-8" : "md:ml-8"}`}>
-            <h3 className="mb-3 font-bold text-gray-800 text-xl">{milestone.title}</h3>
-            <p className="text-gray-600 text-base leading-tight">{milestone.description}</p>
+          <div className={`bg-white rounded-lg shadow-xl px-6 py-4 w-full ${isOdd ? 'md:mr-8' : 'md:ml-8'}` }>
+            <h3 className="mb-3 font-bold text-xl" style={{ color: '#000' }}>{milestone.title}</h3>
+            <p className="text-base leading-tight" style={{ color: '#333333' }}>{milestone.description}</p>
           </div>
         </div>
       </div>

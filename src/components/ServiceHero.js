@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
 import { twMerge } from "tailwind-merge";
+import WetPaintButton from "./ui/WetPaintButton";
 
 export const ServicesHero = () => {
   return (
@@ -16,7 +17,7 @@ export const ServicesHero = () => {
 
 const Content = () => {
   return (
-    <div className="relative  z-20 mx-auto flex max-w-6xl flex-col items-center justify-center px-4 py-24 md:px-8 md:py-10">
+    <div className="relative  z-20 mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-24 md:px-8 md:py-10">{/* standardized container */}
       <motion.div
         initial={{
           y: 25,
@@ -86,28 +87,10 @@ const Content = () => {
         }}
         className="flex flex-col items-center gap-6 sm:flex-row"
       >
-        <SplashButton className="flex items-center gap-2">
-          Try it free
-          <FiArrowRight />
-        </SplashButton>
+        <WetPaintButton text="Try it free" href="/contact-us" size="md" />
    
       </motion.div>
     </div>
-  );
-};
-
-
-const SplashButton = ({ children, className, ...rest }) => {
-  return (
-    <button
-      className={twMerge(
-        "rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70",
-        className
-      )}
-      {...rest}
-    >
-      {children}
-    </button>
   );
 };
 

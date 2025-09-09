@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Heading from "./ui/Heading";
 import Paragraph from "./ui/Paragraph";
-import Button from "./ui/Button";
 import { urlFor } from '@/lib/sanity';
 
 const CARD_WIDTH = 390;
@@ -76,7 +75,7 @@ const Card = ({ url, category, title, description }) => {
   return (
     <Link href="/portfolio">
       <div
-        className="relative shrink-0 cursor-pointer rounded-2xl bg-background-white shadow-md transition-all hover:scale-[1.015] hover:shadow-xl"
+        className="relative shrink-0 cursor-pointer rounded-2xl bg-white shadow-md transition-all hover:scale-[1.015] hover:shadow-xl"
         style={{
           width: CARD_WIDTH,
           height: CARD_HEIGHT,
@@ -92,7 +91,7 @@ const Card = ({ url, category, title, description }) => {
           className="rounded-2xl"
         />
         <div className="absolute inset-0 z-20 rounded-2xl bg-gradient-to-b from-black/90 via-black/60 to-black/0 p-6 text-white transition-[backdrop-filter] hover:backdrop-blur-sm">
-          <h5 className="text-lg text-[#3aa335] font-semibold uppercase text-secondary ">
+          <h5 className="text-lg font-semibold uppercase" style={{ color: '#1E611B' }}>
             {category}
           </h5>
           <h3 className="my-2 text-3xl font-bold ">{title}</h3>
@@ -149,11 +148,14 @@ const RecentWorkTeaser = ({ teasers = [] }) => {
       transition={{ duration: 1, ease: [0.4, 0, 0.6, 1] }}
     >
       <div className="relative overflow-hidden p-4" ref={ref}>
-        <div className="mx-auto max-w-6xl">
-          <h1  className="mb-12 text-2xl sm:text-5xl font-bold">
-            Our Recent Work.{" "}
-            <span className="text-secondary">Transforming Spaces Across Kenya.</span>
-          </h1>
+        <div className="mx-auto max-w-7xl">{/* standardized container */}
+          <div className="text-center md:text-left mb-6">
+            <div className="mx-auto md:mx-0 w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
+              <Heading level={2} className="mb-0 text-center md:text-left" variant="primary">
+                Our Recent Work. <span style={{ color: '#1E611B' }}>Transforming Spaces Across Kenya.</span>
+              </Heading>
+            </div>
+          </div>
           <motion.div
             animate={{ x: offset }}
             transition={{ duration: 0.8, ease: [0.4, 0, 0.6, 1] }}
@@ -170,7 +172,8 @@ const RecentWorkTeaser = ({ teasers = [] }) => {
             animate={{
               x: CAN_SHIFT_LEFT ? "0%" : "-100%",
             }}
-            className="absolute left-0 top-[60%] z-30 rounded-r-xl bg-slate-100/30 p-3 pl-2 text-4xl text-[#3aa335] backdrop-blur-sm transition-[padding] hover:pl-3"
+            className="absolute left-0 top-[60%] z-30 rounded-r-xl bg-white/30 p-3 pl-2 text-4xl backdrop-blur-sm transition-[padding] hover:pl-3"
+            style={{ color: '#3AA335' }}
             onClick={shiftLeft}
           >
             <FiChevronLeft />
@@ -180,7 +183,8 @@ const RecentWorkTeaser = ({ teasers = [] }) => {
             animate={{
               x: CAN_SHIFT_RIGHT ? "0%" : "100%",
             }}
-            className="absolute right-0 top-[60%] z-30 rounded-l-xl bg-slate-100/30 p-3 pr-2 text-4xl text-[#3aa335] backdrop-blur-sm transition-[padding] hover:pr-3"
+            className="absolute right-0 top-[60%] z-30 rounded-l-xl bg-white/30 p-3 pr-2 text-4xl backdrop-blur-sm transition-[padding] hover:pr-3"
+            style={{ color: '#3AA335' }}
             onClick={shiftRight}
           >
             <FiChevronRight />
