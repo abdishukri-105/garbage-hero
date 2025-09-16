@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Standardized vertical spacing utilities */
-.section-standard { padding-top: 3rem; padding-bottom: 3rem; }
+.section-standard { padding-top: 2rem; padding-bottom: 2rem; }
 @media (min-width:640px){ .section-standard { padding-top:4rem; padding-bottom:4rem; } }
 @media (min-width:768px){ .section-standard { padding-top:5rem; padding-bottom:5rem; } }
 @media (min-width:1024px){ .section-standard { padding-top:6rem; padding-bottom:6rem; } }
@@ -56,7 +56,7 @@ h1, h2, h3, h4, h5, h6 {
 .section-compact { padding-top:2rem; padding-bottom:2rem; }
 @media (min-width:640px){ .section-compact { padding-top:2.5rem; padding-bottom:2.5rem; } }
 @media (min-width:768px){ .section-compact { padding-top:3rem; padding-bottom:3rem; } }
-@media (min-width:1024px){ .section-compact { padding-top:3.5rem; padding-bottom:3.5rem; } }
+@media (min-width:1024px){ .section-compact { padding-top:3rem; padding-bottom:3rem; } }
 
 /* Constrain long-form text */
 .prose-max { max-width: 65ch; }

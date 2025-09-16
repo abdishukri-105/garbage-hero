@@ -3,73 +3,83 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import WetPaintButton from "./ui/WetPaintButton";
+import Heading from "./ui/Heading";
+import Paragraph from "./ui/Paragraph";
 
 const CTABanner = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: "-50px 0px" });
 
+  const fadeUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 32 },
+    animate: { opacity: isInView ? 1 : 0, y: isInView ? 0 : 32, transition: { duration: 0.7, ease: [0.4, 0, 0.6, 1], delay } },
+  });
+
   return (
-    <motion.div
+    <motion.section
       ref={ref}
-      className="section-standard bg-white"
+      aria-labelledby="cta-heading"
+      className="section-compact relative overflow-hidden bg-white"
       initial={{ opacity: 0 }}
       animate={{ opacity: isInView ? 1 : 0 }}
       transition={{ duration: 1, ease: [0.4, 0, 0.6, 1] }}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-        <div className="relative isolate overflow-clip bg-[#3AA335] px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+      {/* Background pattern (subtle radial like other sections) */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.05), transparent 70%)' }} />
+
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8 relative">
+        <div className="relative isolate overflow-hidden rounded-3xl bg-gradient-to-br from-[#3AA335] via-[#2F8F2B] to-[#1E611B] px-6 py-14 sm:py-20 sm:px-12 md:px-16 lg:flex lg:items-center lg:gap-x-16 lg:py-20 shadow-xl ring-1 ring-[#FFFFFF1A]">
+          {/* Decorative accents */}
+          <div className="absolute -top-10 -right-10 w-64 h-64 rounded-full bg-white/10 blur-3xl" aria-hidden />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[110%] h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" aria-hidden />
+          <div className="absolute inset-0 mix-blend-overlay opacity-[0.07] bg-[radial-gradient(circle_at_25%_20%,#fff,transparent_60%)]" aria-hidden />
+
+          {/* Text */}
+          <motion.div {...fadeUp(0.05)} className="relative z-10 mx-auto text-center lg:text-left lg:mx-0 lg:basis-[55%] lg:max-w-none max-w-xl">
+            <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-white/80 bg-white/10 px-3 py-1 rounded-full ring-1 ring-white/20 mb-5">
+              Partner With Experts
+            </span>
+            <Heading
+              id="cta-heading"
+              level={2}
+              className="text-white text-3xl sm:text-4xl md:text-5xl leading-tight mb-6"
+            >
+              Sustainable Cleaning & Waste Solutions Across Kenya
+            </Heading>
+            <Paragraph className="text-white/90 text-base sm:text-lg md:text-xl max-w-prose mx-auto lg:mx-0">
+              Tailored facility care, compliant waste management, and eco-focused practices delivered by a dependable national team. Build healthier, efficient spaces with a partner you can trust.
+            </Paragraph>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <WetPaintButton href="/contact-us" text="Get a Quote" size="lg" />
+            </div>
+            {/* <ul className="mt-8 grid grid-cols-2 gap-4 text-left text-white/80 text-xs sm:text-sm max-w-sm mx-auto lg:mx-0">
+              <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-white/70" />ISO-aligned hygiene standards</li>
+              <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-white/70" />Eco-friendly product usage</li>
+              <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-white/70" />Trusted by corporate & public sector</li>
+              <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-white/70" />Nationwide service coverage</li>
+            </ul> */}
+          </motion.div>
+
+          {/* Image */}
           <motion.div
-            aria-hidden="true"
-            className="absolute right-0 top-0 -z-10 aspect-square w-full max-w-3xl translate-x-3/4 rounded-full bg-[#E8F6E9]/60 blur-[10rem] lg:-top-[40rem] lg:left-1/2 lg:-translate-x-1/2"
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: isInView ? 1 : 0.95, opacity: isInView ? 1 : 0 }}
-            transition={{ delay: 1.0, duration: 1, ease: [0.4, 0, 0.6, 1] }}
-          ></motion.div>
-          <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-16 lg:text-start">
-            <motion.h2
-              className="text-3xl font-semibold tracking-tight text-black sm:text-4xl font-montserrat"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -20 }}
-              transition={{ delay: 0.2, duration: 0.8, ease: [0.4, 0, 0.6, 1] }}
-            >
-              Ready to Transform Your Space with Eco-Friendly Cleaning?
-            </motion.h2>
-            <motion.p
-              className="mt-6 text-xl text-black font-lato"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isInView ? 1 : 0 }}
-              transition={{ delay: 0.4, duration: 0.8, ease: [0.4, 0, 0.6, 1] }}
-            >
-              Partner with Garbage Hero Limited for sustainable cleaning and waste management solutions tailored to your needs. Let’s make Kenya cleaner together.
-            </motion.p>
-            <motion.div
-              className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
-              transition={{ delay: 0.6, duration: 0.8, ease: [0.4, 0, 0.6, 1] }}
-            >
-                 <WetPaintButton text="GET A QUOTE NOW!" href="/contact-us" /> 
-            </motion.div>
-          </div>
-          <motion.div
-            className="relative mt-16 h-80 lg:mt-8 lg:h-auto"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : 20 }}
-            transition={{ delay: 0.8, duration: 0.8, ease: [0.4, 0, 0.6, 1] }}
+            {...fadeUp(0.15)}
+            className="relative mt-12 lg:mt-0 mx-auto lg:mx-0 lg:basis-[45%] flex-1"
           >
-            <Image
-              width={1920}
-              height={1139}
-              className="absolute left-0 top-0 w-[58rem] max-w-none rounded-2xl bg-white/5 ring-1 ring-white/10 lg:top-14"
-              src="/images/slide3.jpg"
-              alt="Eco-friendly cleaning in action"
-              sizes="(max-width: 1024px) 100vw, 58rem"
-              priority
-            />
+            <div className="relative w-full aspect-[4/3] md:aspect-[16/10] lg:h-[360px] overflow-hidden rounded-2xl ring-1 ring-white/15 shadow-2xl">
+              <Image
+                src="/Photos/hero2.jpg"
+                alt="Professional eco-focused cleaning team at work"
+                fill
+                sizes="(max-width: 1024px) 100vw, 48rem"
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#1E611B]/20 via-[#3AA335]/10 to-transparent" aria-hidden />
+            </div>
           </motion.div>
         </div>
       </div>
-    </motion.div>
+    </motion.section>
   );
 };
 

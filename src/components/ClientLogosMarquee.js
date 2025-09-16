@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { SiAdobe, SiAmazon, SiBmw, SiChase, SiDeliveroo, SiEpicgames, SiGodaddy, SiHeroku } from 'react-icons/si';
 import { urlFor } from '@/lib/sanity';
+import Heading from "./ui/Heading";
+import Paragraph from "./ui/Paragraph"; // added
 
 /*
   ClientLogosMarquee
@@ -18,11 +20,22 @@ export default function ClientLogosMarquee({ logos = [] }) {
   const [rowA, rowB] = prepared;
 
   return (
-    <section className="relative py-10 sm:py-12 bg-white border-t border-b overflow-hidden" style={{ borderColor: '#E8F6E9' }}>
+    <section className="relative py-2 sm:py-8 pb-10 bg-white border-t border-b overflow-hidden" style={{ borderColor: '#E8F6E9' }}>
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <h2 className="sr-only">Trusted By</h2>
-        <p className="text-center text-xs sm:text-sm tracking-wide uppercase font-semibold mb-6" style={{ color: '#3AA335' }}>Trusted By Forward-Thinking Organisations</p>
+         <div className="text-center mb-6 sm:mb-8">
+           <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Trusted By</span>
+           <Heading
+              level={3}
+              className="mb-2 mx-auto w-fit pb-2 px-2 rounded-md border-b-4 border-[#3aa335]"
+              variant="primary"
+            >
+             Our Clients
+            </Heading>
+           <Paragraph className="text-center text-sm sm:text-base max-w-[60ch] mx-auto text-[#333333]">
+             Forward-thinking organisations partnering with us for sustainable facility care and dependable service delivery.
+           </Paragraph>
+         </div>
         <MarqueeRow items={rowA} reverse={false} duration={ROW_DURATION} />
         <MarqueeRow items={rowB} reverse duration={ROW_DURATION + 8} className="mt-6" />
       </div>
@@ -53,7 +66,7 @@ function LogoItem({ logo }) {
   if (logo.type === 'placeholder') {
     const Icon = logo.icon;
     return (
-      <div className="h-14 w-28 sm:h-16 sm:w-32 flex items-center justify-center rounded-xl border" style={{ backgroundColor: '#E8F6E9', borderColor: '#3AA3351A', color: '#3AA335' }}>
+      <div className="h-14 w-28 sm:h-16 sm:w-32 flex items-center justify-center rounded-full border" style={{ backgroundColor: '#E8F6E9', borderColor: '#3AA3351A', color: '#3AA335' }}>
         <Icon className="text-3xl sm:text-4xl" />
       </div>
     );

@@ -3,12 +3,13 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { urlFor } from '@/lib/sanity';
 import Heading from './ui/Heading'; // added
+import Paragraph from './ui/Paragraph'; // added
 
 // Fallback static members (used only if no Sanity data yet)
 const FALLBACK_MEMBERS = [
-	{ id: 1, name: 'John Mwangi', role: 'CEO', image: '/images/team1.jpg' },
-	{ id: 2, name: 'Sarah Wanjiku', role: 'Project Manager', image: '/images/team2.jpg' },
-	{ id: 3, name: 'Michael Otieno', role: 'Finance', image: '/images/team1.jpg' },
+	{ id: 1, name: 'John Mwangi', role: 'CEO', image: '/images/abdiaziz.jpeg' },
+	{ id: 2, name: 'Sarah Wanjiku', role: 'Project Manager', image: '/images/wadud.jpeg' },
+	{ id: 3, name: 'Michael Otieno', role: 'Finance', image: '/images/rose.jpeg' },
 	{ id: 4, name: 'Esther Njoroge', role: 'Data Analyst', image: '/images/team2.jpg' },
 	{ id: 5, name: 'David Kimani', role: 'Backend Engineer', image: '/images/team1.jpg' },
 ];
@@ -26,14 +27,17 @@ const TeamProfiles = ({ team = [] }) => {
 	if (!hasData && FALLBACK_MEMBERS.length === 0) return null;
 
 	return (
-		<section className="section-standard" id="team">{/* standardized spacing */}
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">{/* standardized container */}
-				<div className="text-center md:text-center mb-8">{/* increased bottom margin to align with other sections */}
-					<div className="mx-auto md:mx-0 w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
-						<Heading level={2} className="mb-0 text-center md:text-center" variant="primary">Our Team</Heading>
+		<section className="section-standard relative overflow-hidden bg-white" id="team">{/* standardized spacing */}
+			{/* Radial background pattern */}
+			<div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} />
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative">{/* standardized container */}
+				<div className="text-center mb-8 sm:mb-10 md:mb-12">
+					<span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Leadership & Talent</span>
+					<div className="mx-auto w-fit pb-1 px-3 rounded-md border-b-4 border-[#3AA335]">
+						<Heading level={2} className="mb-0" variant="primary">People Behind Our Promise</Heading>
 					</div>
+					<Paragraph className="text-[#333333] mt-4 max-w-[60ch] mx-auto text-sm sm:text-base md:text-lg">Meet the dedicated professionals delivering sustainable cleaning, hygiene and waste solutions across Kenya.</Paragraph>
 				</div>
-				<p className="text-lead text-[#333333] mb-12 max-w-2xl font-lato mx-auto md:mx-0">Meet the talented individuals behind our sustainable cleaning & waste management solutions.</p>
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
 					{list.map((member, i) => (
 						<motion.div
@@ -69,8 +73,8 @@ const TeamProfiles = ({ team = [] }) => {
 								))}
 								<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10" />
 							</div>
-							<h3 className="relative z-10 mt-2 text-2xl font-bold text-white drop-shadow-sm font-montserrat">{member.name}</h3>
-							<p className="relative z-10 text-sm font-medium text-[#E8F6E9] tracking-wide uppercase font-lato">{member.role}</p>
+							<h3 className="relative z-10 mt-2 text-2xl font-bold text-white drop-shadow-sm">{member.name}</h3>
+							<p className="relative z-10 text-sm font-medium text-[#E8F6E9] tracking-wide uppercase">{member.role}</p>
 						</motion.div>
 					))}
 				</div>

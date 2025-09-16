@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import Heading from "./ui/Heading";
+import Paragraph from "./ui/Paragraph"; // added
 
 // Palette hex: #3AA335 (brand), #1E611B (dark), #E8F6E9 (light), #333333 (body)
 
@@ -48,29 +49,32 @@ const ServicesPreview = () => {
 	return (
 		<motion.section
 			ref={ref}
-			className="section-standard z-0"
+			className="section-compact z-0 relative overflow-hidden  bg-white"
+			style={{ borderColor: '#E8F6E9' }}
 			initial={{ opacity: 0 }}
 			animate={{ opacity: isInView ? 1 : 0 }}
 			transition={{ duration: 1, ease: [0.4, 0, 0.6, 1] }}
 		>
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-				<div className="text-center md:text-left mb-8 sm:mb-10 md:mb-12">
+			{/* Background pattern */}
+			<div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} />
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative">
+				<div className="text-center mb-8 sm:mb-10 md:mb-12">
+					<span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Service Snapshot</span>
 					<div
-						className="mx-auto md:mx-0 w-fit pb-1 px-3 rounded-md border-b-4"
+						className="mx-auto  w-fit pb-1 px-3 rounded-md border-b-4"
 						style={{ borderColor: "#3AA335" }}
 					>
 						<Heading
 							level={2}
-							className="mb-0 text-center md:text-left"
+							className="mb-4  text-center"
 							variant="primary"
 						>
 							Our Services
 						</Heading>
 					</div>
-					<p className="text-lead font-lato text-[#333333] max-w-[60ch] mx-auto md:mx-0">
-						Comprehensive cleaning, facility care, and environmental management
-						solutions delivered with reliability, safety, and sustainability.
-					</p>
+					<Paragraph className="text-lead mt-4 text-[#333333] max-w-[60ch] mx-auto">
+						Comprehensive cleaning, facility care, and environmental management solutions delivered with reliability, safety, and sustainability.
+					</Paragraph>
 				</div>
 				<div className="w-full mx-auto">
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 mb-4 md:mb-8">

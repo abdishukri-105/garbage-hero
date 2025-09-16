@@ -71,39 +71,6 @@ const staticItems = [
   },
 ];
 
-const Card = ({ url, category, title, description }) => {
-  return (
-    <Link href="/portfolio">
-      <div
-        className="relative shrink-0 cursor-pointer rounded-2xl bg-white shadow-md transition-all hover:scale-[1.015] hover:shadow-xl"
-        style={{
-          width: CARD_WIDTH,
-          height: CARD_HEIGHT,
-          marginRight: MARGIN,
-        }}
-      >
-        <Image
-          src={url}
-          alt={title}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 350px"
-          style={{ objectFit: "cover" }}
-          className="rounded-2xl"
-        />
-        <div className="absolute inset-0 z-20 rounded-2xl bg-gradient-to-b from-black/90 via-black/60 to-black/0 p-6 text-white transition-[backdrop-filter] hover:backdrop-blur-sm">
-          <h5 className="text-lg font-semibold uppercase" style={{ color: '#1E611B' }}>
-            {category}
-          </h5>
-          <h3 className="my-2 text-3xl font-bold ">{title}</h3>
-          <p className="text-base text-white">
-            {description}
-          </p>
-        </div>
-      </div>
-    </Link>
-  );
-};
-
 const RecentWorkTeaser = ({ teasers = [] }) => {
   // Map Sanity teasers (if provided) to card shape; fallback to staticItems
   const mapped = Array.isArray(teasers) && teasers.length > 0
@@ -142,21 +109,27 @@ const RecentWorkTeaser = ({ teasers = [] }) => {
   return (
     <motion.section
       ref={sectionRef}
-      className="border-t border-b rounded-tr-[2rem] rounded-br-[2rem] md:py-12"
+      aria-labelledby="recentwork-heading"
+      className="relative overflow-hidden section-compact rounded-tr-[2rem] rounded-br-[2rem]"
       initial={{ opacity: 0 }}
       animate={{ opacity: isInView ? 1 : 0 }}
       transition={{ duration: 1, ease: [0.4, 0, 0.6, 1] }}
     >
-      <div className="relative overflow-hidden p-4" ref={ref}>
-        <div className="mx-auto max-w-7xl">{/* standardized container */}
-          <div className="text-center md:text-left mb-6">
-            <div className="mx-auto md:mx-0 w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
-              <Heading level={2} className="mb-0 text-center md:text-left" variant="primary">
-                Our Recent Work. <span style={{ color: '#1E611B' }}>Transforming Spaces Across Kenya.</span>
-              </Heading>
-            </div>
+      {/* Radial background pattern (no borders) */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} />
+      <div className="relative p-4" ref={ref}>
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12" >
+            <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Recent Work</span>
+            <Heading id="recentwork-heading" level={2} className="mb-4 mx-auto w-fit pb-1 px-3 rounded-md border-b-4 border-[#3AA335]" variant="primary">
+              Transforming Spaces Across Kenya
+            </Heading>
+            <Paragraph className="text-[#333333] max-w-[65ch] mx-auto text-sm sm:text-base md:text-lg">
+              A showcase of sustainable cleaning, landscaping and hygiene projects delivering healthier, efficient environments for clients nationwide.
+            </Paragraph>
           </div>
           <motion.div
+            role="list"
             animate={{ x: offset }}
             transition={{ duration: 0.8, ease: [0.4, 0, 0.6, 1] }}
             className="flex"
@@ -166,32 +139,62 @@ const RecentWorkTeaser = ({ teasers = [] }) => {
             ))}
           </motion.div>
         </div>
+        {/* Nav buttons */}
         <>
           <motion.button
             initial={false}
-            animate={{
-              x: CAN_SHIFT_LEFT ? "0%" : "-100%",
-            }}
-            className="absolute left-0 top-[60%] z-30 rounded-r-xl bg-white/30 p-3 pl-2 text-4xl backdrop-blur-sm transition-[padding] hover:pl-3"
+            animate={{ x: CAN_SHIFT_LEFT ? "0%" : "-120%" }}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 rounded-r-xl bg-white/60 backdrop-blur-sm p-3 pl-2 text-3xl shadow ring-1 ring-[#3AA335]/20 hover:bg-white/80 transition"
             style={{ color: '#3AA335' }}
             onClick={shiftLeft}
+            aria-label="Scroll left"
           >
             <FiChevronLeft />
           </motion.button>
           <motion.button
             initial={false}
-            animate={{
-              x: CAN_SHIFT_RIGHT ? "0%" : "100%",
-            }}
-            className="absolute right-0 top-[60%] z-30 rounded-l-xl bg-white/30 p-3 pr-2 text-4xl backdrop-blur-sm transition-[padding] hover:pr-3"
+            animate={{ x: CAN_SHIFT_RIGHT ? "0%" : "120%" }}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 rounded-l-xl bg-white/60 backdrop-blur-sm p-3 pr-2 text-3xl shadow ring-1 ring-[#3AA335]/20 hover:bg-white/80 transition"
             style={{ color: '#3AA335' }}
             onClick={shiftRight}
+            aria-label="Scroll right"
           >
             <FiChevronRight />
           </motion.button>
         </>
       </div>
     </motion.section>
+  );
+};
+
+const Card = ({ url, category, title, description }) => {
+  return (
+    <Link href="/portfolio" role="listitem" aria-label={`${title} project`}>
+      <div
+        className="relative shrink-0 cursor-pointer rounded-2xl bg-white shadow-md transition-all hover:scale-[1.015] hover:shadow-xl"
+        style={{ width: CARD_WIDTH, height: CARD_HEIGHT, marginRight: MARGIN }}
+      >
+        <Image
+          src={url}
+          alt={title}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 350px"
+          style={{ objectFit: 'cover' }}
+          className="rounded-2xl"
+        />
+        <div className="absolute inset-0 z-20 rounded-2xl bg-gradient-to-t from-[#1E611B]/85 via-[#1E611B]/55 to-[#1E611B]/10 p-6 flex flex-col justify-end text-white transition-[backdrop-filter] hover:backdrop-blur-sm">
+          <span className="self-start w-auto inline-block text-[10px] tracking-wide font-medium uppercase text-[#1E611B] bg-[#E8F6E9]/80 px-2 py-0.5 rounded-md mb-2 ring-1 ring-[#3AA335]/15">
+            {category}
+          </span>
+          <h3 className="text-2xl sm:text-3xl font-bold leading-snug drop-shadow-md">
+            {title}
+          </h3>
+          <p className="mt-2 text-sm sm:text-base text-white/90 line-clamp-2">
+            {description}
+          </p>
+        </div>
+      </div>
+    </Link>
   );
 };
 

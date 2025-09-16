@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FiArrowUpRight } from "react-icons/fi";
 import Heading from "./ui/Heading";
 import WetPaintButton from "./ui/WetPaintButton";
+import Paragraph from "./ui/Paragraph"; // added
 
 // Structured service data (hardcoded)
 const SERVICES = [
@@ -107,15 +108,18 @@ const SERVICES = [
 
 export const ServicesList = () => {
 	return (
-		<section className="section-standard bg-white" id="services">{/* standardized spacing */}
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">{/* standardized container */}
-				<header className="mb-12 text-center md:text-left">
+		<section className="section-standard bg-white relative overflow-hidden" id="services">{/* standardized spacing with radial pattern */}
+			{/* Radial background pattern */}
+			<div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} />
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative">{/* standardized container */}
+				<header className="mb-12 text-center md:text-left max-w-3xl">
+					<span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">What We Do</span>
 					<div className="mx-auto md:mx-0 w-fit pb-1 px-3 rounded-md border-b-4 border-[#3AA335]">
 						<Heading level={2} variant="primary" className="mb-0 text-center md:text-left">Our Services</Heading>
 					</div>
-					<p className="mt-4 max-w-3xl text-lead font-lato text-[#333333] mx-auto md:mx-0">
+					<Paragraph className="mt-4 text-[#333333] mx-auto md:mx-0">
 						Integrated cleaning, waste, hygiene and outdoor solutions engineered for reliability, compliance and environmental stewardship.
-					</p>
+					</Paragraph>
 				</header>
 				<div className="flex flex-col space-y-14 md:space-y-20">
 					{SERVICES.map((service, idx) => (
@@ -176,3 +180,5 @@ const ServiceBlock = ({ service, index }) => {
 		</div>
 	);
 };
+
+export default ServicesList;

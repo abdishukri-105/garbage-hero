@@ -3,6 +3,7 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 import { Award, Layers, Users, Zap } from "lucide-react";
 import Heading from './ui/Heading';
+import Paragraph from './ui/Paragraph'; // added
 
 const WhyUs = () => {
   const CARDS = [
@@ -37,15 +38,18 @@ const WhyUs = () => {
   ];
 
   return (
-    <section className="section-standard font-sans text-[#333333]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+    <section className="section-compact font-sans text-[#333333] relative overflow-hidden bg-white" style={{ borderColor: '#E8F6E9' }}>
+      {/* Background pattern */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 relative">
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Why Choose Us</span>
           <div className="mx-auto w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
-            <Heading level={2} variant="primary" className="mb-0 text-center">Why Choose Garbage Hero</Heading>
+            <Heading level={2} variant="primary" className="mb-0 text-center">Why Us</Heading>
           </div>
-          <p className="text-lead font-lato text-[#333333] mt-4 max-w-3xl mx-auto">
-            At Garbage Hero Limited, we believe in creating environments that promote well-being, safety, and comfort. Whether it&apos;s a home, office, or commercial property, we are here to help you maintain a clean, healthy, and beautiful space. Let us handle the dirty work so you can enjoy a pristine and well-kept environment.
-          </p>
+          <Paragraph className="text-lead text-[#333333] mt-4 max-w-3xl mx-auto">
+            At Garbage Hero Limited, we believe in creating environments that promote well-being, safety, and comfort. Whether it&apos;s a home, office, or commercial property, we are here to help you maintain a clean, healthy, and beautiful space.
+          </Paragraph>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {CARDS.map((card) => (
