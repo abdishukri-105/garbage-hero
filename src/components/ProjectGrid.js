@@ -17,17 +17,17 @@ const ProjectGrid = ({ projects = [] }) => {
     category: p.category,
     timePeriod: p.timePeriod,
     description: p.shortDescription,
-  })) : PROJECTS;
+  })) : PROJECTS;  
   const [selected, setSelected] = useState(0);
   const active = tabs[selected];
   return (
-    <section className="section-standard font-lato text-[#333333]">{/* standardized spacing */}
+    <section className="section-compact font-lato text-[#333333]">{/* standardized spacing */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">{/* standardized container */}
-        <div className="mb-8 sm:mb-10 md:mb-12 space-y-3 text-center md:text-left">
-          <div className="mx-auto md:mx-0 w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
-            <Heading level={2} className="mb-0 text-center md:text-left" variant="primary">Our Projects</Heading>
+        <div className="mb-8 sm:mb-10 md:mb-12 space-y-3 text-center">{/* centered on all breakpoints */}
+          <div className="mx-auto w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
+            <Heading level={2} className="mb-0 text-center" variant="primary">Our Projects</Heading>
           </div>
-          <p className="text-sm sm:text-base md:text-lg text-[#333333] max-w-3xl mx-auto md:mx-0">
+          <p className="text-sm sm:text-base md:text-lg text-[#333333] max-w-3xl mx-auto">
             Explore our diverse portfolio of innovative projects, each designed to deliver impactful solutions and drive progress across Kenya and beyond.
           </p>
         </div>

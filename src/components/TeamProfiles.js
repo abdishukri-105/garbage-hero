@@ -27,7 +27,7 @@ const TeamProfiles = ({ team = [] }) => {
 	if (!hasData && FALLBACK_MEMBERS.length === 0) return null;
 
 	return (
-		<section className="section-standard relative overflow-hidden bg-white" id="team">{/* standardized spacing */}
+		<section className="section-compact relative overflow-hidden bg-white" id="team">{/* standardized spacing */}
 			{/* Radial background pattern */}
 			<div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} />
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative">{/* standardized container */}

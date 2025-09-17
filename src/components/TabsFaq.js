@@ -3,80 +3,107 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import useMeasure from "react-use-measure";
+import Heading from "./ui/Heading";
+import Paragraph from "./ui/Paragraph";
+
+// slug helper for a11y ids
+const slugify = (str = "") => str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 const TabsFaq = () => {
   const [selected, setSelected] = useState(TABS[0]);
 
   return (
-    <section className="overflow-hidden bg-black px-4 py-12 text-white">
-      <Heading />
-      <Tabs selected={selected} setSelected={setSelected} />
-      <Questions selected={selected} />
+    <section className="relative section-compact bg-white overflow-hidden">
+      {/* Radial background to match AboutUsTeaser */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)" }}
+        aria-hidden="true"
+      />
+      <div className="container-site relative">
+        <FaqHeader />
+        <Tabs selected={selected} setSelected={setSelected} />
+        <Questions selected={selected} />
+      </div>
     </section>
   );
 };
 
-const Heading = () => {
+const FaqHeader = () => {
   return (
-    <>
-      <div className="relative z-10 flex flex-col items-center justify-center">
-        <span className="mb-8 bg-[#E8F6E9] text-[#1E611B] font-semibold px-3 py-1 rounded-full text-xs tracking-wide uppercase">Got Questions? We&apos;ve Got Answers</span>
-        <span className="mb-8 text-5xl font-bold text-white">FAQs</span>
+    <div className="relative z-10 mx-auto max-w-3xl text-center">
+      <span className="eyebrow inline-block rounded-full bg-[#E8F6E9] px-3 py-1 text-[#1E611B]">Help & Support</span>
+      <div className="mx-auto w-fit mt-3 pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
+        <Heading level={2} variant="primary" className="mb-0">
+          Answers for Cleaner, Safer Spaces
+        </Heading>
       </div>
-
-      <span className="absolute -top-[350px] left-[50%] z-0 h-[500px] w-[600px] -translate-x-[50%] rounded-full bg-[#3AA335]/10 blur-3xl" />
-    </>
+      <Paragraph size="md" className="mt-2 opacity-90">
+        Quick, honest answers to the questions clients ask us most—so you can move forward with confidence.
+      </Paragraph>
+    </div>
   );
 };
 
 const Tabs = ({ selected, setSelected }) => {
   return (
-    <div className="relative z-10 flex flex-wrap items-center justify-center gap-4">
-      {TABS.map((tab) => (
-        <button
-          onClick={() => setSelected(tab)}
-          className={`relative overflow-hidden whitespace-nowrap rounded-md border px-3 py-1.5 text-sm font-medium transition-colors duration-300 ${
-            selected === tab
-              ? "border-[#3AA335] bg-[#3AA335] text-white"
-              : "border-white/20 bg-transparent text-white/70 hover:border-white/40"
-          }`}
-          key={tab}
-        >
-          <span className="relative z-10">{tab}</span>
-          <AnimatePresence>
-            {selected === tab && (
-              <motion.span
-                initial={{ y: "100%" }}
-                animate={{ y: "0%" }}
-                exit={{ y: "100%" }}
-                transition={{
-                  duration: 0.4,
-                  ease: "backIn",
-                }}
-                className="absolute inset-0 z-0 bg-[#1E611B]"
-              />
-            )}
-          </AnimatePresence>
-        </button>
-      ))}
+    <div
+      role="tablist"
+      aria-label="FAQ categories"
+      className="relative z-10 mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5"
+    >
+      {TABS.map((tab) => {
+        const id = slugify(tab);
+        const isSelected = selected === tab;
+        return (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={isSelected}
+            aria-controls={`panel-${id}`}
+            id={`tab-${id}`}
+            onClick={() => setSelected(tab)}
+            className={`relative overflow-hidden whitespace-nowrap rounded-md border px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3AA335]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white cursor-pointer hover:cursor-pointer ${
+              isSelected
+                ? "border-[#3AA335] bg-[#3AA335] text-white"
+                : "border-[#3AA335]/20 bg-transparent text-[#333333]/70 hover:border-[#3AA335]/40"
+            }`}
+            key={tab}
+          >
+            <span className="relative z-10">{tab}</span>
+            <AnimatePresence>
+              {isSelected && (
+                <motion.span
+                  initial={{ y: "100%" }}
+                  animate={{ y: "0%" }}
+                  exit={{ y: "100%" }}
+                  transition={{ duration: 0.4, ease: "backIn" }}
+                  className="absolute inset-0 z-0 bg-[#1E611B] pointer-events-none"
+                />
+              )}
+            </AnimatePresence>
+          </button>
+        );
+      })}
     </div>
   );
 };
 
 const Questions = ({ selected }) => {
   return (
-    <div className="mx-auto mt-12 max-w-3xl">
+    <div className="relative z-10 mx-auto mt-10 max-w-3xl">
       <AnimatePresence mode="wait">
         {Object.entries(QUESTIONS).map(([tab, questions]) => {
+          const id = slugify(tab);
           return selected === tab ? (
             <motion.div
+              role="tabpanel"
+              id={`panel-${id}`}
+              aria-labelledby={`tab-${id}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              transition={{
-                duration: 0.5,
-                ease: "backIn",
-              }}
+              transition={{ duration: 0.5, ease: "backIn" }}
               className="space-y-4"
               key={tab}
             >
@@ -94,57 +121,58 @@ const Questions = ({ selected }) => {
 const Question = ({ question, answer }) => {
   const [ref, { height }] = useMeasure();
   const [open, setOpen] = useState(false);
+  const id = slugify(question);
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setOpen((pv) => !pv);
+    }
+  };
 
   return (
     <motion.div
+      role="button"
+      tabIndex={0}
+      aria-expanded={open}
+      aria-controls={`answer-${id}`}
+      onClick={() => setOpen((pv) => !pv)}
+      onKeyDown={handleKeyDown}
       animate={open ? "open" : "closed"}
-      className={`rounded-xl border px-4 transition-colors ${
-        open ? "bg-[#1E611B]/30 border-[#1E611B]" : "bg-white/5 border-white/15"
+      className={`cursor-pointer rounded-xl border px-4 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3AA335]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
+        open ? "bg-[#E8F6E9] border-[#3AA335]" : "bg-white border-[#3AA335]/15"
       }`}
     >
-      <button
-        onClick={() => setOpen((pv) => !pv)}
-        className="flex w-full items-center justify-between gap-4 py-4"
-      >
+      <div className="flex w-full items-center justify-between gap-4 py-3.5">
         <span
-          className={`text-left text-lg font-medium transition-colors ${
-            open ? "text-white" : "text-white/70"
+          className={`font-roboto-serif text-base sm:text-lg font-semibold transition-colors ${
+            open ? "text-[#1E611B]" : "text-[#333333]"
           }`}
         >
           {question}
         </span>
-        <motion.span
-          variants={{
-            open: {
-              rotate: "45deg",
-            },
-            closed: {
-              rotate: "0deg",
-            },
-          }}
-        >
-          <FiPlus
-            className={`text-2xl transition-colors ${
-              open ? "text-white" : "text-white/70"
-            }`}
-          />
+        <motion.span variants={{ open: { rotate: "45deg" }, closed: { rotate: "0deg" } }}>
+          <FiPlus className={`text-lg sm:text-xl transition-colors ${open ? "text-[#1E611B]" : "text-[#333333]/60"}`} />
         </motion.span>
-      </button>
+      </div>
       <motion.div
+        id={`answer-${id}`}
         initial={false}
-        animate={{
-          height: open ? height : "0px",
-          marginBottom: open ? "24px" : "0px",
-        }}
-        className="overflow-hidden text-white/70"
+        animate={{ height: open ? height : "0px", marginBottom: open ? "20px" : "0px" }}
+        className="overflow-hidden text-[#333333]/80"
       >
-        <p ref={ref}>{answer}</p>
+        <p ref={ref} className="text-body">{answer}</p>
       </motion.div>
     </motion.div>
   );
 };
 
-const TABS = ["Cleaning Services", "Sanitary Solutions", "Gardening & Landscaping", "Fumigation & Pest Control"];
+const TABS = [
+  "Cleaning Services",
+  "Sanitary Solutions",
+  "Gardening & Landscaping",
+  "Fumigation & Pest Control",
+];
 
 const QUESTIONS = {
   "Cleaning Services": [

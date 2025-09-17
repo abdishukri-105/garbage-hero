@@ -92,7 +92,7 @@ const Buttons = ({ setMenuOpen }) => (
 			<span className="hidden sm:inline">Company Profile</span>
 			<span className="sm:hidden">Profile</span>
 		</motion.a>
-		<WetPaintButton text="Get a Quote" href="/contact-us" size="sm" />
+		<WetPaintButton text="Get a Quote" href="/contact-us" className="hidden md:inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 text-white font-montserrat font-medium text-sm sm:text-base rounded-md whitespace-nowrap" size="sm" />
 		<button
 			onClick={() => setMenuOpen((pv) => !pv)}
 			className="ml-2 block md:hidden text-2xl sm:text-3xl text-black transition-transform hover:scale-105 active:scale-95 font-montserrat"

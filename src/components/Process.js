@@ -8,16 +8,16 @@ import Paragraph from './ui/Paragraph'; // added
 
 const Process = () => {
   return (
-    <section className="section-standard font-sans text-[#333333] relative overflow-hidden bg-white" id="process">{/* standardized spacing */}
+    <section className="section-compact font-sans text-[#333333] relative overflow-hidden bg-white" id="process">{/* standardized spacing */}
       {/* Radial background pattern */}
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} />
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 md:px-8 space-y-12 lg:px-8 relative">{/* standardized container */}
-        <div className="text-center md:text-left max-w-4xl">
+        <div className="text-center max-w-4xl mx-auto">
           <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">How We Work</span>
-          <div className="mx-auto md:mx-0 w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
-            <Heading level={2} variant="primary" className="mb-0 text-center md:text-left">Our Service Process</Heading>
+          <div className="mx-auto w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
+            <Heading level={2} variant="primary" className="mb-0 text-center">Our Service Process</Heading>
           </div>
-          <Paragraph className="mt-4 text-[#333333] text-center md:text-left">
+          <Paragraph className="mt-4 text-[#333333] text-center">
             Discover how Garbage Hero Ltd delivers exceptional cleaning, sanitary, gardening, and fumigation services with a seamless, professional, and eco-friendly approach.
           </Paragraph>
         </div>

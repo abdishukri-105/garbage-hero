@@ -25,6 +25,7 @@ const TestimonialsCarousel = ({ testimonials = [], autoplay = true }) => {
     <section className="section-standard bg-white px-4 sm:px-6 md:px-8 grid items-center grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-4 overflow-hidden">{/* standardized spacing */}
       <div className="p-4 sm:p-6">
         <div className="text-center lg:text-left">
+          <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Client Voices</span>
           <div className="mx-auto lg:mx-0 w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
             <Heading level={2} variant="primary" className="mb-0 text-center lg:text-left">What Our Customers Think</Heading>
           </div>
@@ -55,9 +56,10 @@ const SelectBtns = ({ numTracks, setSelected, selected, autoplay }) => {
         const isActive = selected === n;
         return (
           <button
+            type="button"
             key={n}
             onClick={() => setSelected(n)}
-            className="h-1.5 w-full bg-[#E8F6E9] relative overflow-hidden"
+            className="h-1.5 w-full bg-[#E8F6E9] relative overflow-hidden cursor-pointer"
             aria-label={`Go to testimonial ${n + 1}`}
           >
             {isActive && autoplay ? (
@@ -104,7 +106,8 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
 
   const scale = position <= selected ? 1 : 1 + 0.015 * (position - selected);
   const offset = position <= selected ? 0 : 95 + (position - selected) * 3;
-  const background = position % 2 ? "#E5F3E8" : "#FFFFFF";
+  const background = position % 2 ? "#3AA335" : "#FFFFFF";
+  const isGreen = position % 2 === 1;
 
   return (
     <motion.div
@@ -113,13 +116,13 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
         zIndex: position,
         transformOrigin: "left bottom",
         background,
-        color: "#333333",
+        color: isGreen ? "#FFFFFF" : "#333333",
       }}
       animate={{ x: `${offset}%`, scale }}
       whileHover={{ translateX: position === selected ? 0 : -3 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
       onClick={() => setSelected(position)}
-      className="absolute top-0 left-0 w-full min-h-full p-6 sm:p-8 lg:p-12 cursor-pointer flex flex-col justify-between rounded-lg border border-[#E8F6E9]"
+      className={`absolute top-0 left-0 w-full min-h-full p-6 sm:p-8 lg:p-12 cursor-pointer flex flex-col justify-between rounded-lg border ${isGreen ? "border-white/20" : "border-[#E8F6E9]"}`}
     >
       <div className="flex flex-col items-center text-center">
         {companyLogo?.asset && (
@@ -138,10 +141,10 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
         </p>
       </div>
       <div className="text-center">
-        <span className="block font-montserrat font-bold text-base sm:text-lg text-black">
+        <span className={`block font-montserrat font-bold text-base sm:text-lg ${isGreen ? "text-white" : "text-black"}`}>
           {clientName}
         </span>
-        <span className="block font-lato text-xs sm:text-sm text-[#333333]">
+        <span className={`block font-lato text-xs sm:text-sm ${isGreen ? "text-white/80" : "text-[#333333]"}`}>
           {clientTitle}{clientTitle && company ? ' • ' : ''}{company}
         </span>
       </div>

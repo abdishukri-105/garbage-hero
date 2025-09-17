@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Navbar from "../../components/Navbar";
 import HeroSection from "../../components/HeroSection";
-
+import TabsFaq from "@/components/TabsFaq"
 import MiniContactForm from "../../components/MiniContactForm";
-import ContactDetails from "../../components/ContactDetails";
+
 import MapEmbed from "../../components/MapEmbed";
 import SocialLinks from "../../components/SocialLinks";
 import Footer from "../../components/Footer";
@@ -25,9 +25,10 @@ export default function ContactUsPage() {
         />
         
         <MiniContactForm />
-        {/* <ContactDetails /> */}
+        
         <MapEmbed />
-        {/* <SocialLinks /> */}
+         <TabsFaq />
+    
         <Footer />
       </main>
     </>

@@ -17,6 +17,7 @@ import ClientLogosMarquee from '@/components/ClientLogosMarquee';
 import { fetchTestimonials, fetchPortfolioTeasers, fetchClientLogos, fetchTeam } from '@/lib/sanity';
 import FAQAccordion from "@/components/FAQAccordion"
 export const dynamic = 'force-dynamic';
+import TabsFaq from "@/components/TabsFaq"
 
 export default async function HomePage() {
   const results = await Promise.allSettled([
@@ -43,7 +44,8 @@ export default async function HomePage() {
       <CTABanner />
       <RecentWorkTeaser teasers={teasers} />
       <TestimonialsCarousel testimonials={testimonials} />
-      <FAQAccordion />
+      {/* <FAQAccordion /> */}
+      <TabsFaq />
       <ContactForm />
       <Footer />
     </main>

@@ -7,6 +7,7 @@ import MiniContactForm from "../../components/MiniContactForm";
 import Process from "@/components/Process";
 import { fetchPortfolio } from '@/lib/sanity';
 import FAQAccordion from "@/components/FAQAccordion"
+import TabsFaq from "@/components/TabsFaq"
 
 // Remove legacy Head usage; use metadata export instead in App Router
 export const dynamic = 'force-dynamic';
@@ -33,7 +34,7 @@ export default async function PortfolioPage() {
       <ProjectGrid projects={projects} />
       <Process />
       <CTABanner />
-      <FAQAccordion />
+      <TabsFaq />
       <MiniContactForm />
       <Footer />
     </main>

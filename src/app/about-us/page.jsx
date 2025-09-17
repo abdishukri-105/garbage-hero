@@ -9,7 +9,7 @@ import PageBanner from "@/components/PageBanner";
 import { fetchTeam } from '@/lib/sanity';
 import MinicontactForm from "@/components/MiniContactForm"
 import FAQAccordion from "@/components/FAQAccordion"
-
+import TabsFaq from "@/components/TabsFaq"
 
 
 export const dynamic = 'force-dynamic';
@@ -36,7 +36,7 @@ export default async function AboutUsPage() {
       <CompanyVideo />
       <TeamProfiles team={team} />
       <CTABanner />
-      <FAQAccordion />
+     <TabsFaq />
       <MinicontactForm />
       <Footer />
     </main>

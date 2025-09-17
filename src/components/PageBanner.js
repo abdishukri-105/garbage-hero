@@ -8,8 +8,9 @@ const PageBanner = ({ title = "Get to Know Us Better", subtitle = "Discover our 
     <section className="relative bg-white text-black h-[300px] md:h-[350px] flex items-center overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.2 }}
+        animate={{ opacity: 0.25 }}
         transition={{ duration: 1, ease: "easeOut" }}
+        style={{ "--tw-accent-grid": "rgba(58,163,53,0.18)" }}
         className="absolute inset-0 bg-[linear-gradient(to_right,var(--tw-accent-grid)_2px,transparent_2px),linear-gradient(to_bottom,var(--tw-accent-grid)_2px,transparent_2px)] bg-[size:40px_40px]"
       ></motion.div>
       <div className="absolute bottom-0 left-0 right-0 h-16">

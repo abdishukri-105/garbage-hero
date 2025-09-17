@@ -112,12 +112,12 @@ export const ServicesList = () => {
 			{/* Radial background pattern */}
 			<div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} />
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative">{/* standardized container */}
-				<header className="mb-12 text-center md:text-left max-w-3xl">
+				<header className="mb-12 text-center max-w-3xl mx-auto">
 					<span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">What We Do</span>
-					<div className="mx-auto md:mx-0 w-fit pb-1 px-3 rounded-md border-b-4 border-[#3AA335]">
-						<Heading level={2} variant="primary" className="mb-0 text-center md:text-left">Our Services</Heading>
+					<div className="mx-auto w-fit pb-1 px-3 rounded-md border-b-4 border-[#3AA335]">
+						<Heading level={2} variant="primary" className="mb-0 text-center">Our Services</Heading>
 					</div>
-					<Paragraph className="mt-4 text-[#333333] mx-auto md:mx-0">
+					<Paragraph className="mt-4 text-[#333333] mx-auto">
 						Integrated cleaning, waste, hygiene and outdoor solutions engineered for reliability, compliance and environmental stewardship.
 					</Paragraph>
 				</header>
