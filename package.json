@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "compress:public": "node ./scripts/compress-public-images.mjs"
   },
   "dependencies": {
     "@sanity/client": "^7.10.0",
@@ -20,7 +21,9 @@
     "react-icons": "^5.5.0",
     "react-masonry-css": "^1.0.16",
     "react-use-measure": "^2.1.7",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "sharp": "^0.33.5",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

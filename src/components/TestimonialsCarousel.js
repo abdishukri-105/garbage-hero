@@ -109,6 +109,10 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
   const background = position % 2 ? "#3AA335" : "#FFFFFF";
   const isGreen = position % 2 === 1;
 
+  // Sanity logo image loader
+  const fallbackUrl = companyLogo?.asset ? urlFor(companyLogo).width(160).height(160).quality(75).auto('format').url() : null;
+  const loader = ({ width, quality }) => companyLogo?.asset ? urlFor(companyLogo).width(Math.min(width, 180)).height(Math.min(width, 180)).quality(quality ?? 70).auto('format').url() : undefined;
+
   return (
     <motion.div
       initial={false}
@@ -128,10 +132,12 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
         {companyLogo?.asset && (
           <div className="relative h-16 w-16 sm:h-20 sm:w-20 mb-4">
             <Image
-              src={urlFor(companyLogo).width(160).height(160).url()}
+              loader={loader}
+              src={fallbackUrl}
               alt={company ? `${company} logo` : 'Company logo'}
               fill
               sizes="80px"
+              quality={70}
               className="object-contain"
             />
           </div>

@@ -130,12 +130,26 @@ export default function HeroSection() {
 				<Image
 					src={slides[0].src}
 					alt=""
-					width={1}
-					height={1}
+					width={1920}
+					height={1080}
 					priority
+					fetchPriority="high"
+					sizes="100vw"
 					className="opacity-0 w-px h-px absolute"
 					onLoadingComplete={() => setIsFirstLoaded(true)}
 				/>
+				{slides[imgIndex + 1] && (
+					<Image
+						src={slides[(imgIndex + 1) % slides.length].src}
+						alt=""
+						width={1920}
+						height={1080}
+						priority={false}
+						fetchPriority="high"
+						sizes="100vw"
+						className="opacity-0 w-px h-px absolute"
+					/>
+				)}
 				{!isFirstLoaded && (
 					<div className="absolute inset-0 bg-black/40 animate-pulse" />
 				)}

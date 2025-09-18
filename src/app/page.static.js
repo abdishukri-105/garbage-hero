@@ -2,19 +2,25 @@
 // Production static variant: build-time generation ONLY (no revalidation). Duplicate logic from page.js without dynamic flag.
 // To use this in production, you can rename to page.js before build or maintain a branch variant.
 
-import { fetchTestimonials, fetchPortfolioTeasers, urlFor } from '@/lib/sanity';
+import { urlFor } from '@/lib/sanity';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { client, TESTIMONIALS_QUERY, PORTFOLIO_TEASERS_QUERY } from '@/lib/sanity';
+import { fetchWithFallback } from '@/lib/fetchWithFallback';
+import { TestimonialsSchema } from '@/lib/schemas';
 
 export const dynamic = 'error'; // ensure static
 export const revalidate = false; // ensure no ISR
 
 export default async function HomePageStatic() {
-  const [testimonials, teasers] = await Promise.all([
-    fetchTestimonials(),
-    fetchPortfolioTeasers(),
+  const [
+    { data: testimonials },
+    { data: teasers }
+  ] = await Promise.all([
+    fetchWithFallback({ key: 'testimonials', live: () => client.fetch(TESTIMONIALS_QUERY), schema: TestimonialsSchema, snapshotFile: 'testimonials.json', defaults: [], timeoutMs: 3000 }),
+    fetchWithFallback({ key: 'portfolioTeasers', live: () => client.fetch(PORTFOLIO_TEASERS_QUERY), schema: undefined, snapshotFile: 'teasers.json', defaults: [], timeoutMs: 3000 }),
   ]);
 
   return (
@@ -55,10 +61,13 @@ function TestimonialsSection({ testimonials }) {
             {t.companyLogo && (
               <div className="mb-4 flex items-center gap-3">
                 <Image
-                  src={urlFor(t.companyLogo).width(120).height(120).url()}
+                  loader={({ width, quality }) => urlFor(t.companyLogo).width(Math.min(width, 140)).height(Math.min(width, 140)).quality(quality ?? 70).auto('format').url()}
+                  src={urlFor(t.companyLogo).width(120).height(120).quality(75).auto('format').url()}
                   alt={t.company + ' logo'}
                   width={48}
                   height={48}
+                  sizes="48px"
+                  quality={70}
                   className="h-12 w-12 object-contain"
                 />
                 <div>
@@ -93,7 +102,8 @@ function TeasersSection({ teasers }) {
             {p.image && (
               <div className="relative h-40 sm:h-48 md:h-52 w-full">
                 <Image
-                  src={urlFor(p.image).width(600).height(400).url()}
+                  loader={({ width, quality }) => urlFor(p.image).width(Math.min(width, 800)).height(Math.min(Math.round(width*0.67), 600)).quality(quality ?? 65).auto('format').url()}
+                  src={urlFor(p.image).width(800).height(534).quality(70).auto('format').url()}
                   alt={p.companyName}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"

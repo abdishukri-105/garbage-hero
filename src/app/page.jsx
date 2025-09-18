@@ -14,36 +14,39 @@ import ContactForm from "@/components/MiniContactForm";
 import Footer from "@/components/Footer";
 import WhyUs from "@/components/WhyUs";
 import ClientLogosMarquee from '@/components/ClientLogosMarquee';
-import { fetchTestimonials, fetchPortfolioTeasers, fetchClientLogos, fetchTeam } from '@/lib/sanity';
-import FAQAccordion from "@/components/FAQAccordion"
+import { client, TESTIMONIALS_QUERY, CLIENT_LOGOS_QUERY, PORTFOLIO_TEASERS_QUERY } from '@/lib/sanity';
+import { fetchWithFallback } from '@/lib/fetchWithFallback';
+import { TestimonialsSchema, ClientLogosSchema } from '@/lib/schemas';
 export const dynamic = 'force-dynamic';
 import TabsFaq from "@/components/TabsFaq"
+import Clients from "@/components/Clients"
 
 export default async function HomePage() {
-  const results = await Promise.allSettled([
-    fetchTestimonials(),
-    fetchPortfolioTeasers(),
-    fetchClientLogos(),
+  const [
+    { data: testimonialsData, source: tSrc },
+    { data: teasersData, source: pSrc },
+    { data: clientLogosData, source: cSrc }
+  ] = await Promise.all([
+    fetchWithFallback({ key: 'testimonials', live: () => client.fetch(TESTIMONIALS_QUERY), schema: TestimonialsSchema, snapshotFile: 'testimonials.json', defaults: [], timeoutMs: 3000 }),
+    fetchWithFallback({ key: 'portfolioTeasers', live: () => client.fetch(PORTFOLIO_TEASERS_QUERY), schema: undefined, snapshotFile: 'teasers.json', defaults: [], timeoutMs: 3000 }),
+    fetchWithFallback({ key: 'clientLogos', live: () => client.fetch(CLIENT_LOGOS_QUERY), schema: ClientLogosSchema, snapshotFile: 'clients.json', defaults: [], timeoutMs: 3000 }),
   ]);
-  const [testimonialsRes, teasersRes, clientLogosRes] = results;
-  const testimonials = testimonialsRes.status === 'fulfilled' ? testimonialsRes.value : [];
-  const teasers = teasersRes.status === 'fulfilled' ? teasersRes.value : [];
-  const clientLogos = clientLogosRes.status === 'fulfilled' ? clientLogosRes.value : [];
-  // Optionally log server side only
-  if (results.some(r => r.status === 'rejected')) {
-    console.warn('[home] Some data fetches failed:', results.filter(r => r.status === 'rejected').map(r => r.reason));
+  // Optional server-side logging of sources
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('[home] sources:', { testimonials: tSrc, teasers: pSrc, clientLogos: cSrc });
   }
   return (
     <main className="bg-white text-black font-lato">
       <Navbar />
       <HeroSection />
       <AboutUsTeaser />
-      <ClientLogosMarquee logos={clientLogos} />
+      <ClientLogosMarquee logos={clientLogosData} />
+      {/* <Clients logos={clientLogosData} /> */}
       <ServicesPreview />
       <WhyUs />
       <CTABanner />
-      <RecentWorkTeaser teasers={teasers} />
-      <TestimonialsCarousel testimonials={testimonials} />
+      <RecentWorkTeaser teasers={teasersData} />
+      <TestimonialsCarousel testimonials={testimonialsData} />
       {/* <FAQAccordion /> */}
       <TabsFaq />
       <ContactForm />

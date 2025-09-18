@@ -26,7 +26,7 @@ const PageBanner = ({ title = "Get to Know Us Better", subtitle = "Discover our 
           />
           <defs>
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style={{ stopColor: '#E8F6E9' }} /> {/* brand-light */}
+              <stop offset="0%" style={{ stopColor: '#183b16' }} /> {/* brand-light */}
               <stop offset="100%" style={{ stopColor: '#3AA335' }} /> {/* brand */}
             </linearGradient>
           </defs>

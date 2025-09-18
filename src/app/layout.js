@@ -8,6 +8,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
+        <link rel="preload" as="image" href="/projects/traning-1.jpg" fetchpriority="high" />
+      </head>
       <body>{children}</body>
     </html>
   );

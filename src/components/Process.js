@@ -3,12 +3,15 @@ import Image from "next/image";
 import { PhoneCall, ClipboardCheck, SprayCan, ShieldCheck } from "lucide-react";
 import Heading from './ui/Heading';
 import Paragraph from './ui/Paragraph'; // added
+import cleaning1 from '../../public/projects/cleaning-1.jpg';
+import cleaning3 from '../../public/projects/cleaning-3.jpg';
+import cleaning4 from '../../public/projects/cleaning-4.jpg';
 
 // Palette: brand #3AA335, brand-dark #1E611B, brand-light #E8F6E9, body #333333
 
 const Process = () => {
   return (
-    <section className="section-compact font-sans text-[#333333] relative overflow-hidden bg-white" id="process">{/* standardized spacing */}
+    <section className="section-standard font-sans text-[#333333] relative overflow-hidden bg-white" id="process">{/* standardized spacing */}
       {/* Radial background pattern */}
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} />
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 md:px-8 space-y-12 lg:px-8 relative">{/* standardized container */}
@@ -91,10 +94,11 @@ const Process = () => {
             {/* First Image - spans full width */}
             <div className="lg:col-span-2">
               <Image
-                src="/projects/cleaning-1.jpg"
+                src={cleaning1}
                 alt="Garbage Hero Ltd team cleaning a professional space"
-                width={600}
-                height={800}
+                placeholder="blur"
+                width={cleaning1.width}
+                height={cleaning1.height}
                 className="mx-auto rounded-lg shadow-lg w-full h-auto"
               />
             </div>
@@ -102,10 +106,11 @@ const Process = () => {
             {/* Second Image */}
             <div>
               <Image
-                src="/projects/cleaning-3.jpg"
+                src={cleaning3}
                 alt="Garbage Hero Ltd team cleaning a professional space"
-                width={600}
-                height={800}
+                placeholder="blur"
+                width={cleaning3.width}
+                height={cleaning3.height}
                 className="mx-auto rounded-lg shadow-lg w-full h-auto"
               />
             </div>
@@ -113,10 +118,11 @@ const Process = () => {
             {/* Third Image */}
             <div>
               <Image
-                src="/projects/cleaning-4.jpg"
+                src={cleaning4}
                 alt="Garbage Hero Ltd team cleaning a professional space"
-                width={600}
-                height={800}
+                placeholder="blur"
+                width={cleaning4.width}
+                height={cleaning4.height}
                 className="mx-auto rounded-lg shadow-lg w-full h-auto"
               />
             </div>

@@ -38,11 +38,12 @@ const TeamProfiles = ({ team = [] }) => {
 					</div>
 					<Paragraph className="text-[#333333] mt-4 max-w-[60ch] mx-auto text-sm sm:text-base md:text-lg">Meet the dedicated professionals delivering sustainable cleaning, hygiene and waste solutions across Kenya.</Paragraph>
 				</div>
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+				<div role="list" aria-label="Team profiles" className="grid grid-flow-col auto-cols-[78%] overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-4 px-4 gap-4 sm:mx-0 sm:px-0 sm:gap-6 sm:overflow-visible sm:grid-flow-row sm:auto-cols-auto sm:grid-cols-2 lg:grid-cols-5">
 					{list.map((member, i) => (
 						<motion.div
+							role="listitem"
 							key={member.id || i}
-							className="relative isolate flex flex-col justify-end overflow-hidden rounded-xl px-6 pb-6 pt-40 max-w-sm mx-auto w-full bg-black/5"
+							className="snap-start sm:snap-none relative isolate flex flex-col justify-end overflow-hidden rounded-xl px-6 pb-6 pt-40 max-w-sm mx-auto w-full bg-black/5"
 							initial={{ opacity: 0, y: 24 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true, amount: 0.3 }}
@@ -52,10 +53,12 @@ const TeamProfiles = ({ team = [] }) => {
 							<div className="absolute inset-0">
 								{member.imageObj?.asset ? (
 									<Image
-										src={urlFor(member.imageObj).width(800).height(1000).fit('crop').url()}
+										loader={({ width, quality }) => urlFor(member.imageObj).width(Math.min(width, 900)).height(Math.min(Math.round(width*1.25), 1200)).fit('crop').quality(quality ?? 60).auto('format').url()}
+										src={urlFor(member.imageObj).width(900).height(1125).fit('crop').quality(70).auto('format').url()}
 										alt={member.name}
 										fill
-										sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 20vw"
+										sizes="(max-width:640px) 78vw, (max-width:1024px) 50vw, 20vw"
+										quality={60}
 										className="object-cover"
 									/>
 								) : (member.image ? (
@@ -63,7 +66,8 @@ const TeamProfiles = ({ team = [] }) => {
 										src={member.image}
 										alt={member.name}
 										fill
-										sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 20vw"
+										sizes="(max-width:640px) 78vw, (max-width:1024px) 50vw, 20vw"
+										quality={70}
 										className="object-cover"
 									/>
 								) : (

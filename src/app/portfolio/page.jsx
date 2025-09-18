@@ -5,7 +5,9 @@ import CTABanner from "../../components/CTABanner";
 import Footer from "../../components/Footer";
 import MiniContactForm from "../../components/MiniContactForm";
 import Process from "@/components/Process";
-import { fetchPortfolio } from '@/lib/sanity';
+import { client, PORTFOLIO_QUERY } from '@/lib/sanity';
+import { fetchWithFallback } from '@/lib/fetchWithFallback';
+import { ProjectsSchema } from '@/lib/schemas';
 import FAQAccordion from "@/components/FAQAccordion"
 import TabsFaq from "@/components/TabsFaq"
 
@@ -18,11 +20,16 @@ export const metadata = {
 
 // Portfolio (Case Studies) Page for Garbage Hero Limited
 export default async function PortfolioPage() {
-  let projects = [];
-  try {
-    projects = await fetchPortfolio();
-  } catch (e) {
-    console.warn('[portfolio] fetchPortfolio failed', e);
+  const { data: projects, source } = await fetchWithFallback({
+    key: 'portfolio',
+    live: () => client.fetch(PORTFOLIO_QUERY),
+    schema: ProjectsSchema,
+    snapshotFile: 'projects.json',
+    defaults: [],
+    timeoutMs: 4000,
+  });
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('[portfolio] source:', source);
   }
   return (
     <main className="bg-white text-black font-lato">

@@ -28,6 +28,9 @@ export const PORTFOLIO_TEASERS_QUERY = `*[_type == "portfolioTeaser"]|order(_cre
   _id, image, category, companyName, shortDescription
 }`;
 
+// Export the raw client for advanced usage
+export { client };
+
 // Fetch helpers (published content only)
 export function fetchTestimonials() { return client.fetch(TESTIMONIALS_QUERY); }
 export function fetchClientLogos() { return client.fetch(CLIENT_LOGOS_QUERY); }
