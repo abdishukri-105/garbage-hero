@@ -98,16 +98,21 @@ function LogoItem({ logo }) {
   }
   const href = cleanUrl(logo.url);
   const img = logo.logoImage;
+  const localUrl = logo.logoImageUrl;
 
   // Sanity loader tuned for small logos + responsive sizes
   const fallbackUrl = (() => {
-    try { return urlFor(img).width(200).height(120).fit('max').quality(70).auto('format').url(); } catch { return '/placeholder.png'; }
+    if (localUrl) return localUrl;
+    try { return urlFor(img).width(200).height(120).fit('max').quality(70).auto('format').url(); } catch { return '/images/logo.png'; }
   })();
   const loader = ({ width, quality }) => {
+    if (localUrl) return localUrl;
     try { return urlFor(img).width(Math.min(width, 240)).height(Math.min(Math.round(width * 0.6), 140)).fit('max').quality(quality ?? 60).auto('format').url(); } catch { return fallbackUrl; }
   };
 
-  const content = img?.asset ? (
+  const hasImage = !!localUrl || img?.asset;
+
+  const content = hasImage ? (
     <Image
       loader={loader}
       src={fallbackUrl}

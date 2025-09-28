@@ -111,7 +111,7 @@ const AboutUsTeaser = () => {
 
             <div className="lg:hidden flex justify-center">
               <Image
-                src="/Photos/hero1.jpg"
+                src="/Photos/about1.jpg"
                 alt="Garbage Hero team cleaning a Kenyan office"
                 width={380}
                 height={320}
@@ -129,7 +129,7 @@ const AboutUsTeaser = () => {
                 variants={fadeInUp}
               >
                 <Image
-                  src="/Photos/hero1.jpg"
+                  src="/projects/cleaning-3.jpg"
                   alt="Garbage Hero team cleaning a Kenyan office"
                   width={320}
                   height={420}
@@ -145,7 +145,7 @@ const AboutUsTeaser = () => {
                 className="relative"
               >
                 <Image
-                  src="/images/slide2.jpg"
+                  src="/Photos/about1.jpg"
                   alt="Eco-friendly waste management in Kenya"
                   width={320}
                   height={420}

@@ -8,6 +8,7 @@ import Link from "next/link";
 import Heading from "./ui/Heading";
 import Paragraph from "./ui/Paragraph";
 import { urlFor } from '@/lib/sanity';
+import { FALLBACK_TEASERS } from '@/data/fallback/teasers';
 
 const CARD_WIDTH = 390;
 const CARD_HEIGHT = 350;
@@ -19,69 +20,23 @@ const BREAKPOINTS = {
   lg: 1024,
 };
 
-const staticItems = [
-  {
-    id: 1,
-    url: "/images/parliament.jpg",
-    category: "Cleaning & Janitorial",
-    title: "Parliament of Kenya",
-    description: "Transformed a 10,000 sq.ft office with eco-friendly cleaning for a leading Kenyan firm.",
-  },
-  {
-    id: 2,
-    url: "/images/slide2.jpg",
-    category: "Gardening & Landscaping",
-    title: "University Campus Garden",
-    description: "Revamped a 2-acre campus garden with sustainable landscaping for a top university.",
-  },
-  {
-    id: 3,
-    url: "/images/slide3.jpg",
-    category: "Fumigation & Pest Control",
-    title: "Mombasa Hotel Sanitization",
-    description: "Provided safe pest control for a 5-star hotel, ensuring guest safety and comfort.",
-  },
-  {
-    id: 4,
-    url: "/images/slide4.jpg",
-    category: "Garbage Collection",
-    title: "Nairobi Community Cleanup",
-    description: "Managed waste for a 500-home community, promoting a cleaner Nairobi.",
-  },
-  {
-    id: 5,
-    url: "/images/slide5.jpg",
-    category: "Sanitary Disposal",
-    title: "Kisumu School Hygiene",
-    description: "Implemented hygienic sanitary disposal for a large school, enhancing health standards.",
-  },
-  {
-    id: 6,
-    url: "/images/slide1.jpg",
-    category: "Cleaning & Janitorial",
-    title: "Eldoret Office Complex",
-    description: "Deep-cleaned a multi-story office complex with eco-friendly solutions.",
-  },
-  {
-    id: 7,
-    url: "/images/slide2.jpg",
-    category: "Gardening & Landscaping",
-    title: "Corporate Park Redesign",
-    description: "Redesigned a corporate park with sustainable plants and irrigation systems.",
-  },
-];
-
 const RecentWorkTeaser = ({ teasers = [] }) => {
-  // Map Sanity teasers (if provided) to card shape; fallback to staticItems
-  const mapped = Array.isArray(teasers) && teasers.length > 0
-    ? teasers.map(t => ({
-        id: t._id,
-        url: t.image ? urlFor(t.image).width(800).height(600).url() : '/images/slide3.jpg',
-        category: t.category || 'Project',
-        title: t.companyName || 'Untitled',
-        description: t.shortDescription || '',
-      }))
-    : staticItems;
+  // Prefer live teasers if available; otherwise use centralized fallback data
+  const src = Array.isArray(teasers) && teasers.length > 0 ? teasers : FALLBACK_TEASERS;
+
+  // Normalize into card shape
+  const mapped = src.map((t, i) => {
+    const url = t.imageUrl || t.url || (t.image ? (() => {
+      try { return urlFor(t.image).width(800).height(600).auto('format').url(); } catch { return '/images/slide3.jpg'; }
+    })() : '/images/slide3.jpg');
+    return {
+      id: t._id || t.id || `teaser-${i}`,
+      url,
+      category: t.category || 'Project',
+      title: t.companyName || t.title || 'Untitled',
+      description: t.shortDescription || t.description || '',
+    };
+  });
 
   const [ref, { width }] = useMeasure();
   const sectionRef = useRef(null);

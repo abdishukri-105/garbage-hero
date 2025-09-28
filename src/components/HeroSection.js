@@ -8,20 +8,20 @@ import WetPaintButton from "./ui/WetPaintButton";
 
 const slides = [
 	{
-		src: "/projects/traning-1.jpg",
+		src: "/Photos/hero1.jpg" ,
 		title: "Immaculate Cleaning for Institutional Excellence",
 		description:
 			"Our trained teams use advanced, eco-friendly equipment to handle routine and deep cleans, ensuring minimal disruption and maximum efficiency for your operations. Secure long-term contracts that prioritize safety, sustainability, and regulatory standards",
 	},
 	{
-		src: "/Photos/hero2.jpg",
+		src: "/projects/cleaning-4.jpg",
 		title: "Trusted & Reliable Staff",
 		description:
 			"Our team is fully trained and dedicated to making your space shine, with safety and satisfaction guaranteed.",
 		cta: "Book Your Cleaning",
 	},
 	{
-		src: "/Photos/hero1.jpg",
+		src: "/projects/traning-1.jpg",
 		title: "Affordable Cleaning Packages",
 		description:
 			"Choose from our flexible packages — from one-time deep cleans to regular maintenance, all at budget-friendly rates.",

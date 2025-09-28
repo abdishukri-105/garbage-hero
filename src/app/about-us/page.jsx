@@ -7,11 +7,10 @@ import CTABanner from "../../components/CTABanner";
 import Footer from "../../components/Footer";
 import PageBanner from "@/components/PageBanner";
 import { client, TEAM_QUERY } from '@/lib/sanity';
-import { fetchWithFallback } from '@/lib/fetchWithFallback';
-import { TeamSchema } from '@/lib/schemas';
 import MinicontactForm from "@/components/MiniContactForm"
 import FAQAccordion from "@/components/FAQAccordion"
 import TabsFaq from "@/components/TabsFaq"
+import { FALLBACK_TEAM } from "@/data/fallback/team";
 
 
 export const dynamic = 'force-dynamic';
@@ -22,17 +21,14 @@ export const metadata = {
 
 // About Us Page for Garbage Hero Limited
 export default async function AboutUsPage() {
-  const { data: team, source } = await fetchWithFallback({
-    key: 'team',
-    live: () => client.fetch(TEAM_QUERY),
-    schema: TeamSchema,
-    snapshotFile: 'team.json',
-    defaults: [],
-    timeoutMs: 4000,
-  });
-  if (process.env.NODE_ENV !== 'production') {
-    console.log('[about-us] team source:', source);
+  let team = [];
+  try {
+    team = await client.fetch(TEAM_QUERY);
+  } catch (_) {
+    team = [];
   }
+  if (!Array.isArray(team) || team.length === 0) team = FALLBACK_TEAM.map(t => ({ _id: t._id, name: t.name, title: t.title, image: t.imageUrl }));
+
   return (
     <main className="bg-white text-black font-lato">
       <Navbar />

@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "Garbage Hero Limited - Eco-Friendly Cleaning and Waste Management in Kenya",
@@ -12,7 +13,10 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         <link rel="preload" as="image" href="/projects/traning-1.jpg" fetchpriority="high" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

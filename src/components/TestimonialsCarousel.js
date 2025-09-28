@@ -102,16 +102,17 @@ const Cards = ({ testimonials, selected, setSelected }) => {
 };
 
 const Card = ({ testimonial, position, selected, setSelected }) => {
-  const { clientName, clientTitle, company, statement, companyLogo } = testimonial;
+  const { clientName, clientTitle, company, statement, companyLogo, companyLogoUrl } = testimonial;
 
   const scale = position <= selected ? 1 : 1 + 0.015 * (position - selected);
   const offset = position <= selected ? 0 : 95 + (position - selected) * 3;
   const background = position % 2 ? "#3AA335" : "#FFFFFF";
   const isGreen = position % 2 === 1;
 
-  // Sanity logo image loader
-  const fallbackUrl = companyLogo?.asset ? urlFor(companyLogo).width(160).height(160).quality(75).auto('format').url() : null;
-  const loader = ({ width, quality }) => companyLogo?.asset ? urlFor(companyLogo).width(Math.min(width, 180)).height(Math.min(width, 180)).quality(quality ?? 70).auto('format').url() : undefined;
+  // Support local logo URL fallback
+  const hasSanity = !!companyLogo?.asset;
+  const fallbackUrl = hasSanity ? urlFor(companyLogo).width(160).height(160).quality(75).auto('format').url() : (companyLogoUrl || null);
+  const loader = ({ width, quality }) => hasSanity ? urlFor(companyLogo).width(Math.min(width, 180)).height(Math.min(width, 180)).quality(quality ?? 70).auto('format').url() : (companyLogoUrl || undefined);
 
   return (
     <motion.div
@@ -129,7 +130,7 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
       className={`absolute top-0 left-0 w-full min-h-full p-6 sm:p-8 lg:p-12 cursor-pointer flex flex-col justify-between rounded-lg border ${isGreen ? "border-white/20" : "border-[#E8F6E9]"}`}
     >
       <div className="flex flex-col items-center text-center">
-        {companyLogo?.asset && (
+        {(hasSanity || companyLogoUrl) && (
           <div className="relative h-16 w-16 sm:h-20 sm:w-20 mb-4">
             <Image
               loader={loader}

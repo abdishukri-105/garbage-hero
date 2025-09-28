@@ -15,26 +15,26 @@ import Footer from "@/components/Footer";
 import WhyUs from "@/components/WhyUs";
 import ClientLogosMarquee from '@/components/ClientLogosMarquee';
 import { client, TESTIMONIALS_QUERY, CLIENT_LOGOS_QUERY, PORTFOLIO_TEASERS_QUERY } from '@/lib/sanity';
-import { fetchWithFallback } from '@/lib/fetchWithFallback';
-import { TestimonialsSchema, ClientLogosSchema } from '@/lib/schemas';
 export const dynamic = 'force-dynamic';
 import TabsFaq from "@/components/TabsFaq"
 import Clients from "@/components/Clients"
+import { FALLBACK_TESTIMONIALS } from "@/data/fallback/testimonials";
+import { FALLBACK_CLIENT_LOGOS } from "@/data/fallback/clients";
+import { FALLBACK_TEASERS } from "@/data/fallback/teasers";
 
 export default async function HomePage() {
-  const [
-    { data: testimonialsData, source: tSrc },
-    { data: teasersData, source: pSrc },
-    { data: clientLogosData, source: cSrc }
-  ] = await Promise.all([
-    fetchWithFallback({ key: 'testimonials', live: () => client.fetch(TESTIMONIALS_QUERY), schema: TestimonialsSchema, snapshotFile: 'testimonials.json', defaults: [], timeoutMs: 3000 }),
-    fetchWithFallback({ key: 'portfolioTeasers', live: () => client.fetch(PORTFOLIO_TEASERS_QUERY), schema: undefined, snapshotFile: 'teasers.json', defaults: [], timeoutMs: 3000 }),
-    fetchWithFallback({ key: 'clientLogos', live: () => client.fetch(CLIENT_LOGOS_QUERY), schema: ClientLogosSchema, snapshotFile: 'clients.json', defaults: [], timeoutMs: 3000 }),
-  ]);
-  // Optional server-side logging of sources
-  if (process.env.NODE_ENV !== 'production') {
-    console.log('[home] sources:', { testimonials: tSrc, teasers: pSrc, clientLogos: cSrc });
-  }
+  let testimonialsData = [];
+  let teasersData = [];
+  let clientLogosData = [];
+
+  try { testimonialsData = await client.fetch(TESTIMONIALS_QUERY); } catch { testimonialsData = []; }
+  try { teasersData = await client.fetch(PORTFOLIO_TEASERS_QUERY); } catch { teasersData = []; }
+  try { clientLogosData = await client.fetch(CLIENT_LOGOS_QUERY); } catch { clientLogosData = []; }
+
+  if (!Array.isArray(testimonialsData) || testimonialsData.length === 0) testimonialsData = FALLBACK_TESTIMONIALS;
+  if (!Array.isArray(teasersData) || teasersData.length === 0) teasersData = FALLBACK_TEASERS;
+  if (!Array.isArray(clientLogosData) || clientLogosData.length === 0) clientLogosData = FALLBACK_CLIENT_LOGOS;
+
   return (
     <main className="bg-white text-black font-lato">
       <Navbar />

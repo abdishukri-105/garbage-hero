@@ -6,10 +6,9 @@ import Footer from "../../components/Footer";
 import MiniContactForm from "../../components/MiniContactForm";
 import Process from "@/components/Process";
 import { client, PORTFOLIO_QUERY } from '@/lib/sanity';
-import { fetchWithFallback } from '@/lib/fetchWithFallback';
-import { ProjectsSchema } from '@/lib/schemas';
 import FAQAccordion from "@/components/FAQAccordion"
 import TabsFaq from "@/components/TabsFaq"
+import { FALLBACK_PROJECTS } from "@/data/fallback/projects";
 
 // Remove legacy Head usage; use metadata export instead in App Router
 export const dynamic = 'force-dynamic';
@@ -20,17 +19,16 @@ export const metadata = {
 
 // Portfolio (Case Studies) Page for Garbage Hero Limited
 export default async function PortfolioPage() {
-  const { data: projects, source } = await fetchWithFallback({
-    key: 'portfolio',
-    live: () => client.fetch(PORTFOLIO_QUERY),
-    schema: ProjectsSchema,
-    snapshotFile: 'projects.json',
-    defaults: [],
-    timeoutMs: 4000,
-  });
-  if (process.env.NODE_ENV !== 'production') {
-    console.log('[portfolio] source:', source);
+  let projects = [];
+  try {
+    projects = await client.fetch(PORTFOLIO_QUERY);
+  } catch (e) {
+    projects = [];
   }
+  if (!Array.isArray(projects) || projects.length === 0) {
+    projects = FALLBACK_PROJECTS;
+  }
+
   return (
     <main className="bg-white text-black font-lato">
       <Navbar />

@@ -13,7 +13,7 @@ import Heading from './ui/Heading';
 const ProjectGrid = ({ projects = [] }) => {
   const tabs = projects.length > 0 ? projects.map(p => ({
     title: p.companyName || 'Untitled',
-    images: (p.images || []).map(img => img.asset).filter(Boolean),
+    images: (p.images || []).map(img => img?.asset || img).filter(Boolean),
     category: p.category,
     timePeriod: p.timePeriod,
     description: p.shortDescription,
@@ -87,7 +87,7 @@ const ProjectGrid = ({ projects = [] }) => {
       <AnimatePresence>
         {lightboxOpen && active?.images?.length > 0 && (
           <Lightbox
-            key={`lb-${active.title}`}
+            key={`lb-${active.title}`]
             images={active.images}
             title={active.title}
             index={lightboxIndex}
@@ -173,12 +173,15 @@ const ProjectFeature = ({ tab, onOpenLightbox }) => {
           </div>
         )}
         {images.map((asset, i) => {
+          const isLocal = typeof asset === 'string' || asset?.url;
+          const srcUrl = isLocal ? (typeof asset === 'string' ? asset : asset.url) : undefined;
           const fallbackUrl = (() => {
-            try { return urlFor(asset).width(800).quality(60).auto('format').url(); } catch (e) { return '/placeholder.png'; }
+            if (srcUrl) return srcUrl;
+            try { return urlFor(asset).width(800).quality(60).auto('format').url(); } catch (e) { return '/images/slide3.jpg'; }
           })();
           const loader = ({ width, quality }) => {
+            if (srcUrl) return srcUrl; // next/image will ignore loader if using static src
             try {
-              // Request smaller thumbs with moderate quality for bandwidth savings
               return urlFor(asset).width(Math.min(width, 800)).fit('max').quality(quality ?? 50).auto('format').url();
             } catch (e) {
               return fallbackUrl;
@@ -189,7 +192,7 @@ const ProjectFeature = ({ tab, onOpenLightbox }) => {
           const lid = `pg-${title}-${asset?._id || i}`;
           return (
             <motion.div
-              key={asset?._id || i}
+              key={asset?._id || srcUrl || i}
               className="break-inside-avoid mb-4 relative rounded-xl overflow-hidden group cursor-zoom-in"
               style={{ 
                 backgroundColor: '#E8F6E9',
@@ -240,8 +243,11 @@ const ProjectFeature = ({ tab, onOpenLightbox }) => {
 // Lightbox component with shared layoutId
 const Lightbox = ({ images = [], title, index = 0, onClose, onPrev, onNext }) => {
   const asset = images[index];
+  const isLocal = typeof asset === 'string' || asset?.url;
+  const srcUrl = isLocal ? (typeof asset === 'string' ? asset : asset.url) : undefined;
   const fallbackUrl = (() => {
-    try { return urlFor(asset).width(1400).quality(80).auto('format').url(); } catch (e) { return '/placeholder.png'; }
+    if (srcUrl) return srcUrl;
+    try { return urlFor(asset).width(1400).quality(80).auto('format').url(); } catch (e) { return '/images/slide3.jpg'; }
   })();
   const lid = `pg-${title}-${asset?._id || index}`;
 
