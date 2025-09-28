@@ -91,8 +91,12 @@ function LogoItem({ logo }) {
   if (logo.type === 'placeholder') {
     const Icon = logo.icon;
     return (
-      <div className=" flex items-center justify-center rounded-xl border" style={{ backgroundColor: '#E8F6E9', borderColor: '#3AA3351A', color: '#3AA335' }} aria-label="Client logo placeholder">
-        <Icon className="text-3xl sm:text-4xl" />
+      <div
+        className="group relative h-16 sm:h-20 w-32 sm:w-40 flex items-center justify-center rounded-xl border"
+        style={{ backgroundColor: 'rgba(232,246,233,0.4)', borderColor: '#3AA3351A', color: '#3AA335' }}
+        aria-label="Client logo placeholder"
+      >
+        <Icon className="text-3xl sm:text-4xl opacity-70 group-hover:opacity-100 transition-opacity" />
       </div>
     );
   }
@@ -100,41 +104,60 @@ function LogoItem({ logo }) {
   const img = logo.logoImage;
   const localUrl = logo.logoImageUrl;
 
-  // Sanity loader tuned for small logos + responsive sizes
+  // Build a best-effort URL (prefer local fallback if provided)
   const fallbackUrl = (() => {
     if (localUrl) return localUrl;
-    try { return urlFor(img).width(200).height(120).fit('max').quality(70).auto('format').url(); } catch { return '/images/logo.png'; }
+    try {
+      return urlFor(img).width(320).height(200).fit('max').quality(75).auto('format').url();
+    } catch {
+      return '/images/logo.png';
+    }
   })();
   const loader = ({ width, quality }) => {
     if (localUrl) return localUrl;
-    try { return urlFor(img).width(Math.min(width, 240)).height(Math.min(Math.round(width * 0.6), 140)).fit('max').quality(quality ?? 60).auto('format').url(); } catch { return fallbackUrl; }
+    try {
+      return urlFor(img)
+        .width(Math.min(width, 360))
+        .fit('max')
+        .quality(quality ?? 70)
+        .auto('format')
+        .url();
+    } catch { return fallbackUrl; }
   };
 
   const hasImage = !!localUrl || img?.asset;
+  const baseClasses = "group relative h-16 sm:h-20 w-32 sm:w-40 flex items-center justify-center rounded-xl border transition-colors";
+  const baseStyle = { backgroundColor: 'rgba(232,246,233,0.4)', borderColor: '#3AA3351A' };
 
-  const content = hasImage ? (
-    <Image
-      loader={loader}
-      src={fallbackUrl}
-      alt={altFor(logo)}
-      width={160}
-      height={80}
-      sizes="(max-width: 640px) 40vw, (max-width: 1024px) 15vw, 160px"
-      quality={60}
-      className="object-contain max-h-full max-w-full opacity-80 hover:opacity-100 transition-opacity p-2"
-    />
+  const Img = hasImage ? (
+    <div className="relative w-full h-full p-2">
+      <Image
+        loader={loader}
+        src={fallbackUrl}
+        alt={altFor(logo)}
+        fill
+        sizes="(max-width: 640px) 40vw, (max-width: 1024px) 15vw, 160px"
+        quality={70}
+        className="object-contain object-center opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+      />
+    </div>
   ) : (
-    <span className="text-xs font-medium truncate px-1" style={{ color: '#333333' }}>{logo.companyName || 'Client'}</span>
+    <span className="text-xs font-medium truncate px-2 text-[#333333]/70 group-hover:text-[#333333] transition-colors">{logo.companyName || 'Client'}</span>
   );
 
-  return href ? (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="group h-14 w-28 sm:h-16 sm:w-32 flex items-center justify-center rounded-xl border transition-colors" style={{ backgroundColor: 'rgba(232,246,233,0.4)', borderColor: '#3AA3351A' }} aria-label={altFor(logo)}>
-      {content}
-    </a>
-  ) : (
-    <div className="group h-14 w-28 sm:h-16 sm:w-32 flex items-center justify-center rounded-xl border transition-colors" style={{ backgroundColor: 'rgba(232,246,233,0.4)', borderColor: '#3AA3351A' }} aria-label={altFor(logo)}>
-      {content}
-    </div>
+  const Wrapper = href ? 'a' : 'div';
+  const wrapperProps = href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {};
+
+  return (
+    <Wrapper
+      {...wrapperProps}
+      className={baseClasses}
+      style={baseStyle}
+      aria-label={altFor(logo)}
+    >
+      {Img}
+      <span className="sr-only">{altFor(logo)}</span>
+    </Wrapper>
   );
 }
 

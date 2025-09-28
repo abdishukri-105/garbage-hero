@@ -13,25 +13,25 @@ const services = [
 	{
 		title: "Cleaning & Janitorial",
 		description: "Spotless cleaning for homes and offices across Kenya.",
-		imgSrc: "/images/slide3.jpg",
+		imgSrc: "/projects/cleaning-3.jpg",
 		href: "/services#cleaning",
 	},
 	{
 		title: "Gardening & Landscaping",
 		description: "Eco-friendly designs to transform your outdoor spaces.",
-		imgSrc: "/images/slide2.jpg",
+		imgSrc: "/Photos/gardening.jpg",
 		href: "/services#gardening",
 	},
 	{
 		title: "Fumigation & Pest Control",
 		description: "Safe, effective solutions to keep pests at bay.",
-		imgSrc: "/images/slide3.jpg",
+		imgSrc: "/RBA/fumi.jpg",
 		href: "/services#pest-control",
 	},
 	{
 		title: "Garbage Collection",
 		description: "Sustainable waste management for a cleaner Kenya.",
-		imgSrc: "/images/slide4.jpg",
+		imgSrc: "/RBA/pest.jpg",
 		href: "/services#garbage-collection",
 	},
 	{
