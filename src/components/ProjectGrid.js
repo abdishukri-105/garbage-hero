@@ -21,6 +21,11 @@ const ProjectGrid = ({ projects = [] }) => {
   const [selected, setSelected] = useState(0);
   const active = tabs[selected];
 
+  // Ensure selected index stays valid if tabs array changes dynamically
+  useEffect(() => {
+    if (selected >= tabs.length) setSelected(0);
+  }, [tabs.length, selected]);
+
   // Lightbox state
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -87,7 +92,7 @@ const ProjectGrid = ({ projects = [] }) => {
       <AnimatePresence>
         {lightboxOpen && active?.images?.length > 0 && (
           <Lightbox
-            key={`lb-${active.title}`]
+            key={`lb-${active.title}`}
             images={active.images}
             title={active.title}
             index={lightboxIndex}

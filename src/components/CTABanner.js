@@ -67,7 +67,7 @@ const CTABanner = () => {
           >
             <div className="relative w-full aspect-[4/3] md:aspect-[16/10] lg:h-[360px] overflow-hidden rounded-2xl ring-1 ring-white/15 shadow-2xl">
               <Image
-                src="/Photos/hero2.jpg"
+                src="/projects/cleaning-4.jpg"
                 alt="Professional eco-focused cleaning team at work"
                 fill
                 sizes="(max-width: 1024px) 100vw, 48rem"
