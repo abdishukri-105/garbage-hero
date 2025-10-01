@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Navbar from "../../components/Navbar";
 import HeroSection from "../../components/HeroSection";
 import { ServicesList } from "../../components/ServicesList";
@@ -11,27 +10,24 @@ import PageBanner from "@/components/PageBanner";
 import TabsFaq from "@/components/TabsFaq"
 
 // Services Page for Garbage Hero Limited
+export const metadata = {
+  title: 'Integrated Eco-Friendly Cleaning & Pest Control Services Kenya',
+  description: 'Sustainable corporate cleaning, sanitary and washroom hygiene, integrated pest management, fumigation, landscaping and waste management support across Kenya. Request a proposal.',
+};
+
 export default function ServicesPage() {
   return (
-    <>
-      <Head>
-        <title>Our Services | Garbage Hero Limited</title>
-        <meta name="description" content="Explore our cleaning, landscaping, pest control, garbage collection, and sanitary disposal services in Kenya." />
-      </Head>
-      <main className="bg-white text-black font-lato">
-        <Navbar />
-       <PageBanner
-        title="Our Eco-Friendly Services"
-        subtitle="Cleaning and landscaping for universities and governments"
+    <main className="bg-white text-black font-lato">
+      <Navbar />
+      <PageBanner
+        title="Integrated Eco-Friendly Services"
+        subtitle="Sustainable cleaning, sanitary hygiene, pest control & landscaping for institutional and corporate facilities across Kenya"
       />
-     <ServicesList />
-        {/* <RecentWorkTeaser /> */}
-        <CTABanner />
-        <TabsFaq />
-        
-        <MiniContactForm />
-        <Footer />
-      </main>
-    </>
+      <ServicesList />
+      <CTABanner />
+      <TabsFaq />
+      <MiniContactForm />
+      <Footer />
+    </main>
   );
 }

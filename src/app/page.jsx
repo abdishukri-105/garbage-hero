@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Garbage Hero Limited | Cleaning & Waste Management Kenya",
-  description: "Professional cleaning and waste management services in Kenya. Eco-friendly, reliable, and affordable.",
+  title: "Facility Hygiene & Contract Cleaning Partner Kenya | Garbage Hero",
+  description: "Integrated cleaning, sanitary bin, pest control and grounds maintenance for government, education, healthcare and corporate sites across Kenya. Reliable vetted teams. Request a proposal.",
 };
 
 import Navbar from "@/components/Navbar";

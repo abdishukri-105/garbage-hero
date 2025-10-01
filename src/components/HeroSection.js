@@ -8,24 +8,25 @@ import WetPaintButton from "./ui/WetPaintButton";
 
 const slides = [
 	{
-		src: "/Photos/hero1.jpg" ,
-		title: "Immaculate Cleaning for Institutional Excellence",
+		src: "/Photos/hero1.jpg",
+		title: "Integrated Hygiene & Facility Care You Can Trust",
 		description:
-			"Our trained teams use advanced, eco-friendly equipment to handle routine and deep cleans, ensuring minimal disruption and maximum efficiency for your operations. Secure long-term contracts that prioritize safety, sustainability, and regulatory standards",
+			"Nationwide cleaning, sanitary management, pest control, and landscaping—delivered by vetted teams, audit‑ready processes, and eco‑aligned products built for government and corporate environments.",
+		cta: "Get a Quote",
 	},
 	{
 		src: "/projects/cleaning-4.jpg",
-		title: "Trusted & Reliable Staff",
+		title: "Consistent, Compliant Cleaning for High‑Traffic Spaces",
 		description:
-			"Our team is fully trained and dedicated to making your space shine, with safety and satisfaction guaranteed.",
-		cta: "Book Your Cleaning",
+			"Structured SOPs, high‑touch disinfection cycles, and measurable SLAs that reduce complaints, protect assets, and keep institutional corridors inspection‑ready.",
+		cta: "Request a Site Assessment",
 	},
 	{
 		src: "/projects/traning-1.jpg",
-		title: "Affordable Cleaning Packages",
+		title: "Trained. Certified. Performance‑Managed.",
 		description:
-			"Choose from our flexible packages — from one-time deep cleans to regular maintenance, all at budget-friendly rates.",
-		cta: "View Packages",
+			"Ongoing staff coaching, safety adherence, and quality audits ensure every shift meets your operational, compliance, and brand standards—across every site.",
+		cta: "Get a Quote",
 	},
 ];
 
@@ -171,7 +172,12 @@ export default function HeroSection() {
 				} bg-gradient-to-b from-black/80 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/80 md:via-black/30 md:to-black/10 flex items-start md:items-center justify-start pt-28 md:pt-0`}
 			>
 				<div className="px-6 md:px-16 max-w-[80%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-6">
-					<Heading level={1} variant="white" key={slides[imgIndex].title} className="text-[clamp(2rem,6vw,3rem)] leading-[1.05] hero-heading-font">{/* hero-specific larger size + new font */}
+					<Heading
+						level={1}
+						variant="white"
+						key={slides[imgIndex].title}
+						className="text-[clamp(2rem,6vw,3rem)] leading-[1.05] hero-heading-font"
+					>
 						{slides[imgIndex].title}
 					</Heading>
 					<Paragraph

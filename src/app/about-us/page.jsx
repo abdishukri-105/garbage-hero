@@ -15,8 +15,8 @@ import { FALLBACK_TEAM } from "@/data/fallback/team";
 
 export const dynamic = 'force-dynamic';
 export const metadata = {
-  title: 'About Us | Garbage Hero Limited',
-  description: "Learn about Garbage Hero Limited's mission, vision, values, and our journey as Kenya's leading cleaning and waste management company.",
+  title: 'About Us | Contract Cleaning, Sanitary & Pest Control Services Kenya',
+  description: 'Facility hygiene partner delivering contract cleaning, washroom hygiene, pest control, fumigation, landscaping and waste support for government, education, healthcare & corporate sites across Kenya.',
 };
 
 // About Us Page for Garbage Hero Limited

@@ -34,16 +34,16 @@ export default function ClientLogosMarquee({ logos = [] }) {
       {/* <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(58,163,53,0.06), transparent 70%)' }} /> */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="text-center mb-6 sm:mb-8">
-          <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Trusted By</span>
+          <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Trusted By Leading Institutions</span>
           <Heading
             level={3}
             className="mb-2 mx-auto w-fit pb-2 px-2 rounded-md border-b-4 border-[#3aa335]"
             variant="primary"
           >
-            Our Clients
+            Trusted by Institutions Shaping Kenya’s Growth
           </Heading>
           <Paragraph className="text-center text-sm sm:text-base max-w-[60ch] mx-auto text-[#333333]">
-            Forward-thinking organisations partnering with us for sustainable facility care and dependable service delivery.
+            From government agencies to universities, hospitals and corporate campuses, our vetted teams deliver measurable hygiene performance and brand‑elevating presentation.
           </Paragraph>
         </div>
 
