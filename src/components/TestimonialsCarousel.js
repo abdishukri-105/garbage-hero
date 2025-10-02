@@ -135,7 +135,7 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
             <Image
               loader={loader}
               src={fallbackUrl}
-              alt={company ? `${company} logo` : 'Company logo'}
+              alt="" /* decorative: company name appears in text below */
               fill
               sizes="(max-width:640px) 120px, (max-width:1024px) 140px, 160px"
               quality={75}

@@ -138,47 +138,31 @@ const Question = ({ question, answer }) => {
   const [open, setOpen] = useState(false);
   const id = slugify(question);
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      setOpen((pv) => !pv);
-    }
-  };
+  const toggle = () => setOpen(p => !p);
 
   return (
-    <motion.div
-      role="button"
-      tabIndex={0}
-      aria-expanded={open}
-      aria-controls={`answer-${id}`}
-      onClick={() => setOpen((pv) => !pv)}
-      onKeyDown={handleKeyDown}
-      animate={open ? "open" : "closed"}
-      className={`cursor-pointer rounded-xl border px-4 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3AA335]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
-        open ? "bg-[#E8F6E9] border-[#3AA335]" : "bg-white border-[#3AA335]/15"
-      }`}
-    >
-      <div className="flex w-full items-center justify-between gap-4 py-3.5">
-        <span
-          className={`font-roboto-serif text-base sm:text-lg font-semibold transition-colors ${
-            open ? "text-[#1E611B]" : "text-[#333333]"
-          }`}
-        >
-          {question}
-        </span>
-        <motion.span variants={{ open: { rotate: "45deg" }, closed: { rotate: "0deg" } }}>
-          <FiPlus className={`text-lg sm:text-xl transition-colors ${open ? "text-[#1E611B]" : "text-[#333333]/60"}`} />
+    <div className={`rounded-xl border transition-colors ${open ? 'bg-[#E8F6E9] border-[#3AA335]' : 'bg-white border-[#3AA335]/15'}`}> {/* container only */}
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={`answer-${id}`}
+        onClick={toggle}
+        className="flex w-full items-center justify-between gap-4 py-3.5 px-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3AA335]/60 focus-visible:ring-offset-2 rounded-xl"
+      >
+        <span className={`font-roboto-serif text-base sm:text-lg font-semibold transition-colors ${open ? 'text-[#1E611B]' : 'text-[#333333]'}`}>{question}</span>
+        <motion.span animate={{ rotate: open ? 45 : 0 }}>
+          <FiPlus className={`text-lg sm:text-xl transition-colors ${open ? 'text-[#1E611B]' : 'text-[#333333]/60'}`} />
         </motion.span>
-      </div>
+      </button>
       <motion.div
         id={`answer-${id}`}
         initial={false}
-        animate={{ height: open ? height : "0px", marginBottom: open ? "20px" : "0px" }}
-        className="overflow-hidden text-[#333333]/80"
+        animate={{ height: open ? height : 0, marginBottom: open ? 20 : 0 }}
+        className="overflow-hidden text-[#333333]/80 px-4"
       >
-        <p ref={ref} className="text-body">{answer}</p>
+        <p ref={ref} className="text-body pb-4">{answer}</p>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 

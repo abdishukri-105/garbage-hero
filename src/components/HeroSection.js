@@ -1,28 +1,31 @@
 "use client";
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Heading from "./ui/Heading";
 import Paragraph from "./ui/Paragraph";
 import WetPaintButton from "./ui/WetPaintButton";
+import hero1 from "../../public/Photos/hero1.jpg";
+import cleaning4 from "../../public/projects/cleaning-4.jpg";
+import training1 from "../../public/projects/traning-1.jpg";
 
 const slides = [
 	{
-		src: "/Photos/hero1.jpg",
+		src: hero1,
 		title: "Integrated Facility Hygiene Excellence Across Kenya",
 		description:
 			"Integrated cleaning, sanitary, pest and landscape stewardship delivering healthier environments, reduced risk and visibly elevated workplace standards.",
 		cta: "Request Quote",
 	},
 	{
-		src: "/projects/cleaning-4.jpg",
+		src: cleaning4,
 		title: "Consistent Compliant Cleaning For High-Traffic Environments",
 		description:
 			"Precision routines, disinfection focus, responsive supervision and transparent performance insight keeping high‑traffic facilities consistent, compliant, calm always.",
 		cta: "Request Quote",
 	},
 	{
-		src: "/projects/traning-1.jpg",
+		src: training1,
 		title: "Trained Teams Driving Sustainable Hygiene Standards",
 		description:
 			"Continuous training, safety discipline and ESG‑aligned chemistry deliver resilient hygiene outcomes and stakeholder confidence nationwide with consistency.",
@@ -42,10 +45,12 @@ const SPRING_OPTIONS = {
 };
 
 export default function HeroSection() {
+	const shouldReduce = useReducedMotion();
 	const [imgIndex, setImgIndex] = useState(0);
 	const dragX = useMotionValue(0);
 	const [isFirstLoaded, setIsFirstLoaded] = useState(false);
 	const intervalRef = useRef(null);
+	const markLoaded = useCallback(() => { if (!isFirstLoaded) setIsFirstLoaded(true); }, [isFirstLoaded]);
 
 	const clearTimer = () => {
 		if (intervalRef.current) clearInterval(intervalRef.current);
@@ -99,61 +104,48 @@ export default function HeroSection() {
 							key={idx}
 							aria-hidden={!isActive}
 							className="absolute inset-0 will-change-transform"
-							style={{
-								backgroundImage: `url(${slide.src})`,
-								backgroundSize: "cover",
-								backgroundPosition: "center",
-							}}
 							initial={false}
 							animate={
 								isActive
-									? {
-											opacity: 1,
-											scale: [1, 1.1],
-											x: [0, idx % 2 === 0 ? 15 : -15],
-											y: [0, idx % 2 === 0 ? -15 : 15],
-									  }
-									: { opacity: 0, scale: 1, x: 0, y: 0 }
+									? shouldReduce
+										? { opacity: 1 }
+										: { opacity: 1, scale: [1, 1.07] }
+									: { opacity: 0, scale: 1 }
 							}
 							transition={
 								isActive
 									? {
-											opacity: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
-											scale: { duration: AUTO_DELAY / 1000, ease: "linear" },
-											x: { duration: AUTO_DELAY / 1000, ease: "linear" },
-											y: { duration: AUTO_DELAY / 1000, ease: "linear" },
+											opacity: { duration: 0.6 },
+											scale: shouldReduce
+												? { duration: 0 }
+												: { duration: 18, ease: "linear" },
 									  }
-									: { opacity: { duration: 0.6, ease: "easeOut" } }
+									: { opacity: { duration: 0.4 } }
 							}
-						/>
+						>
+							<Image
+								priority={idx === 0}
+								src={slide.src}
+								alt=""
+								fill
+								placeholder={idx === 0 ? "blur" : undefined}
+								quality={60}
+								sizes="100vw"
+								className="object-cover"
+								onLoad={idx === 0 ? markLoaded : undefined}
+							/>
+							{/* subtle gradient overlay */}
+							<div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/70 md:via-black/30 md:to-black/10" />
+						</motion.div>
 					);
 				})}
 				<Image
-					src={slides[0].src}
-					alt=""
-					width={1920}
-					height={1080}
-					priority
-					fetchPriority="high"
-					sizes="100vw"
-					className="opacity-0 w-px h-px absolute"
-					onLoadingComplete={() => setIsFirstLoaded(true)}
-				/>
-				{slides[imgIndex + 1] && (
-					<Image
-						src={slides[(imgIndex + 1) % slides.length].src}
+						src={slides[0].src}
 						alt=""
-						width={1920}
-						height={1080}
-						priority={false}
-						fetchPriority="high"
-						sizes="100vw"
-						className="opacity-0 w-px h-px absolute"
-					/>
-				)}
-				{!isFirstLoaded && (
-					<div className="absolute inset-0 bg-black/40 animate-pulse" />
-				)}
+						className="hidden"
+						priority
+						onLoad={markLoaded}
+				/>
 			</div>
 
 			{/* Drag layer for swipe */}
@@ -171,6 +163,10 @@ export default function HeroSection() {
 					isFirstLoaded ? "opacity-100" : "opacity-0"
 				} bg-gradient-to-b from-black/80 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/80 md:via-black/30 md:to-black/10 flex items-start md:items-center justify-start pt-28 md:pt-0`}
 			>
+				{/* Fallback: if image hasn't loaded after 2s, force show */}
+				{!isFirstLoaded && (
+					<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="hidden" onAnimationComplete={() => markLoaded()} />
+				)}
 				<div className="px-6 md:px-16 max-w-[80%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-6">
 					<Heading
 						level={1}

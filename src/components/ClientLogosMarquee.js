@@ -134,7 +134,7 @@ function LogoItem({ logo }) {
       <Image
         loader={loader}
         src={fallbackUrl}
-        alt={altFor(logo)}
+        alt="" /* decorative here because aria-label on wrapper supplies name */
         fill
         sizes="(max-width: 640px) 40vw, (max-width: 1024px) 15vw, 160px"
         quality={70}
@@ -156,7 +156,7 @@ function LogoItem({ logo }) {
       aria-label={altFor(logo)}
     >
       {Img}
-      <span className="sr-only">{altFor(logo)}</span>
+      {/* removed redundant sr-only duplicate */}
     </Wrapper>
   );
 }
