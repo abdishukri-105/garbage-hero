@@ -48,7 +48,7 @@ const GlassNavigation = () => {
 
 	return (
 		<nav
-			className={`fixed left-0 right-0 top-0 z-50 mx-auto max-w-7xl overflow-hidden border backdrop-blur-lg md:left-6 md:right-6 md:top-6 md:rounded-2xl transition-colors duration-300 ${invert ? 'bg-gradient-to-br from-black/40 to-black/10 border-white/20' : 'bg-white/90 border-[#3aa335]'}`}
+			className={`fixed left-0 right-0 top-0 z-50 mx-auto max-w-7xl overflow-hidden border backdrop-blur-lg md:left-6 md:right-6 md:top-6 md:rounded-2xl transition-colors duration-300 ${invert ? 'bg-gradient-to-br from-black/40 to-black/10 border-white/20' : 'bg-gradient-to-br from-white/70 to-white/30 border-[#3aa335]/50 shadow-sm'}`}
 			aria-label="Primary"
 		>
 			<div className="flex items-center justify-between px-4 sm:px-5 py-4 sm:py-3">
