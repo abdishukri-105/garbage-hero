@@ -11,34 +11,28 @@ import Paragraph from "./ui/Paragraph"; // added
 
 const services = [
 	{
-		title: "Cleaning & Janitorial",
-		description: "Spotless cleaning for homes and offices across Kenya.",
+		title: "Cleaning Services",
+		description: "Comprehensive routine and deep cleaning keeping spaces spotless welcoming and consistently healthy.",
 		imgSrc: "/projects/cleaning-3.jpg",
 		href: "/services#cleaning",
 	},
 	{
+		title: "Sanitary Services",
+		description: "Waste management disinfection and high touch surface hygiene for a healthier safer environment.",
+		imgSrc: "/images/slide5.jpg",
+		href: "/services#sanitary",
+	},
+	{
 		title: "Gardening & Landscaping",
-		description: "Eco-friendly designs to transform your outdoor spaces.",
-		imgSrc: "/Photos/gardening.jpg",
+		description: "Garden care design and seasonal maintenance delivering attractive resilient outdoor environments.",
+		imgSrc: "/projects/cleaning-4.jpg",
 		href: "/services#gardening",
 	},
 	{
 		title: "Fumigation & Pest Control",
-		description: "Safe, effective solutions to keep pests at bay.",
+		description: "Safe targeted treatments eliminate pests and block recurrence keeping environments hygienic.",
 		imgSrc: "/RBA/fumi.jpg",
 		href: "/services#pest-control",
-	},
-	{
-		title: "Garbage Collection",
-		description: "Sustainable waste management for a cleaner Kenya.",
-		imgSrc: "/RBA/pest.jpg",
-		href: "/services#garbage-collection",
-	},
-	{
-		title: "Sanitary Disposal",
-		description: "Hygienic disposal for healthier environments.",
-		imgSrc: "/images/slide5.jpg",
-		href: "/services#sanitary-disposal",
 	},
 ];
 
@@ -77,6 +71,7 @@ const ServicesPreview = () => {
 					</Paragraph>
 				</div>
 				<div className="w-full mx-auto">
+					{/* First row (2 cards) */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 mb-4 md:mb-8">
 						{services.slice(0, 2).map((service, index) => (
 							<Card
@@ -90,7 +85,8 @@ const ServicesPreview = () => {
 							/>
 						))}
 					</div>
-					<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8">
+					{/* Second row (remaining 2 cards) */}
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
 						{services.slice(2).map((service, index) => (
 							<Card
 								key={index + 2}

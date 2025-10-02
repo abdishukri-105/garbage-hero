@@ -42,6 +42,12 @@ const VARIANTS = {
     cap: "fill-[#1E611B] group-hover:fill-white",
     drop: "bg-[#1E611B] group-hover:bg-white",
   },
+  cta: {
+    base: "bg-white text-[#1E611B] hover:bg-[#1E611B] hover:text-white",
+    drip: "bg-white group-hover:bg-[#1E611B]",
+    cap: "fill-white group-hover:fill-[#1E611B]",
+    drop: "bg-white group-hover:bg-[#1E611B]",
+  }
 };
 
 // Update signature to accept variant

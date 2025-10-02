@@ -65,11 +65,12 @@ const ProjectGrid = ({ projects = [] }) => {
     <section className="section-compact font-lato text-[#333333]">{/* standardized spacing */}
       <div className="mx-auto max-w-8xl px-4 sm:px-6 md:px-8">{/* standardized container */}
         <div className="mb-8 sm:mb-10 md:mb-12 space-y-3 text-center">{/* centered on all breakpoints */}
+          <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20">Project Portfolio</span>
           <div className="mx-auto w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
-            <Heading level={2} className="mb-0 text-center" variant="primary">Our Projects</Heading>
+            <Heading level={2} className="mb-0 text-center" variant="primary">Recent Facility Impact Work</Heading>
           </div>
           <p className="text-sm sm:text-base md:text-lg text-[#333333] max-w-3xl mx-auto">
-            Explore our diverse portfolio of innovative projects, each designed to deliver impactful solutions and drive progress across Kenya and beyond.
+            Integrated cleaning sanitation landscaping and pest control engagements delivering measurable hygiene uplift safety assurance and presentation value.
           </p>
         </div>
         <div className="flex flex-col md:flex-row gap-6 sm:gap-8 md:gap-10">

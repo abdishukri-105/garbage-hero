@@ -37,20 +37,20 @@ const CTABanner = () => {
           {/* Text */}
           <motion.div {...fadeUp(0.05)} className="relative z-10 mx-auto text-center lg:text-left lg:mx-0 lg:basis-[55%] lg:max-w-none max-w-xl">
             <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-white/80 bg-white/10 px-3 py-1 rounded-full ring-1 ring-white/20 mb-5">
-              Partner With Experts
+              Take Action Today
             </span>
             <Heading
               id="cta-heading"
               level={2}
               className="text-white text-3xl sm:text-4xl md:text-5xl leading-tight mb-6"
             >
-              Sustainable Cleaning & Waste Solutions Across Kenya
+              Elevate Hygiene Standards With A Trusted National Partner
             </Heading>
-            <Paragraph className="text-white/90 text-base sm:text-lg md:text-xl max-w-prose mx-auto lg:mx-0">
-              Tailored facility care, compliant waste management, and eco-focused practices delivered by a dependable national team. Build healthier, efficient spaces with a partner you can trust.
+            <Paragraph className="text-white/90 text-base sm:text-lg md:text-xl max-w-prose mx-auto lg:mx-0" size="lg">
+              Secure consistent compliant and sustainable facility hygiene now. Get a fast tailored quote and start improving health appearance and efficiency.
             </Paragraph>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <WetPaintButton href="/contact-us" text="Get a Quote" size="lg" />
+              <WetPaintButton href="/contact-us" text="Get a Quote Now" size="lg" variant="cta" />
             </div>
             {/* <ul className="mt-8 grid grid-cols-2 gap-4 text-left text-white/80 text-xs sm:text-sm max-w-sm mx-auto lg:mx-0">
               <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-white/70" />ISO-aligned hygiene standards</li>

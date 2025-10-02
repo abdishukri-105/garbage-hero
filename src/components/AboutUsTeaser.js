@@ -84,6 +84,7 @@ const AboutUsTeaser = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative">
         {/* Section Heading block */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12" aria-labelledby="aboutus-heading">
+          <span className="inline-block mb-3 text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9]/80 rounded-full px-3 py-1 ring-1 ring-[#3AA335]/20">Who We Are</span>
           <Heading
             id="aboutus-heading"
             level={2}
@@ -92,8 +93,8 @@ const AboutUsTeaser = () => {
           >
             About Us
           </Heading>
-          <Paragraph className="text-lead text-[#333333] max-w-[60ch] mx-auto">
-            Professional cleaning & environmental care for healthier Kenyan spaces.
+          <Paragraph size="xl" className="text-lead text-[#333333] max-w-[60ch] mx-auto">
+            Get to know Garbage Hero – professional hygiene and environmental care for organisations across Kenya.
           </Paragraph>
         </div>
 
@@ -169,16 +170,9 @@ const AboutUsTeaser = () => {
           >
             <div className="relative borer boder-[#3AA335]/20 bg-gradient-to-br from-[#E8F6E9] via-white to-white p-6 sm:p-8 rounded-2xl shaow-sm lg:text-left text-center ring-1 ring-[#3AA335]/10 backdrop-blur">
               <div className="space-y-5">
-                <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9]/80 rounded-full px-3 py-1 ring-1 ring-[#3AA335]/20">Who We Are</span>
-                <Heading
-                  level={3}
-                  variant="primary"
-                  className="text-2xl sm:text-3xl md:text-4xl leading-tight"
-                >
-                  Cleaning Kenya, Sustaining Tomorrow
-                </Heading>
-                <Paragraph className="text-sm sm:text-base md:text-lg leading-relaxed text-[#333333]">
-                  Garbage Hero Limited is a leading cleaning and waste management company in Kenya, committed to eco-friendly practices. From Nairobi’s bustling offices to serene rural homes, our skilled team delivers professional cleaning, waste collection, fumigation, and landscaping services, ensuring a cleaner, greener Kenya for future generations.
+                {/* Removed internal badge and headline per request */}
+                <Paragraph size="lg" className="leading-relaxed text-[#333333]">
+                  Welcome to Garbage Hero Limited, a leading provider of professional cleaning, sanitary, gardening, and fumigation services. Our company is committed to delivering high-quality, reliable, and eco-friendly solutions to meet the diverse needs of our clients. With years of experience in the industry, we specialize in creating clean, sanitized, and healthy environments for both residential and commercial spaces.
                 </Paragraph>
               </div>
 

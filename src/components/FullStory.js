@@ -23,13 +23,13 @@ const FullStory = () => {
             className="text-center mb-8 sm:mb-10 md:mb-12"
         >
           <span className="inline-block mb-3 sm:mb-4 text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-white rounded-full px-3 py-1 ring-1 ring-[#3AA335]/20">
-            Our Journey
+            Growth Journey
           </span>
           <div className="mx-auto w-fit pb-1 px-3 rounded-md border-b-4 border-[#3AA335]">
-            <Heading level={2} variant="primary" className="mb-0 text-center">A Decade of Growth & Impact</Heading>
+            <Heading level={2} variant="primary" className="mb-0 text-center">Our Growth Story</Heading>
           </div>
           <Paragraph className="text-lead mt-4 max-w-3xl mx-auto">
-            Since 2014, Garbage Hero Limited has advanced eco-friendly cleaning, sanitation, and landscaping solutions across Kenya—earning trust through professionalism, consistency, and sustainability.
+            From a focused Nairobi operation to a multi service hygiene partner our progress reflects disciplined delivery innovation and trust.
           </Paragraph>
         </motion.div>
         {/* Timeline */}
@@ -89,12 +89,12 @@ const TimelineItem = ({ milestone, index }) => {
 };
 
 const MILESTONES = [
-  { id: 1, year: "2014", title: "Founded in Nairobi", description: "Garbage Hero Limited was established in Nairobi, Kenya, with a mission to provide affordable, reliable, and eco-friendly cleaning and waste management solutions.", Icon: FiFlag },
-  { id: 2, year: "2016", title: "Expanded Service Offerings", description: "Introduced gardening, landscaping, and fumigation services, catering to residential and commercial clients across Kenya.", Icon: FiLayers },
-  { id: 3, year: "2018", title: "Trusted by Institutions", description: "Began serving higher learning institutions, hospitals, and government agencies, earning a reputation for quality and professionalism.", Icon: FiUsers },
-  { id: 4, year: "2020", title: "Eco-Friendly Innovation", description: "Adopted advanced eco-friendly products and practices, reinforcing our commitment to sustainable and healthy environments.", Icon: FiSun },
-  { id: 5, year: "2023", title: "Community Impact", description: "Partnered with NGOs and local communities to promote sanitation and waste management initiatives, enhancing our social impact.", Icon: FiAward },
-  { id: 6, year: "2025", title: "Market Leader", description: "Celebrating over a decade of excellence, Garbage Hero continues to lead the cleaning industry with innovative, trustworthy services.", Icon: FiTrendingUp },
+  { id: 1, year: "2014", title: "Founded In Nairobi", description: "Established with a mission to deliver reliable eco aligned cleaning and waste stewardship.", Icon: FiFlag },
+  { id: 2, year: "2016", title: "Service Expansion", description: "Added gardening landscaping fumigation broadening integrated hygiene support for diverse clients.", Icon: FiLayers },
+  { id: 3, year: "2018", title: "Institutional Trust", description: "Earned hospitals higher learning institutions and government agencies through consistent standards supervision.", Icon: FiUsers },
+  { id: 4, year: "2020", title: "Sustainability Focus", description: "Adopted safer chemistry efficiency routines and measurable performance tracking nationwide.", Icon: FiSun },
+  { id: 5, year: "2023", title: "Community Impact", description: "Partnered NGOs and local groups advancing sanitation awareness and responsible waste handling.", Icon: FiAward },
+  { id: 6, year: "2025", title: "Industry Leadership", description: "Driving innovation talent development and client centric quality assurance nationwide.", Icon: FiTrendingUp },
 ];
 
 export default FullStory;

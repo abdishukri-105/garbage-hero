@@ -177,90 +177,90 @@ const TABS = [
 const QUESTIONS = {
   "Cleaning Services": [
     {
-      question: "What types of cleaning services does Garbage Hero Ltd offer?",
-      answer:
-        "We provide comprehensive cleaning services, including routine cleaning, deep cleaning, and specialized cleaning for commercial and residential spaces. Our services cover offices, hospitals, schools, hotels, and homes, using eco-friendly products and advanced equipment to ensure a spotless and welcoming environment."
+      question: "What do your Cleaning Services cover day to day?",
+      answer: "From routine cleaning to deep cleaning, we offer comprehensive services to keep your spaces spotless and welcoming. Our trained staff uses advanced equipment and eco-friendly products to ensure top-notch cleanliness." 
     },
     {
-      question: "Do you offer cleaning for specific industries like hospitals or schools?",
-      answer:
-        "Yes, we cater to a wide range of clients, including hospitals, higher learning institutions, and private schools. Our team is trained to meet industry-specific standards, ensuring hygienic and safe environments tailored to the needs of each sector."
+      question: "How do you ensure quality and professionalism?",
+      answer: "We uphold the highest standards of quality, professionalism, and client satisfaction. Our mission is to redefine cleanliness by providing innovative and trustworthy cleaning services." 
     },
     {
-      question: "Are your cleaning products safe and eco-friendly?",
-      answer:
-        "Absolutely. At Garbage Hero Ltd, we prioritize sustainability by using environmentally friendly, non-toxic cleaning products that are safe for both people and the environment, without compromising on cleanliness."
+      question: "Which types of facilities do you currently serve?",
+      answer: "Higher learning institutions; government institutions, bodies and agencies; private learning institutions; hospitals (both private and public); shopping malls; hotels and restaurants; estates and private residential spaces; non-governmental organizations; places of worship; entertainment joints." 
     },
     {
-      question: "How can I schedule a cleaning service?",
-      answer:
-        "You can contact us via email at info@garbagehero.co.ke or call +254 722 269 511 to schedule a service. We offer flexible scheduling and customized solutions to meet your specific needs."
+      question: "What makes your cleaning team different?",
+      answer: "Professional Team: Our staff is highly trained, skilled, and dedicated to providing the best service possible. Reliable & Efficient: We pride ourselves on our punctuality, consistency, and attention to detail." 
+    },
+    {
+      question: "How do your values influence service delivery?",
+      answer: "Core Values: Innovation, Trust, Professionalism. We tailor our services to meet the unique needs of each client, offering flexible scheduling and personalized care." 
     }
   ],
   "Sanitary Solutions": [
     {
-      question: "What are your sanitary solutions?",
-      answer:
-        "Our sanitary solutions include waste management, disinfection of bathrooms and high-touch surfaces, and sanitation services to promote a healthy environment. We focus on creating clean and safe spaces for homes, offices, and public facilities."
+      question: "What is included in your sanitary services?",
+      answer: "We provide sanitary services that include waste management, disinfection, and sanitation of bathrooms and high-touch surfaces, promoting a healthy and safe environment." 
     },
     {
-      question: "Do you provide waste management for large institutions?",
-      answer:
-        "Yes, we serve large institutions such as government bodies, universities, and shopping malls. Our waste management services are designed to be efficient, eco-friendly, and compliant with local regulations."
+      question: "How do these services create safer environments?",
+      answer: "We provide sanitary services that include waste management, disinfection, and sanitation of bathrooms and high-touch surfaces, promoting a healthy and safe environment." 
     },
     {
-      question: "How often should high-touch surfaces be disinfected?",
-      answer:
-        "The frequency depends on the environment, but we recommend regular disinfection of high-touch surfaces, especially in high-traffic areas like hospitals, schools, and malls. We can create a tailored schedule based on your needs."
+      question: "Do you tailor sanitary schedules to client needs?",
+      answer: "We tailor our services to meet the unique needs of each client, offering flexible scheduling and personalized care." 
     },
     {
-      question: "Are your disinfection methods safe for sensitive environments?",
-      answer:
-        "Yes, we use safe, industry-approved disinfectants that are effective yet gentle enough for sensitive environments like hospitals and schools. Our team follows strict protocols to ensure safety and efficacy."
+      question: "How do you ensure reliability and consistency?",
+      answer: "Reliable & Efficient: We pride ourselves on our punctuality, consistency, and attention to detail, ensuring that every job is completed to the highest standard." 
+    },
+    {
+      question: "Are your methods eco-friendly and sustainable?",
+      answer: "Eco-Friendly Approach: We prioritize sustainability by using environmentally friendly products and practices wherever possible." 
     }
   ],
   "Gardening & Landscaping": [
     {
-      question: "What gardening and landscaping services do you offer?",
-      answer:
-        "We provide routine garden care, landscaping design, and seasonal maintenance for both residential and commercial properties. Our expert gardeners create beautiful, sustainable outdoor spaces tailored to your vision."
+      question: "What do your gardeners deliver?",
+      answer: "Our expert gardeners transform your outdoor spaces into beautiful and well-maintained landscapes." 
     },
     {
-      question: "Can you design a custom landscape for my property?",
-      answer:
-        "Yes, we offer customized landscaping design services. Our team works with you to create a unique outdoor space that reflects your preferences and enhances your property’s aesthetic and functionality."
+      question: "Do you offer design and seasonal maintenance?",
+      answer: "Whether you need routine garden care, landscaping design, or seasonal maintenance, we deliver exceptional results." 
     },
     {
-      question: "Do you use eco-friendly practices in gardening?",
-      answer:
-        "We prioritize sustainability by using organic fertilizers, water-efficient irrigation, and native plants where possible to create environmentally friendly landscapes that thrive in Nairobi’s climate."
+      question: "How do you keep landscapes healthy long term?",
+      answer: "Our expert gardeners transform your outdoor spaces into beautiful and well-maintained landscapes. Reliable & Efficient: We pride ourselves on our punctuality, consistency, and attention to detail." 
     },
     {
-      question: "How often should I schedule garden maintenance?",
-      answer:
-        "Maintenance frequency depends on your garden’s needs, but we typically recommend monthly or quarterly visits for routine care. We can assess your space and provide a personalized maintenance plan."
+      question: "Can solutions be customized to each property?",
+      answer: "We tailor our services to meet the unique needs of each client, offering flexible scheduling and personalized care." 
+    },
+    {
+      question: "Which values guide your landscaping work?",
+      answer: "Core Values: Innovation, Trust, Professionalism. We believe in creating environments that promote well-being, safety, and comfort." 
     }
   ],
   "Fumigation & Pest Control": [
     {
-      question: "What pests do you treat with your fumigation services?",
-      answer:
-        "We treat a wide range of pests, including insects, rodents, and other vermin commonly found in homes, offices, and commercial spaces. Our treatments are tailored to address specific pest issues effectively."
+      question: "What do your fumigation and pest services achieve?",
+      answer: "Protect your home or business from harmful pests with our professional fumigation and pest control services." 
     },
     {
-      question: "Are your fumigation methods safe for homes and businesses?",
-      answer:
-        "Yes, we use safe, industry-approved fumigation methods and eco-friendly products to eliminate pests while ensuring the safety of occupants, pets, and the environment. We follow strict safety protocols during all treatments."
+      question: "How do you eliminate pests safely?",
+      answer: "We use safe and effective treatments to eliminate pests and prevent future infestations, ensuring your environment remains hygienic and pest-free." 
     },
     {
-      question: "How long does a fumigation treatment take?",
-      answer:
-        "The duration depends on the size of the property and the severity of the infestation. Most treatments take a few hours, with some requiring temporary evacuation. We provide clear instructions and timelines before starting."
+      question: "Do you help prevent future infestations?",
+      answer: "We use safe and effective treatments to eliminate pests and prevent future infestations, ensuring your environment remains hygienic and pest-free." 
     },
     {
-      question: "Can you prevent future pest infestations?",
-      answer:
-        "Yes, we offer preventative pest control services, including regular inspections and treatments to keep your property pest-free. Our team can create a customized plan to suit your needs.",
+      question: "Which environments do you support?",
+      answer: "Home or business settings including higher learning institutions, government institutions, hospitals (both private and public), shopping malls, hotels and restaurants, and private residential spaces." 
+    },
+    {
+      question: "What principles guide your pest control approach?",
+      answer: "Professional Team; Eco-Friendly Approach; Customized Solutions; Reliable & Efficient. Core Values: Innovation, Trust, Professionalism." 
     }
   ]
 };

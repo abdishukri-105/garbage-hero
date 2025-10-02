@@ -25,12 +25,12 @@ const TestimonialsCarousel = ({ testimonials = [], autoplay = true }) => {
     <section className="section-standard bg-white px-4 sm:px-6 md:px-8 grid items-center grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-4 overflow-hidden">{/* standardized spacing */}
       <div className="p-4 sm:p-6">
         <div className="text-center lg:text-left">
-          <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Client Voices</span>
+          <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Client Impact</span>
           <div className="mx-auto lg:mx-0 w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
-            <Heading level={2} variant="primary" className="mb-0 text-center lg:text-left">What Our Customers Think</Heading>
+            <Heading level={2} variant="primary" className="mb-0 text-center lg:text-left">What Clients Say About Us</Heading>
           </div>
           <p className="text-[#333333] my-4 sm:my-6 text-sm sm:text-base md:text-lg font-lato max-w-prose mx-auto lg:mx-0">
-            Hear from our satisfied clients about how Garbage Hero Limited’s eco-friendly cleaning and waste management services have transformed their spaces across Kenya.
+            Authentic client outcomes proving consistent hygiene quality nationwide. Scalable supervision measurable standards and responsive teams driving safer cleaner trusted facilities.
           </p>
         </div>
         <SelectBtns
@@ -131,15 +131,15 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
     >
       <div className="flex flex-col items-center text-center">
         {(hasSanity || companyLogoUrl) && (
-          <div className="relative h-16 w-16 sm:h-20 sm:w-20 mb-4">
+          <div className="relative mb-4 flex items-center justify-center h-20 w-28 sm:h-24 sm:w-32 rounded-md bg-white/90 ring-1 ring-[#3AA335]/15 shadow-sm overflow-hidden">
             <Image
               loader={loader}
               src={fallbackUrl}
               alt={company ? `${company} logo` : 'Company logo'}
               fill
-              sizes="80px"
-              quality={70}
-              className="object-contain"
+              sizes="(max-width:640px) 120px, (max-width:1024px) 140px, 160px"
+              quality={75}
+              className="object-contain p-2"
             />
           </div>
         )}

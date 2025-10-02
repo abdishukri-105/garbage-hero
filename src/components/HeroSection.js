@@ -9,24 +9,24 @@ import WetPaintButton from "./ui/WetPaintButton";
 const slides = [
 	{
 		src: "/Photos/hero1.jpg",
-		title: "Integrated Hygiene & Facility Care You Can Trust",
+		title: "Integrated Facility Hygiene Excellence Across Kenya",
 		description:
-			"Nationwide cleaning, sanitary management, pest control, and landscaping—delivered by vetted teams, audit‑ready processes, and eco‑aligned products built for government and corporate environments.",
-		cta: "Get a Quote",
+			"Integrated cleaning, sanitary, pest and landscape stewardship delivering healthier environments, reduced risk and visibly elevated workplace standards.",
+		cta: "Get a Quote Now",
 	},
 	{
 		src: "/projects/cleaning-4.jpg",
-		title: "Consistent, Compliant Cleaning for High‑Traffic Spaces",
+		title: "Consistent Compliant Cleaning For High-Traffic Environments",
 		description:
-			"Structured SOPs, high‑touch disinfection cycles, and measurable SLAs that reduce complaints, protect assets, and keep institutional corridors inspection‑ready.",
-		cta: "Request a Site Assessment",
+			"Precision routines, disinfection focus, responsive supervision and transparent performance insight keeping high‑traffic facilities consistent, compliant, calm always.",
+		cta: "Get a Quote Now",
 	},
 	{
 		src: "/projects/traning-1.jpg",
-		title: "Trained. Certified. Performance‑Managed.",
+		title: "Trained Teams Driving Sustainable Hygiene Standards",
 		description:
-			"Ongoing staff coaching, safety adherence, and quality audits ensure every shift meets your operational, compliance, and brand standards—across every site.",
-		cta: "Get a Quote",
+			"Continuous training, safety discipline and ESG‑aligned chemistry deliver resilient hygiene outcomes and stakeholder confidence nationwide with consistency.",
+		cta: "Get a Quote Now",
 	},
 ];
 

@@ -45,10 +45,10 @@ const WhyUs = () => {
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Why Choose Us</span>
           <div className="mx-auto w-fit pb-1 px-3 rounded-md border-b-4" style={{ borderColor: '#3AA335' }}>
-            <Heading level={2} variant="primary" className="mb-0 text-center">Why Us</Heading>
+            <Heading level={2} variant="primary" className="mb-0 text-center">Why Organisations Trust Us</Heading>
           </div>
-          <Paragraph className="text-lead text-[#333333] mt-4 max-w-3xl mx-auto">
-            At Garbage Hero Limited, we believe in creating environments that promote well-being, safety, and comfort. Whether it&apos;s a home, office, or commercial property, we are here to help you maintain a clean, healthy, and beautiful space.
+          <Paragraph className="text-lead text-[#333333] mt-4 max-w-3xl mx-auto" size="lg">
+            Proven team standards sustainability and reliability delivering consistent hygiene performance nationwide.
           </Paragraph>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">

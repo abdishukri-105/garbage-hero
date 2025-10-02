@@ -2,6 +2,8 @@
 import React, { useState, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import Heading from './ui/Heading';
+import Paragraph from './ui/Paragraph';
 
 const CompanyVideo = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -26,7 +28,18 @@ const CompanyVideo = () => {
   const handlePlay = () => setIsPlaying(true);
 
   return (
-    <section className="relative section-compact overflow-hidden font-roboto text-[#333333]">
+    <section className="relative section-compact overflow-hidden font-roboto text-[#333333]" aria-labelledby="companyvideo-heading">
+      {/* Section Heading */}
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 md:px-8 text-center mb-10 sm:mb-14">
+        <span className="inline-block mb-3 text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20">Inside Our Work</span>
+        <div className="mx-auto w-fit pb-1 px-3 rounded-md border-b-4 border-[#3AA335]">
+          <Heading id="companyvideo-heading" level={2} variant="primary" className="mb-0">Operational Excellence In Motion</Heading>
+        </div>
+        <Paragraph size="lg" className="mt-4 max-w-[60ch] mx-auto text-[#333333]">
+          See how disciplined hygiene routines trained teams and sustainable practices translate into safer healthier Kenyan environments.
+        </Paragraph>
+      </div>
+
       {/* Artistic background (brand tint + radial glow + subtle grid) */}
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         <div className="absolute inset-0 bg-[#E8F6E9]" />
@@ -92,8 +105,8 @@ const CompanyVideo = () => {
                   {/* Caption */}
                   <div className="absolute bottom-4 left-4 right-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                     <div className="max-w-lg">
-                      <h3 className="font-roboto-serif text-white text-lg sm:text-xl font-semibold drop-shadow-sm">A Glimpse Into Our Impact</h3>
-                      <p className="text-white/85 text-xs sm:text-sm leading-relaxed mt-1">Discover how Garbage Hero champions sustainable cleaning, landscaping, and community well-being across Kenya.</p>
+                      <h3 className="font-roboto-serif text-white text-xl sm:text-2xl font-semibold drop-shadow-sm">A Glimpse Into Our Impact</h3>
+                      <p className="text-white/90 text-sm sm:text-base leading-relaxed mt-1">Discover how Garbage Hero champions sustainable cleaning landscaping and community well-being across Kenya.</p>
                     </div>
                     <div className="flex items-center gap-2 text-[10px] sm:text-xs text-white/80 font-medium uppercase tracking-wider">
                       <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#3AA335] animate-pulse" aria-hidden="true" /> HD Ready</span>

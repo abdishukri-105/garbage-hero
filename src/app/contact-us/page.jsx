@@ -10,6 +10,11 @@ import Footer from "../../components/Footer";
 import PageBanner from "@/components/PageBanner";
 
 // Contact Us Page for Garbage Hero Limited
+export const metadata = {
+  title: 'Get a Quote | Corporate Cleaning & Hygiene Services Kenya',
+  description: 'Request a proposal for corporate cleaning, sanitary bin, pest control, fumigation, landscaping and waste support. Fast response nationwide.',
+};
+
 export default function ContactUsPage() {
   return (
     <>
@@ -21,7 +26,7 @@ export default function ContactUsPage() {
         <Navbar />
         <PageBanner  
          title="Get in Touch With Us"
-        subtitle="we're here to help and answer any questions you might have"
+        subtitle="Request a tailored facility hygiene proposal – fast response nationwide"
         />
         
         <MiniContactForm />

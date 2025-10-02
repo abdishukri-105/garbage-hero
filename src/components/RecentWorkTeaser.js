@@ -75,12 +75,12 @@ const RecentWorkTeaser = ({ teasers = [] }) => {
       <div className="relative p-4" ref={ref}>
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-8 sm:mb-10 md:mb-12" >
-            <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Recent Work</span>
+            <span className="inline-block text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-[#E8F6E9] px-3 py-1 rounded-full ring-1 ring-[#3AA335]/20 mb-4">Proven Outcomes</span>
             <Heading id="recentwork-heading" level={2} className="mb-4 mx-auto w-fit pb-1 px-3 rounded-md border-b-4 border-[#3AA335]" variant="primary">
-              Transforming Spaces Across Kenya
+              Recent Hygiene & Facility Success Stories
             </Heading>
-            <Paragraph className="text-[#333333] max-w-[65ch] mx-auto text-sm sm:text-base md:text-lg">
-              A showcase of sustainable cleaning, landscaping and hygiene projects delivering healthier, efficient environments for clients nationwide.
+            <Paragraph className="text-[#333333] max-w-[65ch] mx-auto text-sm sm:text-base md:text-xl" size="xl">
+              A curated snapshot of cleaning sanitation landscaping and pest control engagements delivering measurable health aesthetic and operational gains.
             </Paragraph>
           </div>
           <motion.div
