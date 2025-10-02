@@ -45,8 +45,6 @@ export default async function HomePage() {
       <ClientLogosMarquee logos={clientLogosData} />
       <ServicesPreview />
       <WhyUs />
-      {/* Add a lightweight teaser version of project grid (lazy loaded) */}
-      <ProjectGrid projects={teasersData} />
       <CTABanner />
       <RecentWorkTeaser teasers={teasersData} />
       <TestimonialsCarousel testimonials={testimonialsData} />
