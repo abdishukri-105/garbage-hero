@@ -48,9 +48,7 @@ export default function HeroSection() {
 	const shouldReduce = useReducedMotion();
 	const [imgIndex, setImgIndex] = useState(0);
 	const dragX = useMotionValue(0);
-	const [isFirstLoaded, setIsFirstLoaded] = useState(false);
 	const intervalRef = useRef(null);
-	const markLoaded = useCallback(() => { if (!isFirstLoaded) setIsFirstLoaded(true); }, [isFirstLoaded]);
 
 	const clearTimer = () => {
 		if (intervalRef.current) clearInterval(intervalRef.current);
@@ -132,20 +130,12 @@ export default function HeroSection() {
 								quality={60}
 								sizes="100vw"
 								className="object-cover"
-								onLoad={idx === 0 ? markLoaded : undefined}
 							/>
 							{/* subtle gradient overlay */}
 							<div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/70 md:via-black/30 md:to-black/10" />
 						</motion.div>
 					);
 				})}
-				<Image
-						src={slides[0].src}
-						alt=""
-						className="hidden"
-						priority
-						onLoad={markLoaded}
-				/>
 			</div>
 
 			{/* Drag layer for swipe */}
@@ -157,16 +147,8 @@ export default function HeroSection() {
 				className="absolute inset-0 cursor-grab active:cursor-grabbing"
 			/>
 
-			{/* Content overlay */}
-			<div
-				className={`absolute inset-0 transition-opacity duration-500 ${
-					isFirstLoaded ? "opacity-100" : "opacity-0"
-				} bg-gradient-to-b from-black/80 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/80 md:via-black/30 md:to-black/10 flex items-start md:items-center justify-start pt-28 md:pt-0`}
-			>
-				{/* Fallback: if image hasn't loaded after 2s, force show */}
-				{!isFirstLoaded && (
-					<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="hidden" onAnimationComplete={() => markLoaded()} />
-				)}
+			{/* Content overlay always visible */}
+			<div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/80 md:via-black/30 md:to-black/10 flex items-start md:items-center justify-start pt-28 md:pt-0">
 				<div className="px-6 md:px-16 max-w-[80%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-6">
 					<Heading
 						level={1}

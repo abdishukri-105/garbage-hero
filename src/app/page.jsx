@@ -7,9 +7,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutUsTeaser from "@/components/AboutUsTeaser";
 import nextDynamic from 'next/dynamic';
-import ClientLogosMarquee from '@/components/ClientLogosMarquee';
 import { client, TESTIMONIALS_QUERY, CLIENT_LOGOS_QUERY, PORTFOLIO_TEASERS_QUERY } from '@/lib/sanity';
-export const dynamic = 'force-dynamic';
 import { FALLBACK_TESTIMONIALS } from "@/data/fallback/testimonials";
 import { FALLBACK_CLIENT_LOGOS } from "@/data/fallback/clients";
 import { FALLBACK_TEASERS } from "@/data/fallback/teasers";
@@ -17,12 +15,14 @@ import WhyUs from "@/components/WhyUs";
 import ContactForm from "@/components/MiniContactForm";
 import Footer from "@/components/Footer";
 
-// Replace direct imports with dynamic for below-the-fold
+// Below-the-fold dynamic imports (skeletons with min-heights for CLS stability)
 const ServicesPreview = nextDynamic(() => import('@/components/ServicesPreview'), { loading: () => <div className="min-h-[200px]" aria-busy="true" /> });
 const CTABanner = nextDynamic(() => import('@/components/CTABanner'), { loading: () => <div className="min-h-[280px]" aria-busy="true" /> });
 const RecentWorkTeaser = nextDynamic(() => import('@/components/RecentWorkTeaser'), { loading: () => <div className="min-h-[240px]" aria-busy="true" /> });
 const TestimonialsCarousel = nextDynamic(() => import('@/components/TestimonialsCarousel'), { loading: () => <div className="min-h-[320px]" aria-busy="true" /> });
 const TabsFaq = nextDynamic(() => import('@/components/TabsFaq'), { loading: () => <div className="min-h-[260px]" aria-busy="true" /> });
+const ClientLogosMarquee = nextDynamic(() => import('@/components/ClientLogosMarquee'), { loading: () => <div className="min-h-[180px]" aria-busy="true" /> });
+const ProjectGrid = nextDynamic(() => import('@/components/ProjectGrid'), { loading: () => <div className="min-h-[600px]" aria-busy="true" /> });
 
 export default async function HomePage() {
   let testimonialsData = [];
@@ -43,13 +43,13 @@ export default async function HomePage() {
       <HeroSection />
       <AboutUsTeaser />
       <ClientLogosMarquee logos={clientLogosData} />
-      {/* <Clients logos={clientLogosData} /> */}
       <ServicesPreview />
       <WhyUs />
+      {/* Add a lightweight teaser version of project grid (lazy loaded) */}
+      <ProjectGrid projects={teasersData} />
       <CTABanner />
       <RecentWorkTeaser teasers={teasersData} />
       <TestimonialsCarousel testimonials={testimonialsData} />
-      {/* <FAQAccordion /> */}
       <TabsFaq />
       <ContactForm />
       <Footer />
