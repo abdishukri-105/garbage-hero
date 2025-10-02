@@ -50,7 +50,7 @@ const CTABanner = () => {
               Secure consistent compliant and sustainable facility hygiene now. Get a fast tailored quote and start improving health appearance and efficiency.
             </Paragraph>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <WetPaintButton href="/contact-us" text="Get a Quote Now" size="lg" variant="cta" />
+              <WetPaintButton href="/contact-us" text="Request Quote" size="lg" variant="cta" />
             </div>
             {/* <ul className="mt-8 grid grid-cols-2 gap-4 text-left text-white/80 text-xs sm:text-sm max-w-sm mx-auto lg:mx-0">
               <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-white/70" />ISO-aligned hygiene standards</li>

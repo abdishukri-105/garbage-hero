@@ -12,21 +12,21 @@ const slides = [
 		title: "Integrated Facility Hygiene Excellence Across Kenya",
 		description:
 			"Integrated cleaning, sanitary, pest and landscape stewardship delivering healthier environments, reduced risk and visibly elevated workplace standards.",
-		cta: "Get a Quote Now",
+		cta: "Request Quote",
 	},
 	{
 		src: "/projects/cleaning-4.jpg",
 		title: "Consistent Compliant Cleaning For High-Traffic Environments",
 		description:
 			"Precision routines, disinfection focus, responsive supervision and transparent performance insight keeping high‑traffic facilities consistent, compliant, calm always.",
-		cta: "Get a Quote Now",
+		cta: "Request Quote",
 	},
 	{
 		src: "/projects/traning-1.jpg",
 		title: "Trained Teams Driving Sustainable Hygiene Standards",
 		description:
 			"Continuous training, safety discipline and ESG‑aligned chemistry deliver resilient hygiene outcomes and stakeholder confidence nationwide with consistency.",
-		cta: "Get a Quote Now",
+		cta: "Request Quote",
 	},
 ];
 
@@ -188,7 +188,7 @@ export default function HeroSection() {
 					>
 						{slides[imgIndex].description}
 					</Paragraph>
-					<WetPaintButton text={slides[imgIndex].cta || 'Get a Quote'} key={slides[imgIndex].cta} href="/contact-us" size="md" />
+					<WetPaintButton text={slides[imgIndex].cta || 'Request Quote'} key={slides[imgIndex].cta} href="/contact-us" size="md" />
 				</div>
 			</div>
 

@@ -42,7 +42,7 @@ const SERVICES = [
 	},
 	{
 		key: "gardening",
-		img: "/Photos/_MG_7742.jpg",
+		img: "/Photos/_MG_7719.jpg",
 		subheading: "Gardening & Landscaping",
 		heading: "Gardening & Landscaping",
 		intro: "Our expert gardeners transform your outdoor spaces into beautiful and well-maintained landscapes. Whether you need routine garden care, landscaping design, or seasonal maintenance, we deliver exceptional results.",
@@ -58,7 +58,7 @@ const SERVICES = [
 	},
 	{
 		key: "pest",
-		img: "/RBA/pest.jpg",
+		img: "/pest2.jpg",
 		subheading: "Fumigation & Pest Control",
 		heading: "Fumigation & Pest Control",
 		intro: "Protect your home or business from harmful pests with our professional fumigation and pest control services. We use safe and effective treatments to eliminate pests and prevent future infestations, ensuring your environment remains hygienic and pest-free.",

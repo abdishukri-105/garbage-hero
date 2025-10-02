@@ -36,7 +36,7 @@ export default async function HomePage() {
   if (!Array.isArray(clientLogosData) || clientLogosData.length === 0) clientLogosData = FALLBACK_CLIENT_LOGOS;
 
   return (
-    <main className="bg-white text-black font-lato">
+    <main id="main" className="bg-white text-black font-lato">
       <Navbar />
       <HeroSection />
       <AboutUsTeaser />

@@ -70,7 +70,7 @@ const ProjectGrid = ({ projects = [] }) => {
             <Heading level={2} className="mb-0 text-center" variant="primary">Recent Facility Impact Work</Heading>
           </div>
           <p className="text-sm sm:text-base md:text-lg text-[#333333] max-w-3xl mx-auto">
-            Integrated cleaning sanitation landscaping and pest control engagements delivering measurable hygiene uplift safety assurance and presentation value.
+            Integrated cleaning, sanitary, landscaping and pest control projects delivering measurable hygiene uplift, safer environments and stronger presentation value.
           </p>
         </div>
         <div className="flex flex-col md:flex-row gap-6 sm:gap-8 md:gap-10">

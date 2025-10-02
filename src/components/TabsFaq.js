@@ -14,6 +14,21 @@ const TabsFaq = () => {
 
   return (
     <section className="relative section-compact bg-white overflow-hidden">
+      {/* FAQPage JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: Object.values(QUESTIONS).flat().map(q => ({
+              '@type': 'Question',
+              name: q.question,
+              acceptedAnswer: { '@type': 'Answer', text: q.answer }
+            }))
+          })
+        }}
+      />
       {/* Radial background to match AboutUsTeaser */}
       <div
         className="absolute inset-0 pointer-events-none"

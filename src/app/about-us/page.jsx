@@ -30,7 +30,7 @@ export default async function AboutUsPage() {
   if (!Array.isArray(team) || team.length === 0) team = FALLBACK_TEAM.map(t => ({ _id: t._id, name: t.name, title: t.title, image: t.imageUrl }));
 
   return (
-    <main className="bg-white text-black font-lato">
+    <main id="main" className="bg-white text-black font-lato">
       <Navbar />
       <PageBanner />
       <MissionVisionValues />

@@ -30,7 +30,7 @@ export default async function PortfolioPage() {
   }
 
   return (
-    <main className="bg-white text-black font-lato">
+    <main id="main" className="bg-white text-black font-lato">
       <Navbar />
       <PageBanner
         title="Our Green Projects"

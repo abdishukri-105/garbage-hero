@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="bg-white text-black font-lato">
+    <main id="main" className="bg-white text-black font-lato">
       <Navbar />
       <PageBanner
         title="Integrated Eco-Friendly Services"
