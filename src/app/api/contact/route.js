@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer";
 
+export const runtime = 'nodejs'; // ensure Node.js runtime (not edge) so SMTP works
+
 export async function POST(req) {
   try {
     const body = await req.json();
@@ -29,9 +31,13 @@ export async function POST(req) {
       CONTACT_FROM,
     } = process.env;
 
-    if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
+    // Enhanced debug-friendly check (temporary; remove once stable)
+    const required = ['SMTP_HOST','SMTP_PORT','SMTP_USER','SMTP_PASS'];
+    const missing = required.filter(k => !process.env[k]);
+    if (missing.length) {
+      console.error('Missing SMTP env vars:', missing);
       return new Response(
-        JSON.stringify({ error: "SMTP is not configured on the server" }),
+        JSON.stringify({ error: 'SMTP not configured', missing }),
         { status: 500 }
       );
     }
@@ -44,7 +50,6 @@ export async function POST(req) {
     });
 
     const toAddress = CONTACT_TO || "it@garbagehero.co.ke";
-    // Many cPanel servers require the FROM to match the authenticated account
     const fromRaw = CONTACT_FROM || SMTP_USER || `no-reply@${new URL(req.url).host}`;
     const fromAddress = /</.test(fromRaw) ? fromRaw : `Garbage Hero <${fromRaw}>`;
 
@@ -62,9 +67,7 @@ export async function POST(req) {
           <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Phone</td><td>${
             phone || "-"
           }</td></tr>
-          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Message</td><td>${
-            (message || "").replace(/\n/g, "<br/>")
-          }</td></tr>
+          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Message</td><td>${(message || "").replace(/\n/g, "<br/>")}</td></tr>
         </table>
       </div>`;
 
