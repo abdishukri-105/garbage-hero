@@ -47,29 +47,36 @@ export async function POST(req) {
       port: Number(SMTP_PORT),
       secure: SMTP_SECURE === "true", // true for 465, false for 587/25
       auth: { user: SMTP_USER, pass: SMTP_PASS },
+      // Uncomment ONLY if you face self‑signed cert issues (avoid in production):
+      // tls: { rejectUnauthorized: false },
     });
 
-    const toAddress = CONTACT_TO || "it@garbagehero.co.ke";
-    const fromRaw = CONTACT_FROM || SMTP_USER || `no-reply@${new URL(req.url).host}`;
-    const fromAddress = /</.test(fromRaw) ? fromRaw : `Garbage Hero <${fromRaw}>`;
+    // Verify connection/auth first (helps show clearer errors)
+    try {
+      await transporter.verify();
+    } catch (vErr) {
+      console.error('SMTP verify failed', vErr.code, vErr.message);
+      return new Response(
+        JSON.stringify({ error: 'Email service unavailable', code: vErr.code || 'VERIFY_FAIL' }),
+        { status: 500 }
+      );
+    }
 
     const html = `
       <div style="font-family: Roboto, Arial, sans-serif; line-height:1.6; color:#333">
         <h2 style="margin:0 0 8px;color:#1E611B">New Website Message</h2>
         <p style="margin:0 0 16px;color:#333">A new message was submitted from the contact form.</p>
         <table style="border-collapse:collapse; width:100%">
-          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Sender Name</td><td>${
-            name
-          }</td></tr>
-          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Sender Email</td><td><a href="mailto:${
-            email
-          }">${email}</a></td></tr>
-          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Phone</td><td>${
-            phone || "-"
-          }</td></tr>
+          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Sender Name</td><td>${name}</td></tr>
+          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Sender Email</td><td><a href="mailto:${email}">${email}</a></td></tr>
+          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Phone</td><td>${phone || '-'}</td></tr>
           <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Message</td><td>${(message || "").replace(/\n/g, "<br/>")}</td></tr>
         </table>
       </div>`;
+
+    const toAddress = CONTACT_TO || "it@garbagehero.co.ke";
+    const fromRaw = CONTACT_FROM || SMTP_USER || `no-reply@${new URL(req.url).host}`;
+    const fromAddress = /</.test(fromRaw) ? fromRaw : `Garbage Hero <${fromRaw}>`;
 
     const mailOptions = {
       from: fromAddress,
@@ -79,7 +86,22 @@ export async function POST(req) {
       html,
     };
 
-    await transporter.sendMail(mailOptions);
+    try {
+      await transporter.sendMail(mailOptions);
+    } catch (sendErr) {
+      console.error('Mail send error', sendErr.code, sendErr.response, sendErr.message);
+      const code = sendErr.code || 'MAIL_FAIL';
+      // Map common errors to simpler causes
+      const cause =
+        code === 'EAUTH' ? 'Authentication failed' :
+        code === 'ENOTFOUND' || code === 'ECONNECTION' ? 'SMTP connection issue' :
+        code === 'ETIMEDOUT' ? 'SMTP timeout' : 'Send failed';
+      // Expose limited detail to user
+      return new Response(
+        JSON.stringify({ error: 'Failed to send message', cause }),
+        { status: 500 }
+      );
+    }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
   } catch (err) {
