@@ -1,114 +1,73 @@
-import nodemailer from "nodemailer";
+import { Resend } from 'resend';
 
-export const runtime = 'nodejs'; // ensure Node.js runtime (not edge) so SMTP works
+export const runtime = 'nodejs';
 
 export async function POST(req) {
   try {
     const body = await req.json();
     const { name, email, phone, message, company } = body || {};
+    if (company) return new Response(JSON.stringify({ ok: true }), { status: 200 });
 
-    // Honeypot (bot) check
-    if (company) {
-      return new Response(JSON.stringify({ ok: true }), { status: 200 });
-    }
-
-    // Basic validation
     if (!name || name.trim().length < 2)
-      return new Response(JSON.stringify({ error: "Invalid name" }), { status: 400 });
-    const emailOk = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(email || "");
+      return new Response(JSON.stringify({ error: 'Invalid name' }), { status: 400 });
+    const emailOk = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(email || '');
     if (!emailOk)
-      return new Response(JSON.stringify({ error: "Invalid email" }), { status: 400 });
+      return new Response(JSON.stringify({ error: 'Invalid email' }), { status: 400 });
     if (!message || message.trim().length < 10)
-      return new Response(JSON.stringify({ error: "Invalid message" }), { status: 400 });
+      return new Response(JSON.stringify({ error: 'Invalid message' }), { status: 400 });
 
-    const {
-      SMTP_HOST,
-      SMTP_PORT,
-      SMTP_USER,
-      SMTP_PASS,
-      SMTP_SECURE,
-      CONTACT_TO,
-      CONTACT_FROM,
-    } = process.env;
-
-    // Enhanced debug-friendly check (temporary; remove once stable)
-    const required = ['SMTP_HOST','SMTP_PORT','SMTP_USER','SMTP_PASS'];
-    const missing = required.filter(k => !process.env[k]);
-    if (missing.length) {
-      console.error('Missing SMTP env vars:', missing);
-      return new Response(
-        JSON.stringify({ error: 'SMTP not configured', missing }),
-        { status: 500 }
-      );
+    const { RESEND_API_KEY, CONTACT_TO, CONTACT_FROM } = process.env;
+    if (!RESEND_API_KEY) {
+      return new Response(JSON.stringify({ error: 'Email service not configured' }), { status: 500 });
     }
 
-    const transporter = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: Number(SMTP_PORT),
-      secure: SMTP_SECURE === "true", // true for 465, false for 587/25
-      auth: { user: SMTP_USER, pass: SMTP_PASS },
-      // Uncomment ONLY if you face self‑signed cert issues (avoid in production):
-      // tls: { rejectUnauthorized: false },
-    });
+    const resend = new Resend(RESEND_API_KEY);
 
-    // Verify connection/auth first (helps show clearer errors)
-    try {
-      await transporter.verify();
-    } catch (vErr) {
-      console.error('SMTP verify failed', vErr.code, vErr.message);
-      return new Response(
-        JSON.stringify({ error: 'Email service unavailable', code: vErr.code || 'VERIFY_FAIL' }),
-        { status: 500 }
-      );
-    }
+    const toAddress = CONTACT_TO || 'info@garbagehero.co.ke';
+    const fromAddress = CONTACT_FROM || 'Garbage Hero <no-reply@garbagehero.co.ke>';
 
     const html = `
-      <div style="font-family: Roboto, Arial, sans-serif; line-height:1.6; color:#333">
-        <h2 style="margin:0 0 8px;color:#1E611B">New Website Message</h2>
-        <p style="margin:0 0 16px;color:#333">A new message was submitted from the contact form.</p>
-        <table style="border-collapse:collapse; width:100%">
-          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Sender Name</td><td>${name}</td></tr>
-          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Sender Email</td><td><a href="mailto:${email}">${email}</a></td></tr>
-          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Phone</td><td>${phone || '-'}</td></tr>
-          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Message</td><td>${(message || "").replace(/\n/g, "<br/>")}</td></tr>
+      <div style="font-family: system-ui, Arial, sans-serif; line-height:1.55; color:#333">
+        <h2 style="margin:0 0 12px;color:#1E611B">New Website Message</h2>
+        <p style="margin:0 0 18px;">A new message was submitted from the contact form.</p>
+        <table style="border-collapse:collapse; width:100%; font-size:14px">
+          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Sender Name</td><td>${escapeHtml(name)}</td></tr>
+          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Sender Email</td><td><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
+          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Phone</td><td>${escapeHtml(phone || '-')}</td></tr>
+          <tr><td style="padding:6px 0; width:140px; color:#1E611B; font-weight:600">Message</td><td>${escapeHtml(message).replace(/\n/g,'<br/>')}</td></tr>
         </table>
       </div>`;
 
-    const toAddress = CONTACT_TO || "it@garbagehero.co.ke";
-    const fromRaw = CONTACT_FROM || SMTP_USER || `no-reply@${new URL(req.url).host}`;
-    const fromAddress = /</.test(fromRaw) ? fromRaw : `Garbage Hero <${fromRaw}>`;
-
-    const mailOptions = {
-      from: fromAddress,
-      to: toAddress,
-      subject: `New message from ${name} via Garbage Hero website`,
-      replyTo: `${name} <${email}>`,
-      html,
-    };
-
     try {
-      await transporter.sendMail(mailOptions);
-    } catch (sendErr) {
-      console.error('Mail send error', sendErr.code, sendErr.response, sendErr.message);
-      const code = sendErr.code || 'MAIL_FAIL';
-      // Map common errors to simpler causes
-      const cause =
-        code === 'EAUTH' ? 'Authentication failed' :
-        code === 'ENOTFOUND' || code === 'ECONNECTION' ? 'SMTP connection issue' :
-        code === 'ETIMEDOUT' ? 'SMTP timeout' : 'Send failed';
-      // Expose limited detail to user
-      return new Response(
-        JSON.stringify({ error: 'Failed to send message', cause }),
-        { status: 500 }
-      );
-    }
+      const result = await resend.emails.send({
+        from: fromAddress,
+        to: [toAddress],
+        reply_to: email,
+        subject: `New message from ${name} via Garbage Hero website`,
+        html,
+      });
 
-    return new Response(JSON.stringify({ ok: true }), { status: 200 });
+      if (result.error) {
+        console.error('Resend send error', result.error);
+        return new Response(JSON.stringify({ error: 'Failed to send message' }), { status: 500 });
+      }
+
+      return new Response(JSON.stringify({ ok: true }), { status: 200 });
+    } catch (e) {
+      console.error('Resend API error', e);
+      return new Response(JSON.stringify({ error: 'Failed to send message' }), { status: 500 });
+    }
   } catch (err) {
-    console.error("/api/contact error", err);
-    return new Response(
-      JSON.stringify({ error: "Failed to send message" }),
-      { status: 500 }
-    );
+    console.error('/api/contact error', err);
+    return new Response(JSON.stringify({ error: 'Failed to send message' }), { status: 500 });
   }
+}
+
+function escapeHtml(str='') {
+  return str
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
 }
