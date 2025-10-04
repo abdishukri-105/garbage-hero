@@ -72,6 +72,22 @@ const SERVICES = [
 		],
 		value: "Licensed technicians apply effective low-risk methods that prevent recurrence and safeguard health.",
 	},
+	{
+		key: "garbage",
+		img: "/projects/cleaning-4.jpg",
+		subheading: "Garbage Collection",
+		heading: "Garbage Collection & Waste Handling",
+		intro: "Reliable scheduled collection, segregation guidance and compliant transfer of general and recyclable waste streams reducing on‑site clutter, odour and risk while improving sustainability reporting.",
+		bullets: [
+			"Scheduled on-site pickups",
+			"Segregated bins & labeling support",
+			"Regulatory compliant disposal routes",
+			"Recyclables diversion tracking",
+			"Overflow & urgent call-out response",
+			"Documentation / manifest trail",
+		],
+		value: "Structured collection logistics, proper segregation and auditable disposal reduce environmental impact and operational disruption.",
+	},
 ];
 
 export const ServicesList = () => {

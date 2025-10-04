@@ -34,6 +34,12 @@ const services = [
 		imgSrc: "/RBA/fumi.jpg",
 		href: "/services#pest-control",
 	},
+	{
+		title: "Garbage Collection",
+		description: "Scheduled on‑site waste collection, segregation support and compliant transfer ensuring cleaner safer facilities.",
+		imgSrc: "/Photos/_MG_7719.jpg",
+		href: "/services#garbage",
+	},
 ];
 
 const ServicesPreview = () => {
@@ -71,9 +77,9 @@ const ServicesPreview = () => {
 					</Paragraph>
 				</div>
 				<div className="w-full mx-auto">
-					{/* First row (2 cards) */}
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 mb-4 md:mb-8">
-						{services.slice(0, 2).map((service, index) => (
+					{/* First row (3 cards) */}
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mb-4 md:mb-8">
+						{services.slice(0, 3).map((service, index) => (
 							<Card
 								key={index}
 								heading={service.title}
@@ -87,14 +93,14 @@ const ServicesPreview = () => {
 					</div>
 					{/* Second row (remaining 2 cards) */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
-						{services.slice(2).map((service, index) => (
+						{services.slice(3, 5).map((service, index) => (
 							<Card
-								key={index + 2}
+								key={index + 3}
 								heading={service.title}
 								description={service.description}
 								imgSrc={service.imgSrc}
 								href={service.href}
-								index={index + 2}
+								index={index + 3}
 								isInView={isInView}
 							/>
 						))}
