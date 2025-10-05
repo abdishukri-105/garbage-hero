@@ -26,7 +26,7 @@ const SERVICES = [
 	},
 	{
 		key: "sanitary",
-		img: "/projects/staff-1.jpg",
+		img: "/Photos/_MG_7229.jpg",
 		subheading: "Sanitary Services",
 		heading: "Sanitary Services",
 		intro: "We provide sanitary services that include waste management, disinfection, and sanitation of bathrooms and high-touch surfaces, promoting a healthy and safe environment.",
@@ -74,7 +74,7 @@ const SERVICES = [
 	},
 	{
 		key: "garbage",
-		img: "/projects/cleaning-4.jpg",
+		img: "/garbage5.avif",
 		subheading: "Garbage Collection",
 		heading: "Garbage Collection & Waste Handling",
 		intro: "Reliable scheduled collection, segregation guidance and compliant transfer of general and recyclable waste streams reducing on‑site clutter, odour and risk while improving sustainability reporting.",

@@ -19,25 +19,25 @@ const services = [
 	{
 		title: "Sanitary Services",
 		description: "Waste management disinfection and high touch surface hygiene for a healthier safer environment.",
-		imgSrc: "/images/slide5.jpg",
+		imgSrc: "/Photos/_MG_7229.jpg",
 		href: "/services#sanitary",
 	},
 	{
 		title: "Gardening & Landscaping",
 		description: "Garden care design and seasonal maintenance delivering attractive resilient outdoor environments.",
-		imgSrc: "/projects/cleaning-4.jpg",
+		imgSrc: "/Photos/_MG_7719.jpg",
 		href: "/services#gardening",
 	},
 	{
 		title: "Fumigation & Pest Control",
 		description: "Safe targeted treatments eliminate pests and block recurrence keeping environments hygienic.",
-		imgSrc: "/RBA/fumi.jpg",
+		imgSrc: "/pest2.jpg",
 		href: "/services#pest-control",
 	},
 	{
 		title: "Garbage Collection",
 		description: "Scheduled on‑site waste collection, segregation support and compliant transfer ensuring cleaner safer facilities.",
-		imgSrc: "/Photos/_MG_7719.jpg",
+		imgSrc: "/garbage5.avif",
 		href: "/services#garbage",
 	},
 ];

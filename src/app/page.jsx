@@ -3,6 +3,8 @@ export const metadata = {
   description: "Integrated cleaning, sanitary bin, pest control and grounds maintenance for government, education, healthcare and corporate sites across Kenya. Reliable vetted teams. Request a proposal.",
 };
 
+export const revalidate = 3600; // cache homepage data for 1 hour (ISR)
+
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutUsTeaser from "@/components/AboutUsTeaser";
@@ -22,16 +24,15 @@ const RecentWorkTeaser = nextDynamic(() => import('@/components/RecentWorkTeaser
 const TestimonialsCarousel = nextDynamic(() => import('@/components/TestimonialsCarousel'), { loading: () => <div className="min-h-[320px]" aria-busy="true" /> });
 const TabsFaq = nextDynamic(() => import('@/components/TabsFaq'), { loading: () => <div className="min-h-[260px]" aria-busy="true" /> });
 const ClientLogosMarquee = nextDynamic(() => import('@/components/ClientLogosMarquee'), { loading: () => <div className="min-h-[180px]" aria-busy="true" /> });
-const ProjectGrid = nextDynamic(() => import('@/components/ProjectGrid'), { loading: () => <div className="min-h-[600px]" aria-busy="true" /> });
 
 export default async function HomePage() {
   let testimonialsData = [];
   let teasersData = [];
   let clientLogosData = [];
 
-  try { testimonialsData = await client.fetch(TESTIMONIALS_QUERY); } catch { testimonialsData = []; }
-  try { teasersData = await client.fetch(PORTFOLIO_TEASERS_QUERY); } catch { teasersData = []; }
-  try { clientLogosData = await client.fetch(CLIENT_LOGOS_QUERY); } catch { clientLogosData = []; }
+  try { testimonialsData = await client.fetch(TESTIMONIALS_QUERY, {}, { next: { revalidate: 3600 } }); } catch { testimonialsData = []; }
+  try { teasersData = await client.fetch(PORTFOLIO_TEASERS_QUERY, {}, { next: { revalidate: 3600 } }); } catch { teasersData = []; }
+  try { clientLogosData = await client.fetch(CLIENT_LOGOS_QUERY, {}, { next: { revalidate: 3600 } }); } catch { clientLogosData = []; }
 
   if (!Array.isArray(testimonialsData) || testimonialsData.length === 0) testimonialsData = FALLBACK_TESTIMONIALS;
   if (!Array.isArray(teasersData) || teasersData.length === 0) teasersData = FALLBACK_TEASERS;

@@ -10,6 +10,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+
+        <link rel="icon" href="/images/logo1.png" sizes="32x32" />
+        <link rel="icon" href="/images/logo1.png" sizes="192x192" />
+        <link rel="apple-touch-icon" href="/images/logo1.png" />
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         {/* Preload a frequently used hero image with correct React attribute */}
         <link rel="preload" as="image" href="/projects/traning-1.jpg" fetchPriority="high" />
