@@ -56,9 +56,9 @@ const AboutUsTeaser = () => {
   };
 
   const stats = [
-    { num: 20, suffix: "+", subheading: "Years of Experience", delay: 0 },
+    { num: 10, suffix: "+", subheading: "Years of Experience", delay: 0 },
     { num: 12.5, decimals: 1, suffix: "K+", subheading: "Spaces Cleaned", delay: 300 },
-    { num: 95, suffix: "%", subheading: "Customer Satisfaction", delay: 600 },
+    { num: 99, suffix: "%", subheading: "Customer Satisfaction", delay: 600 },
     { num: 100, suffix: "+", subheading: "Team Members", delay: 900 },
   ];
 

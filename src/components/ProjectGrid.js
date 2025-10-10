@@ -14,8 +14,8 @@ const ProjectGrid = ({ projects = [] }) => {
   const tabs = projects.length > 0 ? projects.map(p => ({
     title: p.companyName || 'Untitled',
     images: (p.images || []).map(img => img?.asset || img).filter(Boolean),
+    services: Array.isArray(p.services) ? p.services : (p.category ? [p.category] : []),
     category: p.category,
-    timePeriod: p.timePeriod,
     description: p.shortDescription,
   })) : PROJECTS;  
   const [selected, setSelected] = useState(0);
@@ -160,19 +160,24 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
 
 const ProjectFeature = ({ tab, onOpenLightbox }) => {
   if (!tab) return null;
-  const { title, images = [], description, category, timePeriod } = tab;
+  const { title, images = [], description, category, services = [] } = tab;
   return (
     <div id={`project-panel-${title}`} role="tabpanel" aria-labelledby={`project-tab-${title}`} className="w-full p-4 rounded-[2rem] space-y-5" style={{ backgroundColor: '#E8F6E9' }}>
       <div className="space-y-2">
         {/* <h3 className="text-xl sm:text-2xl md:text-3xl font-playfair font-bold text-black leading-snug">{title}</h3> */}
         <Heading level={3} variant="primary" className="text-xl sm:text-2xl md:text-3xl font-playfair leading-snug">{title}</Heading>
         <div className="text-xs sm:text-sm flex flex-wrap gap-3 items-center text-[#333333]">
-          {category && <span className="px-2 py-1 rounded-md font-lato font-semibold uppercase tracking-wide" style={{ backgroundColor: '#3AA3351A', color: '#3AA335' }}>{category}</span>}
-          {timePeriod && <span className="text-[#333333]/70 italic font-lato">{timePeriod}</span>}
+          {services && services.length > 0 ? (
+            services.map((s, i) => (
+              <span key={`${title}-svc-${i}`} className="px-2 py-1 rounded-md font-lato font-semibold uppercase tracking-wide" style={{ backgroundColor: '#3AA3351A', color: '#3AA335' }}>{s}</span>
+            ))
+          ) : (
+            category && <span className="px-2 py-1 rounded-md font-lato font-semibold uppercase tracking-wide" style={{ backgroundColor: '#3AA3351A', color: '#3AA335' }}>{category}</span>
+          )}
         </div>
       </div>
       {description && <p className="text-sm sm:text-base max-w-3xl font-lato leading-relaxed text-[#333333]/90">{description}</p>}
-      <div className="[column-fill:_balance] columns-2 sm:columns-2 lg:columns-3 gap-4 sm:gap-6">
+      <div className="[column-fill:_balance] columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-3 sm:gap-4 md:gap-5">
         {images.length === 0 && (
           <div className="col-span-full h-48 flex items-center justify-center rounded-xl text-sm font-lato font-medium" style={{ backgroundColor: '#E8F6E9', color: '#3AA335' }}>
             No images
@@ -230,7 +235,7 @@ const ProjectFeature = ({ tab, onOpenLightbox }) => {
                   width={w}
                   height={h}
                   loading="lazy"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 18vw"
                   quality={50}
                   className="w-full h-auto object-cover object-center rounded-xl group-hover:brightness-110 group-hover:saturate-110 transition duration-500"
                 />
@@ -430,16 +435,16 @@ const Lightbox = ({ images = [], title, index = 0, onClose, onPrev, onNext }) =>
 };
 
 const PROJECTS = [
-  { title: "Umma University", images: [], description: "Flagship campus modernization and sustainability initiative.", category: 'Education', timePeriod: '2023 - Present' },
-  { title: "Project 2", images: [], description: "Community engagement & environmental stewardship program.", category: 'Community', timePeriod: '2024' },
-  { title: "Project 3", images: [], description: "Infrastructure upgrade focusing on accessibility.", category: 'Infrastructure', timePeriod: '2024' },
-  { title: "Project 4", images: [], description: "Digital transformation and process optimization.", category: 'Digital', timePeriod: '2024' },
-  { title: "Project 5", images: [], description: "Health & safety training roll-out across regions.", category: 'Health', timePeriod: '2023 - 2024' },
-  { title: "Project 6", images: [], description: "Renewable energy adoption pilot sites.", category: 'Sustainability', timePeriod: '2024' },
-  { title: "Project 7", images: [], description: "Waste reduction and recycling initiative.", category: 'Environment', timePeriod: '2024' },
-  { title: "Project 8", images: [], description: "Capacity building workshops for local partners.", category: 'Training', timePeriod: '2024' },
-  { title: "Project 9", images: [], description: "Research & development exploration phase.", category: 'R&D', timePeriod: '2024' },
-  { title: "Project 10", images: [], description: "Strategic partnership expansion and alignment.", category: 'Partnerships', timePeriod: '2025' },
+  { title: "Umma University", images: [], description: "Flagship campus modernization and sustainability initiative.", category: 'Education' },
+  { title: "Project 2", images: [], description: "Community engagement & environmental stewardship program.", category: 'Community' },
+  { title: "Project 3", images: [], description: "Infrastructure upgrade focusing on accessibility.", category: 'Infrastructure' },
+  { title: "Project 4", images: [], description: "Digital transformation and process optimization.", category: 'Digital' },
+  { title: "Project 5", images: [], description: "Health & safety training roll-out across regions.", category: 'Health' },
+  { title: "Project 6", images: [], description: "Renewable energy adoption pilot sites.", category: 'Sustainability' },
+  { title: "Project 7", images: [], description: "Waste reduction and recycling initiative.", category: 'Environment' },
+  { title: "Project 8", images: [], description: "Capacity building workshops for local partners.", category: 'Training' },
+  { title: "Project 9", images: [], description: "Research & development exploration phase.", category: 'R&D' },
+  { title: "Project 10", images: [], description: "Strategic partnership expansion and alignment.", category: 'Partnerships' },
 ];
 
 export default ProjectGrid;

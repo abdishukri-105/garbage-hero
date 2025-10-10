@@ -170,7 +170,7 @@ const ContactForm = () => {
                       >
                         <FiPhone className="text-[#3AA335] text-lg sm:text-xl" />
                         <span className="text-base sm:text-lg text-[#333333] ml-4">
-                          +254 712-345-678
+                          +254 722 269 511
                         </span>
                       </a>
                       <a

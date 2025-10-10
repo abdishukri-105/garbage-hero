@@ -10,9 +10,9 @@ import Paragraph from "./ui/Paragraph";
 import { urlFor } from '@/lib/sanity';
 import { FALLBACK_TEASERS } from '@/data/fallback/teasers';
 
-const CARD_WIDTH = 390;
-const CARD_HEIGHT = 350;
-const MARGIN = 20;
+const CARD_WIDTH = 340;
+const CARD_HEIGHT = 300;
+const MARGIN = 16;
 const CARD_SIZE = CARD_WIDTH + MARGIN;
 
 const BREAKPOINTS = {
@@ -26,12 +26,23 @@ const RecentWorkTeaser = ({ teasers = [] }) => {
 
   // Normalize into card shape
   const mapped = src.map((t, i) => {
-    const url = t.imageUrl || t.url || (t.image ? (() => {
-      try { return urlFor(t.image).width(800).height(600).auto('format').url(); } catch { return '/images/slide3.jpg'; }
-    })() : '/images/slide3.jpg');
+    let url;
+    if (t.imageUrl) {
+      url = t.imageUrl;
+    } else if (typeof t.image === 'string') {
+      url = t.image; // already a URL
+    } else if (t.url) {
+      url = t.url;
+    } else if (t.image) {
+      try { url = urlFor(t.image).width(800).fit('max').auto('format').url(); } catch { url = '/images/slide3.jpg'; }
+    } else {
+      url = '/images/slide3.jpg';
+    }
+    const services = Array.isArray(t.services) ? t.services : (t.category ? [t.category] : []);
     return {
       id: t._id || t.id || `teaser-${i}`,
       url,
+      services,
       category: t.category || 'Project',
       title: t.companyName || t.title || 'Untitled',
       description: t.shortDescription || t.description || '',
@@ -122,7 +133,8 @@ const RecentWorkTeaser = ({ teasers = [] }) => {
   );
 };
 
-const Card = ({ url, category, title, description }) => {
+const Card = ({ url, category, title, description, services = [] }) => {
+  const label = services.length > 0 ? services.join(', ') : category;
   return (
     <Link href="/portfolio" role="listitem" aria-label={`${title} project`}>
       <div
@@ -132,14 +144,15 @@ const Card = ({ url, category, title, description }) => {
         <Image
           src={url}
           alt={title}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 350px"
-          style={{ objectFit: 'cover' }}
+          width={CARD_WIDTH}
+          height={CARD_HEIGHT}
+          sizes="340px"
+          style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', backgroundColor: '#E8F6E9' }}
           className="rounded-2xl"
         />
         <div className="absolute inset-0 z-20 rounded-2xl bg-gradient-to-t from-[#1E611B]/85 via-[#1E611B]/55 to-[#1E611B]/10 p-6 flex flex-col justify-end text-white transition-[backdrop-filter] hover:backdrop-blur-sm">
           <span className="self-start w-auto inline-block text-[10px] tracking-wide font-medium uppercase text-[#1E611B] bg-[#E8F6E9]/80 px-2 py-0.5 rounded-md mb-2 ring-1 ring-[#3AA335]/15">
-            {category}
+            {label}
           </span>
           <h3 className="text-2xl sm:text-3xl font-bold leading-snug drop-shadow-md">
             {title}

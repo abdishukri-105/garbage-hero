@@ -101,6 +101,7 @@ function LogoItem({ logo }) {
     );
   }
   const href = cleanUrl(logo.url);
+  const name = logo.companyName || 'Client';
   const img = logo.logoImage;
   const localUrl = logo.logoImageUrl;
 
@@ -126,15 +127,15 @@ function LogoItem({ logo }) {
   };
 
   const hasImage = !!localUrl || img?.asset;
-  const baseClasses = "group relative h-16 sm:h-20 w-32 sm:w-40 flex items-center justify-center rounded-xl border transition-colors";
+  const baseCard = "relative h-16 sm:h-20 w-32 sm:w-40 flex items-center justify-center rounded-xl border transition-colors";
   const baseStyle = { backgroundColor: 'rgba(232,246,233,0.4)', borderColor: '#3AA3351A' };
 
-  const Img = hasImage ? (
+  const imageNode = hasImage ? (
     <div className="relative w-full h-full p-2">
       <Image
         loader={loader}
         src={fallbackUrl}
-        alt="" /* decorative here because aria-label on wrapper supplies name */
+        alt={`${name} logo`}
         fill
         sizes="(max-width: 640px) 40vw, (max-width: 1024px) 15vw, 160px"
         quality={70}
@@ -142,22 +143,45 @@ function LogoItem({ logo }) {
       />
     </div>
   ) : (
-    <span className="text-xs font-medium truncate px-2 text-[#333333]/70 group-hover:text-[#333333] transition-colors">{logo.companyName || 'Client'}</span>
+    <span className="text-xs font-medium truncate px-2 text-[#333333]/70 group-hover:text-[#333333] transition-colors">{name}</span>
   );
 
-  const Wrapper = href ? 'a' : 'div';
-  const wrapperProps = href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {};
-
+  // Wrapper: show logo card and name below; both clickable if href exists
   return (
-    <Wrapper
-      {...wrapperProps}
-      className={baseClasses}
-      style={baseStyle}
-      aria-label={altFor(logo)}
-    >
-      {Img}
-      {/* removed redundant sr-only duplicate */}
-    </Wrapper>
+    <div className="group flex flex-col items-center w-32 sm:w-40">
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={`Visit ${name} website`}
+          className={baseCard}
+          style={baseStyle}
+          aria-label={`Visit ${name} website`}
+        >
+          {imageNode}
+        </a>
+      ) : (
+        <div className={baseCard} style={baseStyle} aria-label={`${name} logo`}>
+          {imageNode}
+        </div>
+      )}
+      <div className="mt-1 text-center max-w-full">
+        {href ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={`Visit ${name} website`}
+            className="text-[11px] sm:text-xs font-medium text-[#1E611B] hover:underline underline-offset-2 line-clamp-1"
+          >
+            {name}
+          </a>
+        ) : (
+          <span className="text-[11px] sm:text-xs font-medium text-[#333333]/80 line-clamp-1">{name}</span>
+        )}
+      </div>
+    </div>
   );
 }
 

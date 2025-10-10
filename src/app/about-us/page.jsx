@@ -37,7 +37,7 @@ export default async function AboutUsPage() {
       <FullStory />
       
       <CompanyVideo />
-      <TeamProfiles team={team} />
+      {/* <TeamProfiles team={team} /> */}
       <CTABanner />
      <TabsFaq />
       <MinicontactForm />

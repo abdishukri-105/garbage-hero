@@ -171,6 +171,7 @@ const TABS = [
   "Sanitary Solutions",
   "Gardening & Landscaping",
   "Fumigation & Pest Control",
+  "Garbage Collection",
 ];
 
 const QUESTIONS = {
@@ -260,6 +261,28 @@ const QUESTIONS = {
     {
       question: "What principles guide your pest control approach?",
       answer: "Professional Team; Eco-Friendly Approach; Customized Solutions; Reliable & Efficient. Core Values: Innovation, Trust, Professionalism." 
+    }
+  ],
+  "Garbage Collection": [
+    {
+      question: "What does your Garbage Collection service include?",
+      answer: "Scheduled pick-ups for general, recyclable, and sanitary waste; supply of bins and liners; safe transport to licensed facilities; and documented handover for audit trails."
+    },
+    {
+      question: "How often can you collect, and can schedules be customized?",
+      answer: "We offer daily, weekly, bi-weekly, monthly, and on-demand pickups. Schedules are tailored to site volume, access windows, and seasonal fluctuations, with public holiday coverage available."
+    },
+    {
+      question: "Do you handle waste segregation and provide the right containers?",
+      answer: "Yes. We provide color-coded bins, liners, and signage for proper segregation (recyclables, organics, general, sanitary). We also train onsite teams to reduce contamination."
+    },
+    {
+      question: "Are you compliant and insured? Where is waste disposed?",
+      answer: "We operate under relevant county by‑laws and NEMA guidelines, using licensed carriers and permitted disposal/recovery facilities. We maintain manifests and chain‑of‑custody records; insurance is in place."
+    },
+    {
+      question: "How do you price and measure performance?",
+      answer: "Pricing is based on pickup frequency, container sizes, estimated volumes, site access, and route density. KPIs include missed‑pickup rate, response time, and fill‑level trends. Monthly reports are available."
     }
   ]
 };
