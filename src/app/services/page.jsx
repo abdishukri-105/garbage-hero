@@ -11,7 +11,7 @@ import TabsFaq from "@/components/TabsFaq"
 
 // Services Page for Garbage Hero Limited
 export const metadata = {
-  title: 'Integrated Eco-Friendly Cleaning & Pest Control Services Kenya',
+  title: 'Services | Corporate Cleaning, Sanitary, Pest Control & Landscaping Kenya',
   description: 'Sustainable corporate cleaning, sanitary and washroom hygiene, integrated pest management, fumigation, landscaping and waste management support across Kenya. Request a proposal.',
 };
 

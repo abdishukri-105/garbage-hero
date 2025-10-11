@@ -2,18 +2,26 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
-  title: "Garbage Hero Limited - Contract Cleaning, Sanitary & Pest Control Kenya",
+  title: {
+    default: "Garbage Hero",
+    template: "%s | Garbage Hero",
+  },
   description: "Integrated contract cleaning, sanitary hygiene, pest control, fumigation and landscaping services delivering consistent compliant facility hygiene across Kenya.",
+  icons: {
+    icon: "/images/logo1.png",
+    apple: "/images/logo1.png",
+    other: [
+      { rel: "icon", url: "/images/logo1.png", sizes: "32x32" },
+      { rel: "icon", url: "/images/logo1.png", sizes: "192x192" },
+    ],
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-
-        <link rel="icon" href="/images/logo1.png" sizes="32x32" />
-        <link rel="icon" href="/images/logo1.png" sizes="192x192" />
-        <link rel="apple-touch-icon" href="/images/logo1.png" />
+        {/* Favicon + Apple touch icon are provided via metadata.icons above */}
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         {/* Preload a frequently used hero image with correct React attribute */}
         <link rel="preload" as="image" href="/projects/traning-1.jpg" fetchPriority="high" />

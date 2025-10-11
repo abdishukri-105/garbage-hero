@@ -13,7 +13,7 @@ import { FALLBACK_PROJECTS } from "@/data/fallback/projects";
 // Remove legacy Head usage; use metadata export instead in App Router
 export const dynamic = 'force-dynamic';
 export const metadata = {
-  title: 'Our Work | Corporate Cleaning, Sanitary & Pest Control Projects',
+  title: 'Our Projects | Corporate Cleaning, Sanitary & Pest Control Projects',
   description: 'Multi-site cleaning, washroom hygiene, pest control and landscaping success highlights. Consistent, compliant delivery nationwide across Kenyan institutions and corporates.',
 };
 

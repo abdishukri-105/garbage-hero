@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Facility Hygiene & Cleaning Partner Kenya | Garbage Hero",
+  title: "Garbage Hero Limited | facilty hygiene & cleaning partner kenya",
   description: "Integrated cleaning, sanitary bin, pest control and grounds maintenance for government, education, healthcare and corporate sites across Kenya. Reliable vetted teams. Request a proposal.",
 };
 

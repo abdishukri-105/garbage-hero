@@ -7,7 +7,7 @@ import PageBanner from "@/components/PageBanner";
 
 // Contact Us Page for Garbage Hero Limited
 export const metadata = {
-  title: 'Get a Quote | Corporate Cleaning & Hygiene Services Kenya',
+  title: 'Contact Us | Corporate Cleaning & Hygiene Services Kenya',
   description: 'Request a proposal for corporate cleaning, sanitary bin, pest control, fumigation, landscaping and waste support. Fast response nationwide.',
 };
 
