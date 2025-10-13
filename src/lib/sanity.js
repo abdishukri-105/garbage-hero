@@ -20,14 +20,33 @@ export const TESTIMONIALS_QUERY = `*[_type == "testimonial"]|order(_createdAt de
 export const CLIENT_LOGOS_QUERY = `*[_type == "clientLogo"]|order(_createdAt desc){
   _id, companyName, url, logoImage
 }`;
-// Updated to use services with coalesce fallback (timePeriod removed)
-export const PORTFOLIO_QUERY = `*[_type == "portfolio"] | order(order asc){
+// Updated to use services with coalesce fallback and better image handling
+export const PORTFOLIO_QUERY = `*[_type == "portfolio"] | order(order asc, _createdAt desc){
   _id,
   companyName,
-  images[]{asset->{url}},
-  "services": coalesce(services, select(defined(category)=>[category], [])),
+  images[]{
+    asset->{
+      _id,
+      url,
+      metadata {
+        dimensions {
+          width,
+          height
+        }
+      }
+    },
+    alt
+  },
+  "services": coalesce(services, select(defined(category) => [category], [])),
+  category,
   shortDescription,
-  order
+  description,
+  fullDescription,
+  content,
+  details,
+  order,
+  location,
+  completionDate
 }`;
 export const TEAM_QUERY = `*[_type == "teamMember"]|order(name asc){ _id, name, title, image }`;
 // Updated teasers to include services; removed timePeriod from nested ref

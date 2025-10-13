@@ -20,11 +20,14 @@ export const metadata = {
 // Portfolio (Case Studies) Page for Garbage Hero Limited
 export default async function PortfolioPage() {
   let projects = [];
+  
   try {
     projects = await client.fetch(PORTFOLIO_QUERY);
   } catch (e) {
+    console.error('Error fetching portfolio data:', e);
     projects = [];
   }
+  
   if (!Array.isArray(projects) || projects.length === 0) {
     projects = FALLBACK_PROJECTS;
   }

@@ -1,6 +1,6 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from 'next/image';
 import { urlFor } from '@/lib/sanity';
 import Heading from './ui/Heading';
@@ -10,14 +10,108 @@ import Heading from './ui/Heading';
 // Palette (reference only):
 // brand: #3AA335, brand-dark: #1E611B, brand-light: #E8F6E9, body: #333333, black: #000, white: #FFFFFF
 
+// Helper function to format and sanitize content from Sanity
+const formatSanityContent = (projects) => {
+  return projects.map(p => {
+    // The shortDescription actually contains the full content in Sanity
+    const fullContent = p.shortDescription || p.description || p.fullDescription || p.content || p.details || '';
+    
+    // For preview, we'll show the first few sentences or first paragraph
+    const lines = fullContent.split('\n').filter(line => line.trim());
+    const previewContent = lines.slice(0, 3).join('\n'); // First 3 lines for preview
+    
+    return {
+      title: (p.companyName || 'Untitled Project').trim(),
+      images: (p.images || []).map(img => img?.asset || img).filter(Boolean),
+      services: formatServices(p.services, p.category),
+      category: p.category?.trim() || 'General',
+      description: previewContent || 'Professional facility management services delivered with excellence.',
+      fullDescription: fullContent || 'Professional facility management services delivered with excellence.',
+      // Add any additional fields you might have
+      completionDate: p.completionDate,
+      location: p.location,
+    };
+  });
+};
+
+// Format services array with proper fallbacks
+const formatServices = (services, category) => {
+  if (Array.isArray(services) && services.length > 0) {
+    return services.map(s => (typeof s === 'string' ? s.trim() : s)).filter(Boolean);
+  }
+  return category ? [category.trim()] : ['General Services'];
+};
+
+// Helper function to format content and make headings bold
+const formatContentWithBoldHeadings = (content) => {
+  if (!content) return content;
+  
+  // Split content into lines and process each line
+  return content.split('\n').map(line => {
+    const trimmedLine = line.trim();
+    
+    // Check if line ends with colon (indicating it's a heading)
+    if (trimmedLine.endsWith(':') && trimmedLine.length > 1 && trimmedLine.length < 50) {
+      // Common headings in the content
+      const headingPatterns = [
+        'Challenge:',
+        'Solution:',
+        'End Result:',
+        'End Result (Impact):',
+        'Impact:',
+        'Results:',
+        'Outcome:',
+        'Benefits:',
+        'Process:',
+        'Approach:',
+        'Implementation:',
+        'Overview:',
+        'Summary:'
+      ];
+      
+      const isHeading = headingPatterns.some(pattern => 
+        trimmedLine.toLowerCase() === pattern.toLowerCase()
+      );
+      
+      if (isHeading) {
+        return `**${trimmedLine}**`;
+      }
+    }
+    
+    return line;
+  }).join('\n');
+};
+
+// Helper function to render formatted content with bold headings
+const renderFormattedContent = (content) => {
+  if (!content) return null;
+  
+  const formattedContent = formatContentWithBoldHeadings(content);
+  const lines = formattedContent.split('\n');
+  
+  return lines.map((line, index) => {
+    // Check if line contains bold markdown (**text**)
+    if (line.includes('**')) {
+      const parts = line.split(/(\*\*[^*]+\*\*)/);
+      return (
+        <div key={index} className="mb-2 last:mb-0">
+          {parts.map((part, partIndex) => {
+            if (part.startsWith('**') && part.endsWith('**')) {
+              const boldText = part.slice(2, -2);
+              return <strong key={partIndex} className="font-bold text-[#1E611B]">{boldText}</strong>;
+            }
+            return part;
+          })}
+        </div>
+      );
+    }
+    
+    return <div key={index} className="mb-2 last:mb-0">{line}</div>;
+  });
+};
+
 const ProjectGrid = ({ projects = [] }) => {
-  const tabs = projects.length > 0 ? projects.map(p => ({
-    title: p.companyName || 'Untitled',
-    images: (p.images || []).map(img => img?.asset || img).filter(Boolean),
-    services: Array.isArray(p.services) ? p.services : (p.category ? [p.category] : []),
-    category: p.category,
-    description: p.shortDescription,
-  })) : PROJECTS;  
+  const tabs = projects.length > 0 ? formatSanityContent(projects) : PROJECTS;  
   const [selected, setSelected] = useState(0);
   const active = tabs[selected];
 
@@ -25,41 +119,6 @@ const ProjectGrid = ({ projects = [] }) => {
   useEffect(() => {
     if (selected >= tabs.length) setSelected(0);
   }, [tabs.length, selected]);
-
-  // Lightbox state
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-
-  const openLightbox = useCallback((i) => {
-    setLightboxIndex(i);
-    setLightboxOpen(true);
-  }, []);
-  const closeLightbox = useCallback(() => setLightboxOpen(false), []);
-  const showPrev = useCallback(() => {
-    if (!active) return;
-    setLightboxIndex((i) => (i === 0 ? (active.images?.length || 1) - 1 : i - 1));
-  }, [active]);
-  const showNext = useCallback(() => {
-    if (!active) return;
-    setLightboxIndex((i) => ((i + 1) % (active.images?.length || 1)));
-  }, [active]);
-
-  // Keyboard and scroll lock for lightbox
-  useEffect(() => {
-    if (!lightboxOpen) return;
-    const onKey = (e) => {
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') showPrev();
-      if (e.key === 'ArrowRight') showNext();
-    };
-    document.addEventListener('keydown', onKey);
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prevOverflow;
-    };
-  }, [lightboxOpen, closeLightbox, showPrev, showNext]);
 
   return (
     <section className="section-compact font-lato text-[#333333]">{/* standardized spacing */}
@@ -83,26 +142,11 @@ const ProjectGrid = ({ projects = [] }) => {
               exit={{ opacity: 0, y: 8 }}
               className="flex-1 min-w-0"
             >
-              <ProjectFeature tab={active} onOpenLightbox={openLightbox} />
+              <ProjectFeature tab={active} />
             </motion.div>
           </AnimatePresence>
         </div>
       </div>
-
-      {/* Lightbox Modal */}
-      <AnimatePresence>
-        {lightboxOpen && active?.images?.length > 0 && (
-          <Lightbox
-            key={`lb-${active.title}`}
-            images={active.images}
-            title={active.title}
-            index={lightboxIndex}
-            onClose={closeLightbox}
-            onPrev={showPrev}
-            onNext={showNext}
-          />
-        )}
-      </AnimatePresence>
     </section>
   );
 };
@@ -128,6 +172,9 @@ const Tabs = ({ selected, setSelected, tabs }) => {
 };
 
 const Tab = ({ selected, title, setSelected, tabNum }) => {
+  // Truncate long titles for better display
+  const displayTitle = title.length > 25 ? `${title.substring(0, 22)}...` : title;
+  
   return (
     <div className="group relative w-full md:w-auto">
       <button
@@ -136,7 +183,8 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
         aria-controls={`project-panel-${tabNum}`}
         id={`project-tab-${tabNum}`}
         onClick={() => setSelected(tabNum)}
-        className={`relative border z-0 flex w-full items-center gap-2 border-l-[6px] md:border-l-8 p-3 md:p-2 transition-colors text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3AA335]/60 focus-visible:ring-offset-2 rounded-r md:rounded-none ${selected ? 'border-[#3AA335] bg-white shadow-sm' : 'border-transparent hover:border-[#3AA335]/50'}`}
+        className={`relative border z-0 flex w-full items-center gap-2 border-l-[6px] md:border-l-8 p-3 md:p-2 transition-all duration-200 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3AA335]/60 focus-visible:ring-offset-2 rounded-r md:rounded-none ${selected ? 'border-[#3AA335] bg-white shadow-sm' : 'border-transparent hover:border-[#3AA335]/50 hover:bg-white/50'}`}
+        title={title} // Full title on hover
       >
         <span
           className={`w-full hover:cursor-pointer text-start text-base sm:text-lg font-playfair font-bold transition-colors ${
@@ -145,7 +193,7 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
               : 'text-[#333333]/60 group-hover:text-[#3AA335]'
           }`}
         >
-          {title}
+          {displayTitle}
         </span>
       </button>
       {selected && (
@@ -158,279 +206,175 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
   );
 };
 
-const ProjectFeature = ({ tab, onOpenLightbox }) => {
+const ProjectFeature = ({ tab }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
   if (!tab) return null;
-  const { title, images = [], description, category, services = [] } = tab;
+  const { title, images = [], description, fullDescription, category, services = [], location, completionDate } = tab;
+  
+  // Check if there's more content to show
+  const hasMoreContent = (fullDescription && fullDescription.length > description.length) || images.length > 0;
+  
   return (
-    <div id={`project-panel-${title}`} role="tabpanel" aria-labelledby={`project-tab-${title}`} className="w-full p-4 rounded-[2rem] space-y-5" style={{ backgroundColor: '#E8F6E9' }}>
-      <div className="space-y-2">
-        {/* <h3 className="text-xl sm:text-2xl md:text-3xl font-playfair font-bold text-black leading-snug">{title}</h3> */}
-        <Heading level={3} variant="primary" className="text-xl sm:text-2xl md:text-3xl font-playfair leading-snug">{title}</Heading>
-        <div className="text-xs sm:text-sm flex flex-wrap gap-3 items-center text-[#333333]">
-          {services && services.length > 0 ? (
-            services.map((s, i) => (
-              <span key={`${title}-svc-${i}`} className="px-2 py-1 rounded-md font-lato font-semibold uppercase tracking-wide" style={{ backgroundColor: '#3AA3351A', color: '#3AA335' }}>{s}</span>
-            ))
-          ) : (
-            category && <span className="px-2 py-1 rounded-md font-lato font-semibold uppercase tracking-wide" style={{ backgroundColor: '#3AA3351A', color: '#3AA335' }}>{category}</span>
+    <div id={`project-panel-${title}`} role="tabpanel" aria-labelledby={`project-tab-${title}`} className="w-full p-4 sm:p-5 md:p-6 rounded-[2rem] space-y-6" style={{ backgroundColor: '#E8F6E9' }}>
+      
+      {/* Project Header */}
+      <div className="space-y-3">
+        <Heading level={3} variant="primary" className="text-xl sm:text-2xl md:text-3xl font-playfair leading-snug text-black">
+          <strong>{title}</strong>
+        </Heading>
+        
+        {/* Metadata row */}
+        <div className="flex flex-wrap gap-2 sm:gap-3 items-center text-xs sm:text-sm">
+          {/* Services/Category Tags */}
+          <div className="flex flex-wrap gap-2">
+            {services.slice(0, 4).map((service, i) => (
+              <span 
+                key={`${title}-svc-${i}`} 
+                className="px-2.5 py-1 rounded-lg font-lato font-bold uppercase tracking-wide text-[10px] sm:text-xs transition-colors" 
+                style={{ backgroundColor: '#3AA3351A', color: '#3AA335' }}
+                title={service}
+              >
+                {service.length > 15 ? `${service.substring(0, 12)}...` : service}
+              </span>
+            ))}
+            {services.length > 4 && (
+              <span 
+                className="px-2.5 py-1 rounded-lg font-lato font-medium text-[10px] sm:text-xs" 
+                style={{ backgroundColor: '#3AA33520', color: '#1E611B' }}
+                title={`And ${services.length - 4} more services`}
+              >
+                <strong>+{services.length - 4} more</strong>
+              </span>
+            )}
+          </div>
+          
+          {/* Additional metadata */}
+          {location && (
+            <span className="text-[#333333]/70 font-lato flex items-center gap-1">
+              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              </svg>
+              <em>{location}</em>
+            </span>
+          )}
+          
+          {completionDate && (
+            <span className="text-[#333333]/70 font-lato flex items-center gap-1">
+              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+              </svg>
+              <strong>{new Date(completionDate).getFullYear()}</strong>
+            </span>
           )}
         </div>
       </div>
-      {description && <p className="text-sm sm:text-base max-w-3xl font-lato leading-relaxed text-[#333333]/90">{description}</p>}
-      <div className="[column-fill:_balance] columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-3 sm:gap-4 md:gap-5">
-        {images.length === 0 && (
-          <div className="col-span-full h-48 flex items-center justify-center rounded-xl text-sm font-lato font-medium" style={{ backgroundColor: '#E8F6E9', color: '#3AA335' }}>
-            No images
+
+      {/* Description - Preview or Full */}
+      {(description || fullDescription) && (
+        <div className="prose prose-sm max-w-none">
+          <div className="text-sm sm:text-base leading-relaxed font-lato text-[#333333]/90">
+            {!isExpanded ? (
+              // Preview: Show condensed description
+              <div>
+                <div className="space-y-2">
+                  {renderFormattedContent(description)}
+                </div>
+                {hasMoreContent && (
+                  <div className="mt-3">
+                    <button
+                      onClick={() => setIsExpanded(true)}
+                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-[#3AA335] bg-white/70 hover:bg-white rounded-lg border border-[#3AA335]/30 hover:border-[#3AA335] transition-all duration-200 shadow-sm hover:shadow-md"
+                    >
+                      <span>Read More</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              // Full content - show full description with proper formatting
+              <div>
+                <div className="space-y-2">
+                  {renderFormattedContent(fullDescription)}
+                </div>
+              </div>
+            )}
           </div>
-        )}
-        {images.map((asset, i) => {
-          const isLocal = typeof asset === 'string' || asset?.url;
-          const srcUrl = isLocal ? (typeof asset === 'string' ? asset : asset.url) : undefined;
-          const fallbackUrl = (() => {
-            if (srcUrl) return srcUrl;
-            try { return urlFor(asset).width(800).quality(60).auto('format').url(); } catch (e) { return '/images/slide3.jpg'; }
-          })();
-          const loader = ({ width, quality }) => {
-            if (srcUrl) return srcUrl; // next/image will ignore loader if using static src
-            try {
-              return urlFor(asset).width(Math.min(width, 800)).fit('max').quality(quality ?? 50).auto('format').url();
-            } catch (e) {
-              return fallbackUrl;
-            }
-          };
-          const w = asset?.metadata?.dimensions?.width || 900;
-          const h = asset?.metadata?.dimensions?.height || 900;
-          const lid = `pg-${title}-${asset?._id || i}`;
-          return (
-            <motion.div
-              key={asset?._id || srcUrl || i}
-              className="break-inside-avoid mb-4 relative rounded-xl overflow-hidden group cursor-zoom-in"
-              style={{ 
-                backgroundColor: '#E8F6E9',
-                // spotlight coords are set via CSS vars on mouse move
-                backgroundImage: 'radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(58,163,53,0.12), transparent 40%)'
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const x = e.clientX - rect.left; // px within
-                const y = e.clientY - rect.top;
-                e.currentTarget.style.setProperty('--mx', `${x}px`);
-                e.currentTarget.style.setProperty('--my', `${y}px`);
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.removeProperty('--mx');
-                e.currentTarget.style.removeProperty('--my');
-              }}
-              onClick={() => onOpenLightbox?.(i)}
-            >
-              <motion.div layoutId={lid} className="relative">
-                <Image
-                  loader={loader}
-                  src={fallbackUrl}
-                  alt={`${title} image ${i+1}`}
-                  width={w}
-                  height={h}
-                  loading="lazy"
-                  sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 18vw"
-                  quality={50}
-                  className="w-full h-auto object-cover object-center rounded-xl group-hover:brightness-110 group-hover:saturate-110 transition duration-500"
-                />
-                {/* cinematic overlays */}
-                <div className="pointer-events-none absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ boxShadow: 'inset 0 0 0 1px rgba(58,163,53,0.25)' }} />
-                <div className="pointer-events-none absolute inset-0 rounded-xl mix-blend-overlay opacity-0 group-hover:opacity-60 transition-opacity" style={{ background: 'radial-gradient(120% 120% at 80% 0%, rgba(255,255,255,0.15), transparent 60%)' }} />
-              </motion.div>
-            </motion.div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
-// Lightbox component with shared layoutId
-const Lightbox = ({ images = [], title, index = 0, onClose, onPrev, onNext }) => {
-  const asset = images[index];
-  const isLocal = typeof asset === 'string' || asset?.url;
-  const srcUrl = isLocal ? (typeof asset === 'string' ? asset : asset.url) : undefined;
-  const fallbackUrl = (() => {
-    if (srcUrl) return srcUrl;
-    try { return urlFor(asset).width(1400).quality(80).auto('format').url(); } catch (e) { return '/images/slide3.jpg'; }
-  })();
-  const lid = `pg-${title}-${asset?._id || index}`;
-
-  // Gesture state: pinch-zoom, pan, swipe
-  const containerRef = useRef(null);
-  const [scale, setScale] = useState(1);
-  const [tx, setTx] = useState(0);
-  const [ty, setTy] = useState(0);
-  const pointersRef = useRef(new Map()); // id -> { x, y }
-  const lastSingleRef = useRef(null); // { x, y }
-  const pinchRef = useRef(null); // { startDist, startScale }
-  const tapRef = useRef({ last: 0 });
-
-  useEffect(() => {
-    // Reset transforms when image changes
-    setScale(1); setTx(0); setTy(0);
-    pointersRef.current.clear();
-    lastSingleRef.current = null;
-    pinchRef.current = null;
-  }, [index]);
-
-  const clampPos = useCallback((sx, x, y) => {
-    const el = containerRef.current;
-    if (!el) return { x, y };
-    const cw = el.clientWidth || 0;
-    const ch = el.clientHeight || 0;
-    const overX = Math.max(0, (cw * sx - cw) / 2);
-    const overY = Math.max(0, (ch * sx - ch) / 2);
-    return {
-      x: Math.max(-overX, Math.min(overX, x)),
-      y: Math.max(-overY, Math.min(overY, y)),
-    };
-  }, []);
-
-  const onPointerDown = (e) => {
-    e.currentTarget.setPointerCapture?.(e.pointerId);
-    pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (pointersRef.current.size === 1) {
-      lastSingleRef.current = { x: e.clientX, y: e.clientY };
-    }
-    if (pointersRef.current.size === 2) {
-      const vals = Array.from(pointersRef.current.values());
-      const dx = vals[1].x - vals[0].x;
-      const dy = vals[1].y - vals[0].y;
-      const dist = Math.hypot(dx, dy);
-      pinchRef.current = { startDist: dist, startScale: scale };
-    }
-  };
-
-  const onPointerMove = (e) => {
-    if (!pointersRef.current.has(e.pointerId)) return;
-    const prev = pointersRef.current.get(e.pointerId);
-    pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
-
-    if (pointersRef.current.size === 2 && pinchRef.current) {
-      const vals = Array.from(pointersRef.current.values());
-      const dx = vals[1].x - vals[0].x;
-      const dy = vals[1].y - vals[0].y;
-      const dist = Math.hypot(dx, dy);
-      const raw = (pinchRef.current.startScale || 1) * (dist / (pinchRef.current.startDist || dist));
-      const nextScale = Math.max(1, Math.min(4, raw));
-      const clamped = clampPos(nextScale, tx, ty);
-      setScale(nextScale);
-      setTx(clamped.x);
-      setTy(clamped.y);
-      return;
-    }
-
-    if (pointersRef.current.size === 1 && lastSingleRef.current) {
-      const dx = e.clientX - lastSingleRef.current.x;
-      const dy = e.clientY - lastSingleRef.current.y;
-      lastSingleRef.current = { x: e.clientX, y: e.clientY };
-      if (scale > 1.02) {
-        const clamped = clampPos(scale, tx + dx, ty + dy);
-        setTx(clamped.x);
-        setTy(clamped.y);
-      } else {
-        // track swipe intent at scale ~1
-        swipeDX.current += dx;
-        swipeDY.current += dy;
-      }
-    }
-  };
-
-  const swipeDX = useRef(0);
-  const swipeDY = useRef(0);
-
-  const onPointerUp = (e) => {
-    pointersRef.current.delete(e.pointerId);
-    if (pointersRef.current.size < 2) pinchRef.current = null;
-
-    if (pointersRef.current.size === 0) {
-      // end of gesture: handle swipe navigation
-      if (scale <= 1.02) {
-        const absX = Math.abs(swipeDX.current);
-        const absY = Math.abs(swipeDY.current);
-        if (absX > 48 && absX > absY) {
-          if (swipeDX.current < 0) onNext?.(); else onPrev?.();
-        }
-      }
-      swipeDX.current = 0; swipeDY.current = 0;
-      lastSingleRef.current = null;
-    }
-  };
-
-  const onDoubleTap = (e) => {
-    const now = Date.now();
-    if (now - tapRef.current.last < 280) {
-      // toggle zoom
-      if (scale > 1) {
-        setScale(1); setTx(0); setTy(0);
-      } else {
-        const nextScale = 2;
-        // center slightly towards tap position
-        const rect = containerRef.current?.getBoundingClientRect();
-        if (rect) {
-          const cx = e.clientX - rect.left - rect.width / 2;
-          const cy = e.clientY - rect.top - rect.height / 2;
-          const nx = tx - cx * (nextScale - 1) / nextScale;
-          const ny = ty - cy * (nextScale - 1) / nextScale;
-          const clamped = clampPos(nextScale, nx, ny);
-          setTx(clamped.x); setTy(clamped.y);
-        }
-        setScale(nextScale);
-      }
-      tapRef.current.last = 0;
-    } else {
-      tapRef.current.last = now;
-    }
-  };
-
-  return (
-    <motion.div
-      className="fixed inset-0 z-[80]"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      aria-modal="true"
-      role="dialog"
-    >
-      <div className="absolute inset-0 bg-black/80" onClick={onClose} />
-      <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6" ref={containerRef}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerCancel={onPointerUp}
-        onClick={onDoubleTap}
-      >
-        <div className="relative w-full max-w-6xl aspect-[16/10] overflow-hidden touch-pan-y">
-          <motion.div layoutId={lid} className="absolute inset-0 will-change-transform" style={{ transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scale})` }}>
-            <Image
-              src={fallbackUrl}
-              alt={`${title} large view`}
-              fill
-              sizes="100vw"
-              quality={80}
-              className="object-contain select-none pointer-events-none"
-              draggable={false}
-            />
-          </motion.div>
         </div>
-        {/* Controls */}
-        {images.length > 1 && scale <= 1.02 && (
-          <>
-            <button aria-label="Previous" onClick={onPrev} className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 h-11 w-11 sm:h-12 sm:w-12 rounded-full bg-white/15 text-white hover:bg-white/25 transition ring-1 ring-white/20 grid place-items-center">‹</button>
-            <button aria-label="Next" onClick={onNext} className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 h-11 w-11 sm:h-12 sm:w-12 rounded-full bg-white/15 text-white hover:bg-white/25 transition ring-1 ring-white/20 grid place-items-center">›</button>
-          </>
-        )}
-        <button aria-label="Close" onClick={onClose} className="absolute top-3 right-3 sm:top-6 sm:right-6 h-10 w-10 rounded-full bg-white/15 text-white hover:bg-white/25 transition ring-1 ring-white/20 grid place-items-center">✕</button>
-        <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 text-white/80 text-xs sm:text-sm">{title} • {index + 1} / {images.length}</div>
-      </div>
-    </motion.div>
+      )}
+
+      {/* Images Grid - Only show when expanded */}
+      {isExpanded && images.length > 0 && (
+        <div className="space-y-4">
+          <div>
+            <h4 className="text-sm font-lato font-bold text-[#333333] uppercase tracking-wide">
+              <u>Project Gallery</u>
+            </h4>
+          </div>
+          
+          {/* Regular Grid Layout */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {images.map((asset, i) => {
+              const isLocal = typeof asset === 'string' || asset?.url;
+              const srcUrl = isLocal ? (typeof asset === 'string' ? asset : asset.url) : undefined;
+              const fallbackUrl = (() => {
+                if (srcUrl) return srcUrl;
+                try { return urlFor(asset).width(400).quality(75).auto('format').url(); } catch (e) { return '/images/slide3.jpg'; }
+              })();
+              const loader = ({ width, quality }) => {
+                if (srcUrl) return srcUrl;
+                try {
+                  return urlFor(asset).width(Math.min(width, 400)).fit('max').quality(quality ?? 75).auto('format').url();
+                } catch (e) {
+                  return fallbackUrl;
+                }
+              };
+              
+              return (
+                <motion.div
+                  key={asset?._id || srcUrl || i}
+                  className="relative rounded-xl overflow-hidden group bg-white shadow-sm hover:shadow-md transition-shadow duration-300"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <div className="relative aspect-square">
+                    <Image
+                      loader={loader}
+                      src={fallbackUrl}
+                      alt={`${title} - Image ${i+1}`}
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      quality={75}
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+          
+          {/* Collapse button */}
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={() => setIsExpanded(false)}
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-[#333333] bg-white/70 hover:bg-white rounded-lg border border-[#333333]/30 hover:border-[#333333] transition-all duration-200 shadow-sm hover:shadow-md"
+            >
+              <span>Show Less</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -20,7 +20,7 @@ export function assertSanityEnv() {
   }
 }
 
-// Helper to get a configured client (lazy import to avoid bundling if unused)
+// Helper to get a configured client (synchronous for compatibility)
 export function getSanityClient({ useFresh = false, token } = {}) {
   const { createClient } = require('@sanity/client');
   return createClient({
