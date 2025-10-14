@@ -2,6 +2,10 @@ import sgMail from '@sendgrid/mail';
 
 export const runtime = 'nodejs';
 
+export async function GET() {
+  return Response.json({ ok: true, message: 'Contact API is reachable' });
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -114,10 +118,6 @@ export async function POST(req: Request) {
     console.error('❌ Contact route error:', err);
     return Response.json({ error: 'Failed to send message' }, { status: 500 });
   }
-}
-
-export async function GET() {
-  return Response.json({ ok: true, message: 'Contact API is reachable' });
 }
 
 function escapeHtml(str = '') {
