@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
     const toEmail = process.env.CONTACT_TO || 'info@garbagehero.co.ke';
-    const fromEmail = process.env.CONTACT_FROM || 'noreply@garbagehero.co.ke';
+    const fromEmail = process.env.CONTACT_FROM || 'info@garbagehero.co.ke';
 
     const safe = escapeHtml;
     const htmlContent = `
