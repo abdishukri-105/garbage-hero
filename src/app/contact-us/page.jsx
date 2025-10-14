@@ -1,9 +1,9 @@
 import Navbar from "../../components/Navbar";
-import TabsFaq from "@/components/TabsFaq";
+import TabsFaq from "../../components/TabsFaq";
 import MiniContactForm from "../../components/MiniContactForm";
 import MapEmbed from "../../components/MapEmbed";
 import Footer from "../../components/Footer";
-import PageBanner from "@/components/PageBanner";
+import PageBanner from "../../components/PageBanner";
 
 // Contact Us Page for Garbage Hero Limited
 export const metadata = {

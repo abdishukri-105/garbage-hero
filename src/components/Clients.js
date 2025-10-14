@@ -5,7 +5,7 @@ import Image from "next/image";
 import Heading from "./ui/Heading";
 import Paragraph from "./ui/Paragraph";
 import NeuButton from "./ui/Button";
-import { urlFor } from "@/lib/sanity";
+import { urlFor } from "../lib/sanity";
 import {
   SiAdobe,
   SiAmazon,

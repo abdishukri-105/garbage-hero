@@ -4,11 +4,11 @@ import ProjectGrid from "../../components/ProjectGrid";
 import CTABanner from "../../components/CTABanner";
 import Footer from "../../components/Footer";
 import MiniContactForm from "../../components/MiniContactForm";
-import Process from "@/components/Process";
-import { client, PORTFOLIO_QUERY } from '@/lib/sanity';
-import FAQAccordion from "@/components/FAQAccordion"
-import TabsFaq from "@/components/TabsFaq"
-import { FALLBACK_PROJECTS } from "@/data/fallback/projects";
+import Process from "../../components/Process";
+import { client, PORTFOLIO_QUERY } from '../../lib/sanity';
+import FAQAccordion from "../../components/FAQAccordion"
+import TabsFaq from "../../components/TabsFaq"
+import { FALLBACK_PROJECTS } from "../../data/fallback/projects";
 
 // Remove legacy Head usage; use metadata export instead in App Router
 export const dynamic = 'force-dynamic';

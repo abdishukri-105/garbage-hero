@@ -5,9 +5,9 @@ import RecentWorkTeaser from "../../components/RecentWorkTeaser";
 import CTABanner from "../../components/CTABanner";
 import MiniContactForm from "../../components/MiniContactForm";
 import Footer from "../../components/Footer";
-import PageBanner from "@/components/PageBanner";
+import PageBanner from "../../components/PageBanner";
 
-import TabsFaq from "@/components/TabsFaq"
+import TabsFaq from "../../components/TabsFaq"
 
 // Services Page for Garbage Hero Limited
 export const metadata = {
@@ -20,8 +20,8 @@ export default function ServicesPage() {
     <main id="main" className="bg-white text-black font-lato">
       <Navbar />
       <PageBanner
-        title="Integrated Eco-Friendly Services"
-        subtitle="Sustainable cleaning, sanitary hygiene, pest control & landscaping for institutional and corporate facilities across Kenya"
+        title="What We Do"
+        subtitle="Discover sustainable cleaning, hygiene, pest control, and landscaping solutions designed to elevate your facility"
       />
       <ServicesList />
       <CTABanner />

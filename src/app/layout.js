@@ -1,6 +1,9 @@
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
+// Central site URL for metadata and links
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://garbagehero.co.ke';
+
 export const metadata = {
   title: {
     default: "Garbage Hero",
@@ -15,6 +18,8 @@ export const metadata = {
       { rel: "icon", url: "/images/logo1.png", sizes: "192x192" },
     ],
   },
+  // Ensure absolute URLs for OpenGraph/SEO
+  metadataBase: new URL(siteUrl),
 };
 
 export default function RootLayout({ children }) {
@@ -25,7 +30,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         {/* Preload a frequently used hero image with correct React attribute */}
         <link rel="preload" as="image" href="/projects/traning-1.jpg" fetchPriority="high" />
-        <link rel="canonical" href="https://garbagehero.co.ke/" />
+        <link rel="canonical" href={`${siteUrl}/`} />
         <meta name="robots" content="index,follow" />
         {/* Inline style for skip link (kept lightweight to avoid new CSS file edits) */}
         <style>{`:root{scroll-behavior:smooth}.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden} .skip-link:focus{left:8px;top:8px;width:auto;height:auto;padding:8px 14px;z-index:1000;background:#1E611B;color:#fff;border-radius:6px;outline:2px solid #fff;}`}</style>
@@ -37,8 +42,8 @@ export default function RootLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Garbage Hero Limited",
-              url: "https://garbagehero.co.ke/",
-              logo: "https://garbagehero.co.ke/images/logo1.png",
+              url: `${siteUrl}/`,
+              logo: `${siteUrl}/images/logo1.png`,
               description: "Integrated contract cleaning, sanitary hygiene, pest control and landscaping partner in Kenya.",
               areaServed: "KE",
               foundingDate: "2020",

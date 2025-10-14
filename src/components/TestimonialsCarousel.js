@@ -6,7 +6,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { urlFor } from "@/lib/sanity";
+import { urlFor } from "../lib/sanity";
 import Heading from './ui/Heading';
 
 const AUTOPLAY_INTERVAL = 5000; // ms matches progress animation duration

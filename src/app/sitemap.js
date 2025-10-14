@@ -2,7 +2,7 @@
 // Docs: https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
 
 export default function sitemap() {
-  const baseUrl = 'https://garbagehero.co.ke';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://garbagehero.co.ke';
   const now = new Date();
   /** @type {import('next').MetadataRoute.Sitemap} */
   const routes = [

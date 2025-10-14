@@ -5,12 +5,12 @@ import CompanyVideo from "../../components/CompanyVideo";
 import TeamProfiles from "../../components/TeamProfiles";
 import CTABanner from "../../components/CTABanner";
 import Footer from "../../components/Footer";
-import PageBanner from "@/components/PageBanner";
-import { client, TEAM_QUERY } from '@/lib/sanity';
-import MinicontactForm from "@/components/MiniContactForm"
-import FAQAccordion from "@/components/FAQAccordion"
-import TabsFaq from "@/components/TabsFaq"
-import { FALLBACK_TEAM } from "@/data/fallback/team";
+import PageBanner from "../../components/PageBanner";
+import { client, TEAM_QUERY } from '../../lib/sanity';
+import MinicontactForm from "../../components/MiniContactForm"
+import FAQAccordion from "../../components/FAQAccordion"
+import TabsFaq from "../../components/TabsFaq"
+import { FALLBACK_TEAM } from "../../data/fallback/team";
 
 
 export const dynamic = 'force-dynamic';
