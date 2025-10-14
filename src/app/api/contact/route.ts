@@ -116,6 +116,10 @@ export async function POST(req: Request) {
   }
 }
 
+export async function GET() {
+  return Response.json({ ok: true, message: 'Contact API is reachable' });
+}
+
 function escapeHtml(str = '') {
   return str
     .replace(/&/g,'&amp;')
