@@ -72,6 +72,8 @@ export async function POST(req: Request) {
 
     try {
       console.log('Sending email via SendGrid to:', toEmail);
+      console.log('From email:', fromEmail);
+      console.log('Reply to:', email);
 
       const msg = {
         to: toEmail,
@@ -93,14 +95,18 @@ export async function POST(req: Request) {
 
     } catch (err) {
       console.error('❌ SendGrid error:', err);
+      console.error('Error message:', err.message);
+      console.error('Error code:', err.code);
 
       if (err.response) {
         console.error('SendGrid response body:', err.response.body);
+        console.error('SendGrid response headers:', err.response.headers);
       }
 
       return Response.json({
         error: 'Failed to send message',
-        details: err.message
+        details: err.message,
+        code: err.code
       }, { status: 500 });
     }
 
