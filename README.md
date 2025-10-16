@@ -20,6 +20,33 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Contact form configuration
+
+The contact form posts to `/api/contact` which delivers submissions via email. Configure one of the following transport options through environment variables before deploying:
+
+### SendGrid
+
+```
+SENDGRID_API_KEY=your_sendgrid_api_key
+CONTACT_TO=recipient@example.com        # Optional, defaults to info@garbagehero.co.ke
+CONTACT_FROM=verified-sender@example.com # Optional, defaults to info@garbagehero.co.ke
+CONTACT_FROM_NAME="Garbage Hero"        # Optional display name
+```
+
+### SMTP
+
+```
+SMTP_HOST=smtp.yourprovider.com
+SMTP_PORT=587
+SMTP_USER=your_username
+SMTP_PASS=your_password
+CONTACT_TO=recipient@example.com         # Optional override
+CONTACT_FROM=sender@example.com          # Optional override
+CONTACT_FROM_NAME="Garbage Hero"         # Optional display name
+```
+
+If neither SendGrid nor SMTP credentials are supplied the API will respond with `500 Email service not configured` and the form will show an error message.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
