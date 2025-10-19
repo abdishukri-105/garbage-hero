@@ -32,6 +32,8 @@ export default function RootLayout({ children }) {
         {/* Explicit links to ensure all browsers pick the correct icon */}
         <link rel="icon" href="/images/logo1.png" type="image/png" />
         <link rel="apple-touch-icon" href="/images/logo1.png" />
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <meta name="theme-color" content="#1E611B" />
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         {/* Preload a frequently used hero image with correct React attribute */}
         <link rel="preload" as="image" href="/projects/traning-1.jpg" fetchPriority="high" />

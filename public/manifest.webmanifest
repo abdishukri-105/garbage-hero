@@ -1,0 +1,21 @@
+{
+  "name": "Garbage Hero",
+  "short_name": "GarbageHero",
+  "description": "Integrated cleaning, hygiene, pest control and landscaping services in Kenya.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1E611B",
+  "icons": [
+    {
+      "src": "/images/logo1.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
