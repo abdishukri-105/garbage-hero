@@ -11,12 +11,14 @@ export const metadata = {
   },
   description: "Integrated contract cleaning, sanitary hygiene, pest control, fumigation and landscaping services delivering consistent compliant facility hygiene across Kenya.",
   icons: {
-    icon: "/images/logo1.png",
-    apple: "/images/logo1.png",
-    other: [
-      { rel: "icon", url: "/images/logo1.png", sizes: "32x32" },
-      { rel: "icon", url: "/images/logo1.png", sizes: "192x192" },
+    icon: [
+      { url: "/images/logo1.png", type: "image/png" },
+      { url: "/images/logo1.png", sizes: "16x16", type: "image/png" },
+      { url: "/images/logo1.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/logo1.png", sizes: "192x192", type: "image/png" },
     ],
+    apple: [{ url: "/images/logo1.png" }],
+    shortcut: ["/images/logo1.png"],
   },
   // Ensure absolute URLs for OpenGraph/SEO
   metadataBase: new URL(siteUrl),
@@ -27,6 +29,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* Favicon + Apple touch icon are provided via metadata.icons above */}
+        {/* Explicit links to ensure all browsers pick the correct icon */}
+        <link rel="icon" href="/images/logo1.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/logo1.png" />
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         {/* Preload a frequently used hero image with correct React attribute */}
         <link rel="preload" as="image" href="/projects/traning-1.jpg" fetchPriority="high" />
