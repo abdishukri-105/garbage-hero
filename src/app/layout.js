@@ -12,13 +12,13 @@ export const metadata = {
   description: "Integrated contract cleaning, sanitary hygiene, pest control, fumigation and landscaping services delivering consistent compliant facility hygiene across Kenya.",
   icons: {
     icon: [
-      { url: "/images/logo1.png", type: "image/png" },
-      { url: "/images/logo1.png", sizes: "16x16", type: "image/png" },
-      { url: "/images/logo1.png", sizes: "32x32", type: "image/png" },
-      { url: "/images/logo1.png", sizes: "192x192", type: "image/png" },
+      { url: "/images/logo1.png?v=2", type: "image/png" },
+      { url: "/images/logo1.png?v=2", sizes: "16x16", type: "image/png" },
+      { url: "/images/logo1.png?v=2", sizes: "32x32", type: "image/png" },
+      { url: "/images/logo1.png?v=2", sizes: "192x192", type: "image/png" },
     ],
-    apple: [{ url: "/images/logo1.png" }],
-    shortcut: ["/images/logo1.png"],
+    apple: [{ url: "/images/logo1.png?v=2" }],
+    shortcut: ["/images/logo1.png?v=2"],
   },
   // Ensure absolute URLs for OpenGraph/SEO
   metadataBase: new URL(siteUrl),
@@ -30,8 +30,8 @@ export default function RootLayout({ children }) {
       <head>
         {/* Favicon + Apple touch icon are provided via metadata.icons above */}
         {/* Explicit links to ensure all browsers pick the correct icon */}
-        <link rel="icon" href="/images/logo1.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/images/logo1.png" />
+  <link rel="icon" href="/images/logo1.png?v=2" type="image/png" />
+  <link rel="apple-touch-icon" href="/images/logo1.png?v=2" />
         <link rel="manifest" href="/manifest.webmanifest" />
         <meta name="theme-color" content="#1E611B" />
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
               "@type": "Organization",
               name: "Garbage Hero Limited",
               url: `${siteUrl}/`,
-              logo: `${siteUrl}/images/logo1.png`,
+              logo: `${siteUrl}/images/logo1.png?v=2`,
               description: "Integrated contract cleaning, sanitary hygiene, pest control and landscaping partner in Kenya.",
               areaServed: "KE",
               foundingDate: "2020",
