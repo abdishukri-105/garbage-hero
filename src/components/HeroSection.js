@@ -138,17 +138,14 @@ export default function HeroSection() {
 				})}
 			</div>
 
-			{/* Drag layer for swipe */}
+			{/* Content overlay always visible (also acts as swipe surface) */}
 			<motion.div
+				className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/80 md:via-black/30 md:to-black/10 flex items-start md:items-center justify-start pt-28 md:pt-0 pb-24 md:pb-0 z-10 cursor-grab active:cursor-grabbing select-none"
 				drag="x"
 				dragConstraints={{ left: 0, right: 0 }}
 				style={{ x: dragX }}
 				onDragEnd={(_, info) => onDragEnd(info)}
-				className="absolute inset-0 cursor-grab active:cursor-grabbing"
-			/>
-
-			{/* Content overlay always visible */}
-			<div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/80 md:via-black/30 md:to-black/10 flex items-start md:items-center justify-start pt-28 md:pt-0 pb-24 md:pb-0 z-10">
+			>
 				<div className="px-6 md:px-16 max-w-[80%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-6">
 					<Heading
 						level={1}
@@ -168,7 +165,7 @@ export default function HeroSection() {
 					</Paragraph>
 					<WetPaintButton text={slides[imgIndex].cta || 'Request Quote'} key={slides[imgIndex].cta} href="/contact-us" size="md" />
 				</div>
-			</div>
+			</motion.div>
 
 			<Dots imgIndex={imgIndex} setImgIndex={goTo} />
 			<GradientEdges />
