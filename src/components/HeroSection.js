@@ -173,12 +173,12 @@ export default function HeroSection() {
 				onDragStart={onDragStart}
 				onDragEnd={(_, info) => onDragEnd(info)}
 			>
-				<div className="px-6 md:px-16 max-w-[90%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-6 text-center md:text-left mx-auto md:mx-0">
+				<div className="px-6 md:px-16 max-w-[90%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl space-y-6 sm:space-y-7 text-center md:text-left mx-auto md:mx-0">
 					<Heading
 						level={1}
 						variant="white"
 						key={slides[imgIndex].title}
-						className="text-[clamp(2rem,6vw,3rem)] leading-[1.05] hero-heading-font"
+						className="text-[clamp(1.6rem,6vw,2.5rem)] md:text-[clamp(2rem,4.5vw,3rem)] leading-[1.1] md:leading-[1.05] hero-heading-font"
 					>
 						{slides[imgIndex].title}
 					</Heading>
