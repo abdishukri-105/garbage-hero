@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { motion, useMotionValue, useReducedMotion, animate } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, animate, useTransform } from "framer-motion";
 import Image from "next/image";
 import Heading from "./ui/Heading";
 import Paragraph from "./ui/Paragraph";
@@ -50,6 +50,13 @@ export default function HeroSection() {
 	const [imgIndex, setImgIndex] = useState(0);
 	const dragX = useMotionValue(0);
 	const intervalRef = useRef(null);
+
+	// Slight parallax for the active image: clamp to ~±8–10px
+	const imageX = useTransform(dragX, (v) => {
+		if (shouldReduce) return 0;
+		const mapped = v * 0.06; // 6% of drag distance
+		return Math.max(-10, Math.min(10, mapped));
+	});
 
 	const clearTimer = () => {
 		if (intervalRef.current) clearInterval(intervalRef.current);
@@ -115,6 +122,7 @@ export default function HeroSection() {
 							key={idx}
 							aria-hidden={!isActive}
 							className="absolute inset-0 will-change-transform"
+							style={{ x: isActive ? imageX : 0 }}
 							initial={false}
 							animate={
 								isActive
