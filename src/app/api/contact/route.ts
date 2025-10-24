@@ -34,8 +34,18 @@ export async function POST(req: Request) {
     // Initialize SendGrid with API key
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-    const toEmail = process.env.CONTACT_TO || 'info@garbagehero.co.ke';
-    const fromEmail = process.env.CONTACT_FROM || 'info@garbagehero.co.ke';
+    // Destination: send to the team's Yahoo inbox by default
+    const toEmail = process.env.CONTACT_TO || 'garbagelimited@yahoo.com';
+    // From/sender must be a verified domain (not Yahoo/Gmail due to DMARC)
+    const configuredFrom = process.env.CONTACT_FROM || 'info@garbagehero.co.ke';
+    const fromName = 'Garbage Hero Limited';
+
+    // Guard against using free webmail domains as From (poor deliverability)
+    const freeDomains = ['yahoo.com', 'gmail.com', 'hotmail.com', 'outlook.com', 'aol.com'];
+    const cfgFromDomain = configuredFrom.split('@')[1]?.toLowerCase();
+    const safeFromEmail = cfgFromDomain && freeDomains.includes(cfgFromDomain)
+      ? 'info@garbagehero.co.ke'
+      : configuredFrom;
 
     const safe = escapeHtml;
     const htmlContent = `
@@ -76,12 +86,12 @@ export async function POST(req: Request) {
 
     try {
       console.log('Sending email via SendGrid to:', toEmail);
-      console.log('From email:', fromEmail);
+  console.log('From email:', safeFromEmail);
       console.log('Reply to:', email);
 
       const msg = {
         to: toEmail,
-        from: fromEmail,
+        from: { email: safeFromEmail, name: fromName },
         replyTo: email,
         subject: `New Contact: ${name} - Garbage Hero Website`,
         html: htmlContent,
