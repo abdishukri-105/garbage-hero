@@ -92,7 +92,7 @@ export default function HeroSection() {
 	};
 
 	return (
-		<div className="relative overflow-hidden w-full h-[60vh] sm:h-[70vh] md:h-screen">{/* switched w-screen -> w-full to prevent horizontal overflow caused by 100vw including scrollbar */}
+		<div className="relative overflow-hidden w-full min-h-[100svh]">{/* w-full prevents horizontal overflow; min-h for true fullscreen on mobile */}
 			{/* Images crossfade + Ken Burns stack */}
 			<div className="absolute inset-0">
 				{slides.map((slide, idx) => {
@@ -148,7 +148,7 @@ export default function HeroSection() {
 			/>
 
 			{/* Content overlay always visible */}
-			<div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/80 md:via-black/30 md:to-black/10 flex items-start md:items-center justify-start pt-28 md:pt-0">
+			<div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/80 md:via-black/30 md:to-black/10 flex items-start md:items-center justify-start pt-28 md:pt-0 pb-24 md:pb-0 z-10">
 				<div className="px-6 md:px-16 max-w-[80%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-6">
 					<Heading
 						level={1}
@@ -177,7 +177,7 @@ export default function HeroSection() {
 }
 
 const Dots = ({ imgIndex, setImgIndex }) => (
-	<div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+	<div className="absolute z-20 bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 mb-[env(safe-area-inset-bottom)]">
 		{slides.map((_, idx) => (
 			<button
 				key={idx}
