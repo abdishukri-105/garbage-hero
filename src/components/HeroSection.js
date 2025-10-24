@@ -144,8 +144,11 @@ export default function HeroSection() {
 								sizes="100vw"
 								className="object-cover"
 							/>
-							{/* subtle gradient overlay */}
-							<div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/70 md:via-black/30 md:to-black/10" />
+							{/* Desktop-only subtle scrim on the image to aid readability; hidden on mobile to avoid double overlay during drag */}
+							<div
+								className="absolute inset-0 hidden md:block md:bg-gradient-to-r md:from-black/60 md:via-black/30 md:to-black/10"
+								aria-hidden
+							/>
 						</motion.div>
 					);
 				})}
@@ -153,8 +156,10 @@ export default function HeroSection() {
 
 			{/* Content overlay always visible (also acts as swipe surface) */}
 			<motion.div
-				className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/10 md:bg-gradient-to-r md:from-black/80 md:via-black/30 md:to-black/10 flex items-start md:items-center justify-start pt-28 md:pt-0 pb-24 md:pb-0 z-10 cursor-grab active:cursor-grabbing select-none"
+				className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/10 md:bg-none flex items-start md:items-center justify-start pt-28 md:pt-0 pb-24 md:pb-0 z-10 cursor-grab active:cursor-grabbing select-none"
 				drag="x"
+				dragElastic={0.18}
+				dragTransition={{ bounceStiffness: 350, bounceDamping: 45 }}
 				dragConstraints={{ left: 0, right: 0 }}
 				style={{ x: dragX }}
 				onDragStart={onDragStart}
