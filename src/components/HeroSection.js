@@ -11,13 +11,6 @@ import training1 from "../../public/projects/traning-1.jpg";
 
 const slides = [
 	{
-		src: hero1,
-		title: "Integrated Facility Hygiene Excellence Across Kenya",
-		description:
-			"Integrated cleaning, sanitary, pest and landscape stewardship delivering healthier environments, reduced risk and visibly elevated workplace standards.",
-		cta: "Request Quote",
-	},
-	{
 		src: cleaning4,
 		title: "Consistent Compliant Cleaning For High-Traffic Environments",
 		description:
@@ -29,6 +22,13 @@ const slides = [
 		title: "Trained Teams Driving Sustainable Hygiene Standards",
 		description:
 			"Continuous training, safety discipline and ESG‑aligned chemistry deliver resilient hygiene outcomes and stakeholder confidence nationwide with consistency.",
+		cta: "Request Quote",
+	},
+	{
+		src: hero1,
+		title: "Integrated Facility Hygiene Excellence Across Kenya",
+		description:
+			"Integrated cleaning, sanitary, pest and landscape stewardship delivering healthier environments, reduced risk and visibly elevated workplace standards.",
 		cta: "Request Quote",
 	},
 ];
