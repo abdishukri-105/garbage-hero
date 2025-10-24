@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { motion, useMotionValue, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, animate } from "framer-motion";
 import Image from "next/image";
 import Heading from "./ui/Heading";
 import Paragraph from "./ui/Paragraph";
@@ -35,7 +35,8 @@ const slides = [
 
 const ONE_SECOND = 1000;
 const AUTO_DELAY = ONE_SECOND * 20; // 20 seconds
-const DRAG_BUFFER = 80; // sensitivity for swipe
+const DRAG_BUFFER = 60; // sensitivity for swipe (lower = easier)
+const VELOCITY_THRESHOLD = 300; // px/s velocity to trigger swipe
 
 const SPRING_OPTIONS = {
 	type: "spring",
@@ -82,13 +83,25 @@ export default function HeroSection() {
 	const onDragEnd = (info) => {
 		const offset = info.offset.x;
 		const velocity = info.velocity.x;
-		if (offset < -DRAG_BUFFER || velocity < -500) {
+
+		// Decide intent first
+		const next = offset < -DRAG_BUFFER || velocity < -VELOCITY_THRESHOLD;
+		const prev = offset > DRAG_BUFFER || velocity > VELOCITY_THRESHOLD;
+
+		if (next) {
 			advance();
-		} else if (offset > DRAG_BUFFER || velocity > 500) {
+		} else if (prev) {
 			setImgIndex((pv) => (pv === 0 ? slides.length - 1 : pv - 1));
 		}
-		dragX.set(0);
+
+		// Always animate back to origin for a smoother, natural feel
+		animate(dragX, 0, SPRING_OPTIONS);
 		startTimer();
+	};
+
+	const onDragStart = () => {
+		// Pause autoplay while interacting
+		clearTimer();
 	};
 
 	return (
@@ -144,6 +157,7 @@ export default function HeroSection() {
 				drag="x"
 				dragConstraints={{ left: 0, right: 0 }}
 				style={{ x: dragX }}
+				onDragStart={onDragStart}
 				onDragEnd={(_, info) => onDragEnd(info)}
 			>
 				<div className="px-6 md:px-16 max-w-[80%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-6">
