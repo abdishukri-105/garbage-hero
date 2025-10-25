@@ -1,4 +1,5 @@
 import sgMail from '@sendgrid/mail';
+import nodemailer from 'nodemailer';
 
 export const runtime = 'nodejs';
 
@@ -25,14 +26,7 @@ export async function POST(req: Request) {
       return Response.json({ error: 'Invalid message' }, { status: 400 });
     }
 
-    // Check for SendGrid API key
-    if (!process.env.SENDGRID_API_KEY) {
-      console.error('Missing SENDGRID_API_KEY environment variable');
-      return Response.json({ error: 'Email service not configured' }, { status: 500 });
-    }
-
-    // Initialize SendGrid with API key
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    // We'll support two providers: SMTP (preferred for "send directly") and SendGrid fallback
 
   // Destination: send to the team's inbox (defaults to info@garbagehero.co.ke)
   const toEmail = process.env.CONTACT_TO || 'info@garbagehero.co.ke';
@@ -85,46 +79,75 @@ export async function POST(req: Request) {
       </div>`;
 
     try {
-      console.log('Sending email via SendGrid to:', toEmail);
-  console.log('From email:', safeFromEmail);
-      console.log('Reply to:', email);
-
       const plainText = `New Contact Form Submission\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\n\nMessage:\n${message}`;
 
-      const msg = {
-        to: toEmail,
-        from: { email: safeFromEmail, name: fromName },
-        replyTo: email,
-        subject: `New Contact: ${name} - Garbage Hero Website`,
-        text: plainText,
-        html: htmlContent,
-      };
+      const useSmtp = !!process.env.SMTP_HOST;
 
-      const response = await sgMail.send(msg);
+      if (useSmtp) {
+        // SMTP direct send via your mailbox provider
+        const port = Number(process.env.SMTP_PORT || 587);
+        const secure = process.env.SMTP_SECURE === 'true' || port === 465;
+        const transporter = nodemailer.createTransport({
+          host: process.env.SMTP_HOST,
+          port,
+          secure,
+          auth: process.env.SMTP_USER && process.env.SMTP_PASS ? {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
+          } : undefined,
+        });
 
-      console.log('✅ Email sent successfully via SendGrid!');
-      console.log('Response status:', response[0].statusCode);
+        console.log('Sending email via SMTP to:', toEmail);
+        console.log('SMTP host:', process.env.SMTP_HOST, 'port:', port, 'secure:', secure);
+        console.log('From email:', safeFromEmail);
+        console.log('Reply to:', email);
 
-      return Response.json({
-        ok: true,
-        message: 'Message sent successfully!'
-      });
+        await transporter.sendMail({
+          to: toEmail,
+          from: { address: safeFromEmail, name: fromName },
+          replyTo: email,
+          subject: `New Contact: ${name} - Garbage Hero Website`,
+          text: plainText,
+          html: htmlContent,
+        });
 
-    } catch (err) {
-      console.error('❌ SendGrid error:', err);
-      console.error('Error message:', err.message);
-      console.error('Error code:', err.code);
+        console.log('✅ Email sent successfully via SMTP!');
+      } else {
+        // Fallback to SendGrid if configured
+        if (!process.env.SENDGRID_API_KEY) {
+          console.error('No SMTP config and missing SENDGRID_API_KEY. Cannot send.');
+          return Response.json({ error: 'Email service not configured' }, { status: 500 });
+        }
 
-      if (err.response) {
-        console.error('SendGrid response body:', err.response.body);
-        console.error('SendGrid response headers:', err.response.headers);
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+        console.log('Sending email via SendGrid to:', toEmail);
+        console.log('From email:', safeFromEmail);
+        console.log('Reply to:', email);
+
+        const msg = {
+          to: toEmail,
+          from: { email: safeFromEmail, name: fromName },
+          replyTo: email,
+          subject: `New Contact: ${name} - Garbage Hero Website`,
+          text: plainText,
+          html: htmlContent,
+        };
+
+        const response = await sgMail.send(msg);
+        console.log('✅ Email sent successfully via SendGrid!');
+        console.log('Response status:', response[0].statusCode);
       }
 
-      return Response.json({
-        error: 'Failed to send message',
-        details: err.message,
-        code: err.code
-      }, { status: 500 });
+      return Response.json({ ok: true, message: 'Message sent successfully!' });
+
+    } catch (err: any) {
+      console.error('❌ Mail send error:', err);
+      if (err?.response) {
+        console.error('Provider response body:', err.response.body);
+        console.error('Provider response headers:', err.response.headers);
+      }
+      return Response.json({ error: 'Failed to send message', details: err?.message }, { status: 500 });
     }
 
   } catch (err) {
