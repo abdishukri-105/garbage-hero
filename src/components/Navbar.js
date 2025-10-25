@@ -99,8 +99,8 @@ const TextLink = ({ text, href, invert }) => {
 const Buttons = ({ setMenuOpen, invert }) => (
 	<div className="flex items-center gap-2 sm:gap-4">
 		<motion.a
-			href="/images/companyprofile.pdf"
-			download="Garbage-Hero-Ltd-Company-Profile.pdf"
+			href="/Garbage%20Hero%20Limited%20Co.Profile%20(1).pdf"
+			download="Garbage-Hero-Limited-Company-Profile.pdf"
 			whileHover={{ scale: 1.05, backgroundColor: '#1E611B' }}
 			whileTap={{ scale: 0.95 }}
 			className={`hidden md:inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 font-montserrat font-medium text-sm sm:text-base rounded-md whitespace-nowrap transition-colors ${invert ? 'bg-white/15 text-white hover:bg-white/25' : 'bg-[#3AA335] text-white hover:bg-[#1E611B]'}`}
@@ -137,8 +137,8 @@ const MobileMenu = ({ menuOpen, invert }) => {
 					<TextLink key={link.href} text={link.title} href={link.href} invert={invert} />
 				))}
 				<motion.a
-					href="/images/companyprofile.pdf"
-					download="Garbage-Hero-Ltd-Company-Profile.pdf"
+					href="/Garbage%20Hero%20Limited%20Co.Profile%20(1).pdf"
+					download="Garbage-Hero-Limited-Company-Profile.pdf"
 					className={`inline-flex items-center gap-2 px-2 py-1.5 font-montserrat font-medium text-sm rounded-md transition-colors ${invert ? 'bg-white/15 text-white hover:bg-white/25' : 'bg-[#3AA335] text-white hover:bg-[#1E611B]'}`}
 				>
 					<Download size={16} />

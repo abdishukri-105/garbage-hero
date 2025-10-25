@@ -58,7 +58,7 @@ export default function Clients({ logos = [] }) {
             </Paragraph>
           </div>
           <div className="flex items-center justify-center md:justify-end gap-2 sm:gap-3">
-            <NeuButton text="Download Company Profile" href="/images/companyprofile.pdf" className="whitespace-nowrap" />
+            <NeuButton text="Download Company Profile" href="/Garbage%20Hero%20Limited%20Co.Profile%20(1).pdf" className="whitespace-nowrap" />
             <NeuButton text="View All Clients" href="/about-us#clients" className="bg-white text-[#1E611B] ring-1 ring-[#3AA335]/30 hover:bg-[#E8F6E9]" />
           </div>
         </div>
