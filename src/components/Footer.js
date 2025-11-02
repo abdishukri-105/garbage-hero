@@ -25,14 +25,14 @@ const Footer = () => {
           className="sm:col-span-2"
         >
           <Link href="/" aria-label="Go home" title="Garbage Hero Limited" className="inline-flex items-center">
-            <Image src="/images/logo1.png" alt="Garbage Hero Logo" width={60} height={60} className="" />
-            <h2 className="ml-2 text-3xl font-bold tracking-wide text-black uppercase font-montserrat">Garbage Hero Limited</h2>
+            <Image src="/images/logo1.png" alt="Garbage Hero Logo" width={60} height={60} />
+            <h2 className="ml-2 font-roboto-serif text-[clamp(1.4rem,3.5vw,1.9rem)] font-semibold tracking-tight text-[#1E611B]">Garbage Hero Limited</h2>
           </Link>
           <div className="mt-2 lg:max-w-sm">
-            <p className="text-base text-[#333333] font-lato">
+            <p className="text-sm sm:text-base text-[#333333]">
               Leading eco-friendly cleaning and waste management solutions across Kenya, dedicated to a sustainable future.
             </p>
-            <p className="mt-2 text-base text-[#333333] font-lato">
+            <p className="mt-2 text-sm sm:text-base text-[#333333]">
               Committed to transforming communities with innovative and green practices.
             </p>
           </div>
@@ -42,20 +42,20 @@ const Footer = () => {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
-          className="space-y-2 text-sm"
+          className="space-y-2"
         >
-          <p className="text-xl font-bold tracking-wide  font-montserrat">Contacts</p>
+          <p className="font-roboto-serif text-lg sm:text-xl font-semibold tracking-tight text-[#1E611B]">Contacts</p>
           <div className="flex">
-            <p className="mr-1 text-lg font-semibold text-[#333333]">Phone:</p>
-            <a href="tel:+254712345678" aria-label="Our phone" title="Our phone" className="transition-colors duration-300 text-[#3AA335] text-lg hover:text-[#1E611B]">+254 722-269-511</a>
+            <p className="mr-1 text-sm sm:text-base font-semibold text-[#1E611B]">Phone:</p>
+            <a href="tel:+254712345678" aria-label="Our phone" title="Our phone" className="transition-colors duration-300 text-[#3AA335] text-sm sm:text-base hover:text-[#1E611B]">+254 722-269-511</a>
           </div>
           <div className="flex">
-            <p className="mr-1 text-lg font-semibold text-[#333333]">Email:</p>
-            <a href="mailto:info@garbagehero.co.ke" aria-label="Our email" title="Our email" className="transition-colors duration-300 text-[#3AA335] text-lg  hover:text-[#1E611B]">info@garbagehero.co.ke</a>
+            <p className="mr-1 text-sm sm:text-base font-semibold text-[#1E611B]">Email:</p>
+            <a href="mailto:info@garbagehero.co.ke" aria-label="Our email" title="Our email" className="transition-colors duration-300 text-[#3AA335] text-sm sm:text-base hover:text-[#1E611B]">info@garbagehero.co.ke</a>
           </div>
           <div className="flex">
-            <p className="mr-1 text-lg font-semibold text-[#333333]">Address:</p>
-            <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" aria-label="Our address" title="Our address" className="transition-colors text-lg duration-300 text-[#3AA335] hover:text-[#1E611B]">
+            <p className="mr-1 text-sm sm:text-base font-semibold text-[#1E611B]">Address:</p>
+            <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" aria-label="Our address" title="Our address" className="transition-colors text-sm sm:text-base duration-300 text-[#3AA335] hover:text-[#1E611B]">
               Lenana Road 08, Hurlingham, Nairobi, Kenya
             </a>
           </div>
@@ -66,7 +66,7 @@ const Footer = () => {
           whileInView="animate"
           viewport={{ once: true }}
         >
-          <span className="text-xl font-bold tracking-wide text-black font-montserrat">Social</span>
+          <span className="font-roboto-serif text-lg sm:text-xl font-semibold tracking-tight text-[#1E611B]">Social</span>
           <div className="flex items-center mt-1 space-x-3">
             <Link href="/" aria-label="Twitter" className="text-[#1E611B] transition-colors duration-300 hover:text-[#3AA335]">
               <span className="sr-only">Twitter</span>
@@ -88,7 +88,7 @@ const Footer = () => {
               </svg>
             </Link>
           </div>
-          <p className="mt-4 text-lg text-[#333333]/70 font-lato">
+          <p className="mt-4 text-sm sm:text-base text-[#333333]/80">
             Eco-friendly waste solutions to keep Kenya green and clean.
           </p>
         </motion.div>
@@ -98,13 +98,13 @@ const Footer = () => {
         initial="initial"
         whileInView="animate"
         viewport={{ once: true }}
-        className="flex flex-col-reverse justify-between pt-2 pb-2 border-t border-[#1E611B] lg:flex-row"
+        className="flex flex-col-reverse justify-between pt-2 pb-2 border-t border-[#E8F6E9] lg:flex-row"
       >
-        <p className="text-sm text-[#333333]/70 font-lato">
+        <p className="text-sm text-[#333333]/70">
           © 2025 Garbage Hero Limited. All rights reserved.
         </p>
         <p className="">
-          <Link href="https://abdishukri.tech" target="_blank" className="text-sm underline text-[#333333]/70 transition-colors duration-300 hover:text-[#3AA335] font-lato">Built By Abdishukri Mohamed</Link>
+          <Link href="https://abdishukri.tech" target="_blank" className="text-sm underline text-[#333333]/70 transition-colors duration-300 hover:text-[#3AA335]">Built By Abdishukri Mohamed</Link>
         </p>
       </motion.div>
     </div>
