@@ -172,7 +172,7 @@ const AboutUsTeaser = () => {
               <div className="space-y-5">
                 {/* Removed internal badge and headline per request */}
                 <Paragraph size="lg" className="leading-relaxed text-[#333333]">
-                  Welcome to Garbage Hero Limited, a leading provider of professional cleaning, sanitary, gardening, and fumigation services. Our company is committed to delivering high-quality, reliable, and eco-friendly solutions to meet the diverse needs of our clients. With years of experience in the industry, we specialize in creating clean, sanitized, and healthy environments for both residential and commercial spaces.
+                  Welcome to Garbage Hero Limited, a leading provider of professional cleaning, sanitary, gardening, garbage collection and fumigation services. Our company is committed to delivering high-quality, reliable, and eco-friendly solutions to meet the diverse needs of our clients. With years of experience in the industry, we specialize in creating clean, sanitized, and healthy environments for both residential and commercial spaces.
                 </Paragraph>
               </div>
 

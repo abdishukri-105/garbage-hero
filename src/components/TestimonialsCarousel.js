@@ -87,7 +87,7 @@ const SelectBtns = ({ numTracks, setSelected, selected, autoplay }) => {
 
 const Cards = ({ testimonials, selected, setSelected }) => {
   return (
-    <div className="p-4 sm:p-6 relative h-[320px] sm:h-[360px] lg:h-[420px] shadow-xl">
+  <div className="p-4 sm:p-6 relative h-[360px] sm:h-[400px] lg:h-[460px] shadow-xl">
       {testimonials.map((t, i) => (
         <Card
           key={t._id || i}
@@ -129,7 +129,7 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
       onClick={() => setSelected(position)}
       className={`absolute top-0 left-0 w-full min-h-full p-6 sm:p-8 lg:p-12 cursor-pointer flex flex-col justify-between rounded-lg border ${isGreen ? "border-white/20" : "border-[#E8F6E9]"}`}
     >
-      <div className="flex flex-col items-center text-center">
+  <div className="flex flex-col items-center text-center">
         {(hasSanity || companyLogoUrl) && (
           <div className="relative mb-4 flex items-center justify-center h-20 w-28 sm:h-24 sm:w-32 rounded-md bg-white/90 ring-1 ring-[#3AA335]/15 shadow-sm overflow-hidden">
             <Image
@@ -143,7 +143,7 @@ const Card = ({ testimonial, position, selected, setSelected }) => {
             />
           </div>
         )}
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl font-lato font-light italic my-4 sm:my-6 max-w-prose">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl font-lato font-light italic my-4 sm:my-6 max-w-prose testimonial-quote-clamp">
           “{statement}”
         </p>
       </div>
