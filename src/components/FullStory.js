@@ -23,13 +23,13 @@ const FullStory = () => {
             className="text-center mb-8 sm:mb-10 md:mb-12"
         >
           <span className="inline-block mb-3 sm:mb-4 text-[10px] sm:text-xs tracking-widest font-semibold uppercase text-[#1E611B] bg-white rounded-full px-3 py-1 ring-1 ring-[#3AA335]/20">
-            Growth Journey
+            Our Journey
           </span>
           <div className="mx-auto w-fit pb-1 px-3 rounded-md border-b-4 border-[#3AA335]">
-            <Heading level={2} variant="primary" className="mb-0 text-center">Our Growth Story</Heading>
+            <Heading level={2} variant="primary" className="mb-0 text-center">Our Journey of Growth and Excellence</Heading>
           </div>
           <Paragraph className="text-lead mt-4 max-w-3xl mx-auto">
-            From a focused Nairobi operation to a multi service hygiene partner our progress reflects disciplined delivery innovation and trust.
+            Since our inception in 2014, Garbage Hero Limited has grown from a small cleaning outfit into one of Kenya’s trusted providers of professional cleaning, sanitary, garbage collection, gardening, and fumigation services.
           </Paragraph>
         </motion.div>
         {/* Timeline */}
@@ -89,12 +89,12 @@ const TimelineItem = ({ milestone, index }) => {
 };
 
 const MILESTONES = [
-  { id: 1, year: "2014", title: "Founded In Nairobi", description: "Established with a mission to deliver reliable eco aligned cleaning and waste stewardship.", Icon: FiFlag },
-  { id: 2, year: "2016", title: "Service Expansion", description: "Added gardening landscaping fumigation broadening integrated hygiene support for diverse clients.", Icon: FiLayers },
-  { id: 3, year: "2018", title: "Institutional Trust", description: "Earned hospitals higher learning institutions and government agencies through consistent standards supervision.", Icon: FiUsers },
-  { id: 4, year: "2020", title: "Sustainability Focus", description: "Adopted safer chemistry efficiency routines and measurable performance tracking nationwide.", Icon: FiSun },
-  { id: 5, year: "2023", title: "Community Impact", description: "Partnered NGOs and local groups advancing sanitation awareness and responsible waste handling.", Icon: FiAward },
-  { id: 6, year: "2025", title: "Industry Leadership", description: "Driving innovation talent development and client centric quality assurance nationwide.", Icon: FiTrendingUp },
+  { id: 1, year: "2014", title: "Our Beginning", description: "Founded with a vision to redefine cleanliness and hygiene standards through reliable and professional service delivery.", Icon: FiFlag },
+  { id: 2, year: "2016", title: "Expanding Our Expertise", description: "Introduced a full range of sanitary, fumigation, and pest control services, enabling us to serve both residential and commercial clients with complete hygiene solutions.", Icon: FiLayers },
+  { id: 3, year: "2018", title: "Building Trust", description: "Partnered with key corporate and government institutions, cementing our reputation for quality, consistency, and professionalism.", Icon: FiUsers },
+  { id: 4, year: "2020", title: "Going Green", description: "Embraced eco-friendly cleaning solutions and sustainable waste management practices to protect both people and the planet.", Icon: FiSun },
+  { id: 5, year: "2022", title: "Nationwide Reach", description: "Extended our operations to multiple counties across Kenya, delivering integrated environmental management services to diverse clients.", Icon: FiTrendingUp },
+  { id: 6, year: "2024", title: "Leading with Excellence", description: "Recognized for maintaining high service standards and customer satisfaction — a testament to our dedicated team and commitment to excellence.", Icon: FiAward },
 ];
 
 export default FullStory;
