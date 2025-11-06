@@ -177,90 +177,90 @@ const TABS = [
 const QUESTIONS = {
   "Cleaning Services": [
     {
-      question: "What do your Cleaning Services cover day to day?",
-      answer: "From routine cleaning to deep cleaning, we offer comprehensive services to keep your spaces spotless and welcoming. Our trained staff uses advanced equipment and eco-friendly products to ensure top-notch cleanliness." 
+      question: "What’s included in daily and deep cleaning?",
+      answer: "Daily tasks cover dusting, vacuuming/mopping, desks and surfaces, bins, washrooms and touchpoints. Deep cleans include detail work like high dusting, grout/edge scrubs, upholstery/steam as needed, and machine floor care." 
     },
     {
-      question: "How do you ensure quality and professionalism?",
-      answer: "We uphold the highest standards of quality, professionalism, and client satisfaction. Our mission is to redefine cleanliness by providing innovative and trustworthy cleaning services." 
+      question: "How do you assure quality and supervision?",
+      answer: "We use site-specific checklists, trained supervisors, and periodic QA audits. Issues are logged and resolved via SLAs, with corrective actions tracked and reported." 
     },
     {
-      question: "Which types of facilities do you currently serve?",
-      answer: "Higher learning institutions; government institutions, bodies and agencies; private learning institutions; hospitals (both private and public); shopping malls; hotels and restaurants; estates and private residential spaces; non-governmental organizations; places of worship; entertainment joints." 
+      question: "Which facilities do you specialise in?",
+      answer: "Government offices and agencies, higher education, private schools, hospitals/clinics, malls and retail, hospitality, estates/residential blocks, NGOs and worship centres." 
     },
     {
-      question: "What makes your cleaning team different?",
-      answer: "Professional Team: Our staff is highly trained, skilled, and dedicated to providing the best service possible. Reliable & Efficient: We pride ourselves on our punctuality, consistency, and attention to detail." 
+      question: "Can you supply materials and equipment?",
+      answer: "Yes—full bundle (labour + materials + equipment) or labour-only. Chemicals are eco‑friendly and compliant; MSDS/technical data sheets are available on request." 
     },
     {
-      question: "How do your values influence service delivery?",
-      answer: "Core Values: Innovation, Trust, Professionalism. We tailor our services to meet the unique needs of each client, offering flexible scheduling and personalized care." 
+      question: "How fast can you start, and can schedules flex?",
+      answer: "After a site survey and approval, we typically mobilise in 24–48 hours. We offer day/night shifts and can adjust frequency around exams, events or peak seasons." 
     }
   ],
   "Sanitary Solutions": [
     {
-      question: "What is included in your sanitary services?",
-      answer: "We provide sanitary services that include waste management, disinfection, and sanitation of bathrooms and high-touch surfaces, promoting a healthy and safe environment." 
+      question: "What’s included in sanitary bin service?",
+      answer: "Supply of bins and liners, discreet scheduled swaps, safe transport to licensed facilities, manifests/chain‑of‑custody, and optional feminine hygiene consumables." 
     },
     {
-      question: "How do these services create safer environments?",
-      answer: "We provide sanitary services that include waste management, disinfection, and sanitation of bathrooms and high-touch surfaces, promoting a healthy and safe environment." 
+      question: "How often do you service washrooms?",
+      answer: "Weekly, fortnightly or monthly as standard—scaled to footfall and season. High‑traffic sites can have multiple visits per week; telemetry options available for overflow alerts." 
     },
     {
-      question: "Do you tailor sanitary schedules to client needs?",
-      answer: "We tailor our services to meet the unique needs of each client, offering flexible scheduling and personalized care." 
+      question: "Are you compliant and licensed for sanitary waste?",
+      answer: "Yes. We operate under county by‑laws and NEMA guidelines, use licensed carriers, and retain disposal certificates for audit readiness." 
     },
     {
-      question: "How do you ensure reliability and consistency?",
-      answer: "Reliable & Efficient: We pride ourselves on our punctuality, consistency, and attention to detail, ensuring that every job is completed to the highest standard." 
+      question: "Do you disinfect washrooms and high‑touch points?",
+      answer: "Yes. We provide routine disinfection using hospital‑grade, surface‑safe products, including taps, handles, dispensers and partitions." 
     },
     {
-      question: "Are your methods eco-friendly and sustainable?",
-      answer: "Eco-Friendly Approach: We prioritize sustainability by using environmentally friendly products and practices wherever possible." 
+      question: "Are your methods eco‑friendly and safe?",
+      answer: "We prioritise low‑toxicity, biodegradable chemicals and proper segregation to minimise environmental impact while maintaining hygiene standards." 
     }
   ],
   "Gardening & Landscaping": [
     {
-      question: "What do your gardeners deliver?",
-      answer: "Our expert gardeners transform your outdoor spaces into beautiful and well-maintained landscapes." 
+      question: "What services do you provide outdoors?",
+      answer: "Routine lawn care (mowing, edging), pruning/hedging, bed preparation, weeding, leaf sweeping, green‑waste haul‑away and seasonal clean‑ups." 
     },
     {
-      question: "Do you offer design and seasonal maintenance?",
-      answer: "Whether you need routine garden care, landscaping design, or seasonal maintenance, we deliver exceptional results." 
+      question: "Do you offer design and installations?",
+      answer: "Yes—softscape design/planting and small hardscape works (edging, paving repairs). We can refresh existing beds or implement new concepts to brief." 
     },
     {
-      question: "How do you keep landscapes healthy long term?",
-      answer: "Our expert gardeners transform your outdoor spaces into beautiful and well-maintained landscapes. Reliable & Efficient: We pride ourselves on our punctuality, consistency, and attention to detail." 
+      question: "How do you keep plants healthy long‑term?",
+      answer: "We manage irrigation setups, mulching, soil conditioning, fertilisation and targeted pest management to maintain vigorous growth across seasons." 
     },
     {
-      question: "Can solutions be customized to each property?",
-      answer: "We tailor our services to meet the unique needs of each client, offering flexible scheduling and personalized care." 
+      question: "Can you work safely on active sites?",
+      answer: "Yes. Our teams follow RAMS, PPE and signage protocols to operate around staff, students and visitors with minimal disruption." 
     },
     {
-      question: "Which values guide your landscaping work?",
-      answer: "Core Values: Innovation, Trust, Professionalism. We believe in creating environments that promote well-being, safety, and comfort." 
+      question: "Do you tailor plans to each property?",
+      answer: "We build site‑specific maintenance plans with clear frequencies and standards, and adapt to seasonal/usage changes as needed." 
     }
   ],
   "Fumigation & Pest Control": [
     {
-      question: "What do your fumigation and pest services achieve?",
-      answer: "Protect your home or business from harmful pests with our professional fumigation and pest control services." 
+      question: "Which pests do you treat?",
+      answer: "Cockroaches, rodents, termites, bed bugs, ants, flies, mosquitoes and more—both residential and commercial environments." 
     },
     {
-      question: "How do you eliminate pests safely?",
-      answer: "We use safe and effective treatments to eliminate pests and prevent future infestations, ensuring your environment remains hygienic and pest-free." 
+      question: "Is treatment safe for people and pets?",
+      answer: "We use targeted baits, gels and low‑odour formulations. Safety data and re‑entry times are provided; sensitive areas get non‑chemical options where appropriate." 
     },
     {
-      question: "Do you help prevent future infestations?",
-      answer: "We use safe and effective treatments to eliminate pests and prevent future infestations, ensuring your environment remains hygienic and pest-free." 
+      question: "What prep and after‑care are needed?",
+      answer: "Before: cover food/utensils, declutter access points, isolate pets. After: ventilate if instructed, clean food areas, and follow housekeeping tips to prevent re‑infestation." 
     },
     {
-      question: "Which environments do you support?",
-      answer: "Home or business settings including higher learning institutions, government institutions, hospitals (both private and public), shopping malls, hotels and restaurants, and private residential spaces." 
+      question: "Do you offer preventive maintenance?",
+      answer: "Yes—monitoring visits with traps/baits, structural proofing, and sanitation recommendations. We maintain logs for audits in regulated facilities." 
     },
     {
-      question: "What principles guide your pest control approach?",
-      answer: "Professional Team; Eco-Friendly Approach; Customized Solutions; Reliable & Efficient. Core Values: Innovation, Trust, Professionalism." 
+      question: "Are treatments guaranteed?",
+      answer: "Most services include follow‑ups within the treatment window. Warranty terms vary by pest and will be confirmed in your proposal." 
     }
   ],
   "Garbage Collection": [

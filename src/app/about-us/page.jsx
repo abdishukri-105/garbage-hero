@@ -8,7 +8,6 @@ import Footer from "../../components/Footer";
 import PageBanner from "../../components/PageBanner";
 import { client, TEAM_QUERY } from '../../lib/sanity';
 import MinicontactForm from "../../components/MiniContactForm"
-import FAQAccordion from "../../components/FAQAccordion"
 import TabsFaq from "../../components/TabsFaq"
 import { FALLBACK_TEAM } from "../../data/fallback/team";
 

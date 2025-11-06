@@ -26,7 +26,7 @@ const SERVICES = [
 	},
 	{
 		key: "sanitary",
-		img: "/Photos/_MG_7229.jpg",
+		img: "/san.jpg",
 		subheading: "Sanitary Services",
 		heading: "Sanitary Services",
 		intro: "We provide sanitary services that include waste management, disinfection, and sanitation of bathrooms and high-touch surfaces, promoting a healthy and safe environment.",
@@ -58,7 +58,7 @@ const SERVICES = [
 	},
 	{
 		key: "pest",
-		img: "/pest2.jpg",
+		img: "/roch.jpg",
 		subheading: "Fumigation & Pest Control",
 		heading: "Fumigation & Pest Control",
 		intro: "Protect your home or business from harmful pests with our professional fumigation and pest control services. We use safe and effective treatments to eliminate pests and prevent future infestations, ensuring your environment remains hygienic and pest-free.",
@@ -74,7 +74,7 @@ const SERVICES = [
 	},
 	{
 		key: "garbage",
-		img: "/garbage5.avif",
+		img: "/dustbin.jpg",
 		subheading: "Garbage Collection",
 		heading: "Garbage Collection & Waste Handling",
 		intro: "Reliable scheduled collection, segregation guidance and compliant transfer of general and recyclable waste streams reducing on‑site clutter, odour and risk while improving sustainability reporting.",

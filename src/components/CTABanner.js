@@ -65,7 +65,7 @@ const CTABanner = () => {
             {...fadeUp(0.15)}
             className="relative mt-12 lg:mt-0 mx-auto lg:mx-0 lg:basis-[45%] flex-1"
           >
-            <div className="relative w-full aspect-[4/3] md:aspect-[16/10] lg:h-[360px] overflow-hidden rounded-2xl ring-1 ring-white/15 shadow-2xl">
+            <div className="relative w-full aspect-[4/3] md:aspect-[16/10] lg:h-[400px] overflow-hidden rounded-2xl ring-1 ring-white/15 shadow-2xl">
               <Image
                 src="/projects/cleaning-4.jpg"
                 alt="Professional eco-focused cleaning team at work"

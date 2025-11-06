@@ -19,7 +19,7 @@ const services = [
 	{
 		title: "Sanitary Services",
 		description: "Waste management disinfection and high touch surface hygiene for a healthier safer environment.",
-		imgSrc: "/Photos/_MG_7229.jpg",
+		imgSrc: "/san.jpg",
 		href: "/services#sanitary",
 	},
 	{
@@ -31,13 +31,13 @@ const services = [
 	{
 		title: "Fumigation & Pest Control",
 		description: "Safe targeted treatments eliminate pests and block recurrence keeping environments hygienic.",
-		imgSrc: "/pest2.jpg",
+		imgSrc: "/roch.jpg",
 		href: "/services#pest-control",
 	},
 	{
 		title: "Garbage Collection",
 		description: "Scheduled on‑site waste collection, segregation support and compliant transfer ensuring cleaner safer facilities.",
-		imgSrc: "/garbage5.avif",
+		imgSrc: "/dustbin.jpg",
 		href: "/services#garbage",
 	},
 ];
