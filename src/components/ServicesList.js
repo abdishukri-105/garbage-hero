@@ -29,9 +29,9 @@ const SERVICES = [
 		img: "/san.jpg",
 		subheading: "Sanitary Services",
 		heading: "Sanitary Services",
-		intro: "We provide sanitary services that include waste management, disinfection, and sanitation of bathrooms and high-touch surfaces, promoting a healthy and safe environment.",
+		intro: "We provide sanitary services that include supply of sanitary bins and servicing, waste management, disinfection, and sanitation of bathrooms and high-touch surfaces, promoting a healthy and safe environment.",
 		bullets: [
-			"Bathroom hygiene servicing",
+			"supply of sanitary bin  & liners",
 			"High-touch surface sanitation",
 			"Waste segregation guidance",
 			"Scheduled disinfection cycles",

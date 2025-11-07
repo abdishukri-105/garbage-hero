@@ -39,7 +39,7 @@ export default async function PortfolioPage() {
         title="Our Green Projects"
         subtitle="See our work in sustainable cleaning and landscaping"
       />
-      <ProjectGrid projects={projects} />
+      {/* <ProjectGrid projects={projects} /> */}
       <Process />
       <CTABanner />
       <TabsFaq />
